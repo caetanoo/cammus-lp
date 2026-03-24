@@ -214,7 +214,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
+            padding: 1rem 1.75rem; /* ANTES: 0.875rem → DEPOIS: 1rem — alinhamento ao grid 4pt (16px) */
             font-size: var(--font-size-md);
             font-weight: var(--font-weight-semibold);
             letter-spacing: var(--letter-spacing-wide);
@@ -257,7 +257,7 @@
             background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
             border-radius: 1rem;
-            padding: 2.5rem;
+            padding: 1.5rem; /* ANTES: 2.5rem (40px) → DEPOIS: 1.5rem (24px) — máximo 24px para padding interno de cards */
             box-shadow: var(--shadow-sm);
         }
 
@@ -463,7 +463,7 @@
     </button>
 
     <!-- Hero Section -->
-    <section style="padding: 4rem 0 2rem; position: relative; z-index: 1;">
+    <section style="padding: 2.5rem 0 1.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto; text-align: center;">
                 <h1 style="font-size: var(--font-size-hero); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: var(--letter-spacing-tight); margin-bottom: 1rem; color: var(--text-primary);">
@@ -477,7 +477,7 @@
     </section>
 
     <!-- Calendar Section -->
-    <section style="padding: 2rem 0 4rem; position: relative; z-index: 1;">
+    <section style="padding: 1.5rem 0 2.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 920px; margin: 0 auto;">
                 <div class="card">
@@ -492,7 +492,7 @@
                     <!-- Calendly inline widget end -->
 
                     <!-- Divider -->
-                    <div style="height: 1px; background: var(--border-subtle); margin: 2rem 0;"></div>
+                    <div style="height: 1px; background: var(--border-subtle); margin: 1.5rem 0;"></div>
 
                     <!-- Botão para pular agendamento (opcional) -->
                     <div style="padding: 1rem; text-align: center;">

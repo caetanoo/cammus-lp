@@ -304,7 +304,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
+            padding: 1rem 1.75rem; /* ANTES: 0.875rem → DEPOIS: 1rem — alinhamento ao grid 4pt (16px) */
             font-size: var(--font-size-md);
             font-weight: var(--font-weight-regular);
             border-radius: 0.5rem;
@@ -343,13 +343,13 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 0.375rem; /* 6px — label-to-input */
+            gap: 0.5rem; /* ANTES: 0.375rem (6px) → DEPOIS: 0.5rem (8px) — alinhamento ao grid 4pt */
             margin-bottom: 1.25rem; /* 20px — field gap (8pt grid) */
         }
 
         /* Mais espaçamento para input-groups com dropdown */
         .input-group:has(.custom-dropdown) {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; /* ANTES: 2rem → DEPOIS: 1.5rem — aproxima dropdown do próximo campo (24px) */
         }
 
         .input-label {
@@ -667,7 +667,7 @@
         }
 
         .dropdown-empty {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem; /* ANTES: 2rem 1.5rem → DEPOIS: 1.5rem — reduz vertical excessivo (24px) */
             text-align: center;
             color: var(--text-muted);
             font-size: var(--font-size-sm);
@@ -767,7 +767,7 @@
             background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
             border-radius: 1rem;
-            padding: 2.5rem;
+            padding: 1.5rem; /* ANTES: 2.5rem (40px) → DEPOIS: 1.5rem (24px) — máximo 24px para padding interno de cards */
             box-shadow: var(--shadow-sm);
         }
 
@@ -1089,7 +1089,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     </header>
 
     <!-- Hero Section -->
-    <section style="padding: 0.75rem 0 2rem; position: relative; z-index: 1;">
+    <section style="padding: 0.75rem 0 1.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto; text-align: center;">
                 <h1 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: var(--letter-spacing-tight); margin-bottom: 1rem; color: var(--text-primary);">
@@ -1103,15 +1103,15 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     </section>
 
     <!-- Form Section -->
-    <section style="padding: 2rem 0 4rem; position: relative; z-index: 1;">
+    <section style="padding: 1.5rem 0 2.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto;">
                 <div class="card">
                     <form id="qualificationForm" novalidate>
 
                         <!-- BLOCO 1: Dados de Contato -->
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Dados de contato
                             </h2>
 
@@ -1289,8 +1289,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         <!-- BLOCO 2: Qualificação de Ticket -->
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Investimento em mídia
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1323,8 +1323,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         <!-- BLOCO 3: Maturidade de Marketing -->
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Situação atual
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1353,8 +1353,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         <!-- BLOCO 4: Urgência -->
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Urgência
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1379,8 +1379,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         <!-- BLOCO 5: Campo Aberto -->
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 2rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Informações adicionais
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
