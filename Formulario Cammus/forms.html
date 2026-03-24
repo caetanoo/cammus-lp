@@ -1089,6 +1089,46 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         </div>
     </header>
 
+    <!-- ✅ CORREÇÃO ALTO-03: Geração de Token CSRF -->
+    <!-- Proteção contra Cross-Site Request Forgery (CSRF) -->
+    <script>
+    (function() {
+        'use strict';
+
+        // Gerar token CSRF único ao carregar a página
+        // Usa crypto.randomUUID() para garantir unicidade
+        if (!sessionStorage.getItem('csrfToken')) {
+            const csrfToken = crypto.randomUUID(); // Ex: "550e8400-e29b-41d4-a716-446655440000"
+            const csrfTimestamp = Date.now(); // Timestamp em milissegundos
+
+            sessionStorage.setItem('csrfToken', csrfToken);
+            sessionStorage.setItem('csrfTimestamp', csrfTimestamp);
+
+            if (window.location.hostname === 'localhost') {
+                console.log('🔒 Token CSRF gerado:', csrfToken.substring(0, 8) + '...');
+            }
+        } else {
+            // Token já existe - verificar se não expirou
+            const csrfTimestamp = parseInt(sessionStorage.getItem('csrfTimestamp'));
+            const CSRF_MAX_AGE = 60 * 60 * 1000; // 1 hora
+            const tokenAge = Date.now() - csrfTimestamp;
+
+            if (tokenAge > CSRF_MAX_AGE) {
+                // Token expirado - gerar novo
+                const newCsrfToken = crypto.randomUUID();
+                const newCsrfTimestamp = Date.now();
+
+                sessionStorage.setItem('csrfToken', newCsrfToken);
+                sessionStorage.setItem('csrfTimestamp', newCsrfTimestamp);
+
+                if (window.location.hostname === 'localhost') {
+                    console.log('🔄 Token CSRF renovado (expirado após ' + Math.round(tokenAge / 1000 / 60) + ' minutos)');
+                }
+            }
+        }
+    })();
+    </script>
+
     <!-- Hero Section -->
     <section style="padding: 0.75rem 0 1.5rem; position: relative; z-index: 1;">
         <div class="container">
@@ -1109,6 +1149,14 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
             <div style="max-width: 720px; margin: 0 auto;">
                 <div class="card">
                     <form id="qualificationForm" novalidate>
+
+                        <!-- ✅ CORREÇÃO ALTO-03: Campo hidden com token CSRF -->
+                        <!-- Token validado no submit para prevenir ataques CSRF -->
+                        <input type="hidden" id="csrf-token" name="csrf_token" value="">
+                        <script>
+                            // Preencher campo hidden com token do sessionStorage
+                            document.getElementById('csrf-token').value = sessionStorage.getItem('csrfToken') || '';
+                        </script>
 
                         <!-- BLOCO 1: Dados de Contato -->
                         <div style="margin-bottom: 2rem;">
@@ -2109,9 +2157,10 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         /**
          * Monta payload no formato esperado pelo N8N
          * @param {Object} formData - Dados do formulário
+         * @param {string} csrfToken - Token CSRF para validação server-side (opcional)
          * @returns {Object} Payload estruturado
          */
-        function montarPayload(formData) {
+        function montarPayload(formData, csrfToken) {
             const payload = {
                 lead: {
                     nome: formData.name,
@@ -2133,7 +2182,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                     origin: 'flux-aurora-form',
                     timestamp: new Date().toISOString(),
                     user_agent: navigator.userAgent,
-                    additional_info: formData.additional || ''
+                    additional_info: formData.additional || '',
+                    // ✅ CORREÇÃO ALTO-03: Adicionar token CSRF ao payload
+                    csrf_token: csrfToken || ''
                 }
             };
 
@@ -2352,6 +2403,38 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 return;
             }
 
+            // ✅ CORREÇÃO ALTO-03: Validar token CSRF antes de enviar
+            // Proteção contra Cross-Site Request Forgery (CSRF)
+            const csrfToken = sessionStorage.getItem('csrfToken');
+            const csrfTimestamp = sessionStorage.getItem('csrfTimestamp');
+            const CSRF_MAX_AGE = 60 * 60 * 1000; // 1 hora
+
+            // 1. Verificar se token existe
+            if (!csrfToken || !csrfTimestamp) {
+                console.error('⚠️ SEGURANÇA: Token CSRF ausente');
+                alert('Erro de segurança: Token CSRF não encontrado. Por favor, recarregue a página.');
+                return;
+            }
+
+            // 2. Verificar se token não expirou
+            const tokenAge = Date.now() - parseInt(csrfTimestamp);
+            if (tokenAge > CSRF_MAX_AGE) {
+                console.error('⚠️ SEGURANÇA: Token CSRF expirado (idade: ' + Math.round(tokenAge / 1000 / 60) + ' minutos)');
+                alert('Erro de segurança: Sessão expirada. Por favor, recarregue a página.');
+
+                // Limpar tokens expirados
+                sessionStorage.removeItem('csrfToken');
+                sessionStorage.removeItem('csrfTimestamp');
+                return;
+            }
+
+            // 3. Atualizar campo hidden com token atual (caso tenha sido renovado)
+            document.getElementById('csrf-token').value = csrfToken;
+
+            if (window.location.hostname === 'localhost') {
+                console.log('🔒 Token CSRF validado:', csrfToken.substring(0, 8) + '...');
+            }
+
             // Estado loading
             isSubmitting = true;
             submitBtn.disabled = true;
@@ -2378,7 +2461,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 };
 
                 // Montar payload para N8N
-                const payload = montarPayload(formData);
+                // ✅ CORREÇÃO ALTO-03: Incluir token CSRF no payload
+                const payload = montarPayload(formData, csrfToken);
 
                 // Enviar para webhook
                 const response = await enviarFormulario(payload);
@@ -2388,6 +2472,17 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 // Sucesso - Atualizar botão
                 btnText.innerHTML = '✓ Enviado com sucesso!';
                 submitBtn.style.background = 'var(--semantic-success-text)';
+
+                // ✅ CORREÇÃO ALTO-03: Renovar token CSRF após submissão bem-sucedida
+                // Previne reuso do mesmo token (proteção adicional)
+                const newCsrfToken = crypto.randomUUID();
+                const newCsrfTimestamp = Date.now();
+                sessionStorage.setItem('csrfToken', newCsrfToken);
+                sessionStorage.setItem('csrfTimestamp', newCsrfTimestamp);
+
+                if (window.location.hostname === 'localhost') {
+                    console.log('🔄 Token CSRF renovado após sucesso:', newCsrfToken.substring(0, 8) + '...');
+                }
 
                 // Salvar nome no localStorage para usar na página de obrigado
                 const firstName = formData.name.split(' ')[0]; // Apenas o primeiro nome
