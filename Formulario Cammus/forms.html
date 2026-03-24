@@ -2295,22 +2295,49 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 }
             });
 
-            // Validar dropdowns de nicho e subnicho
+            // ✅ CORREÇÃO CRÍTICO-03: Validar dropdowns contra lista permitida
+            // Previne bypass via manipulação de DOM (console do browser)
             const nichoValue = document.getElementById('nicho-value').value;
             const subnichoValue = document.getElementById('subnicho-value').value;
             const nichoInput = document.getElementById('nicho-input');
             const subnichoInput = document.getElementById('subnicho-input');
 
+            // 1. Obter lista de nichos permitidos (mesmo array usado no dropdown)
+            const nichosPermitidos = Object.keys(nichos).sort();
+
+            // 2. Validar nicho: campo vazio OU valor não está na lista permitida
             if (!nichoValue) {
                 nichoInput.setAttribute('aria-invalid', 'true');
                 isValid = false;
+            } else if (!nichosPermitidos.includes(nichoValue)) {
+                // ⚠️ TENTATIVA DE BYPASS DETECTADA
+                console.error('⚠️ SEGURANÇA: Valor inválido detectado em nicho:', nichoValue);
+                console.error('Valores permitidos:', nichosPermitidos);
+                nichoInput.setAttribute('aria-invalid', 'true');
+                isValid = false;
+
+                // Alertar usuário (possível manipulação via console)
+                alert('Erro: Valor de nicho inválido detectado. Por favor, selecione um nicho da lista.');
             } else {
                 nichoInput.setAttribute('aria-invalid', 'false');
             }
 
+            // 3. Obter lista de subnichos permitidos para o nicho selecionado
+            const subnichoPermitidos = nichos[nichoValue] || [];
+
+            // 4. Validar subnicho: campo vazio OU valor não está na lista permitida
             if (!subnichoValue) {
                 subnichoInput.setAttribute('aria-invalid', 'true');
                 isValid = false;
+            } else if (!subnichoPermitidos.includes(subnichoValue)) {
+                // ⚠️ TENTATIVA DE BYPASS DETECTADA
+                console.error('⚠️ SEGURANÇA: Valor inválido detectado em subnicho:', subnichoValue);
+                console.error('Valores permitidos para nicho "' + nichoValue + '":', subnichoPermitidos);
+                subnichoInput.setAttribute('aria-invalid', 'true');
+                isValid = false;
+
+                // Alertar usuário (possível manipulação via console)
+                alert('Erro: Valor de subnicho inválido detectado. Por favor, selecione um subnicho da lista.');
             } else {
                 subnichoInput.setAttribute('aria-invalid', 'false');
             }
