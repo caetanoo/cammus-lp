@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMMUS — Content Intelligence Platform</title>
+    <meta name="description" content="Pare de criar conteúdo no escuro. CAMMUS analisa +10.000 posts de alto engajamento e mostra exatamente o que, como e quando criar conteúdo que converte.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════ */
+        /* FLUX AURORA v2 — DESIGN SYSTEM TOKENS          */
+        /* ═══════════════════════════════════════════════ */
+
+        :root {
+            /* BASE */
+            --charcoal-1: #1a1a1a;
+            --charcoal-2: #2e2e2e;
+            --off-white: #f5f5f5;
+
+            /* BACKGROUNDS */
+            --bg-page: #f5f5f5;
+            --bg-page-alt: #ebebeb;
+            --bg-section: #ffffff;
+            --bg-section-alt: #fafafa;
+            --bg-elevated: #ffffff;
+            --bg-elevated-hover: #fafafa;
+            --bg-overlay-dark: rgba(26, 26, 26, 0.8);
+            --bg-overlay-light: rgba(245, 245, 245, 0.95);
+
+            /* TEXT */
+            --text-primary: #1a1a1a;
+            --text-secondary: #2e2e2e;
+            --text-muted: #6b6b6b;
+            --text-inverse: #f5f5f5;
+            --text-inverse-secondary: #d4d4d4;
+            --text-disabled: #a3a3a3;
+
+            /* BORDERS */
+            --border-subtle: #e5e5e5;
+            --border-default: #d4d4d4;
+            --border-strong: #a3a3a3;
+            --border-inverse: #404040;
+
+            /* INTERACTIVE */
+            --interactive-link: #5a7a8c;
+            --interactive-link-hover: #486575;
+
+            /* CTA PRIMARY */
+            --cta-primary-bg: #1a1a1a;
+            --cta-primary-bg-hover: #2e2e2e;
+            --cta-primary-bg-active: #0a0a0a;
+            --cta-primary-text: #f5f5f5;
+
+            /* CTA SECONDARY */
+            --cta-secondary-bg: transparent;
+            --cta-secondary-bg-hover: #fafafa;
+            --cta-secondary-text: #1a1a1a;
+            --cta-secondary-border: #1a1a1a;
+            --cta-secondary-border-hover: #2e2e2e;
+
+            /* SEMANTIC */
+            --semantic-success-bg: #e8f0e9;
+            --semantic-success-border: #a8c5ab;
+            --semantic-success-text: #3d5940;
+            --semantic-error-bg: #f5e8e8;
+            --semantic-error-text: #5c3333;
+
+            /* SHADOWS */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-focus: 0 0 0 3px rgba(26, 26, 26, 0.2);
+
+            /* TIMING */
+            --duration-fast: 150ms;
+            --duration-medium: 300ms;
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+            /* TYPOGRAPHY */
+            --font-sans: "Coolvetica", system-ui, -apple-system, sans-serif;
+            --font-serif: "EB Garamond", Georgia, serif;
+            --font-mono: "JetBrains Mono", monospace;
+
+            --text-h1-size: clamp(2.5rem, 5vw, 4rem);
+            --text-h2-size: 2.5rem;
+            --text-h3-size: 1.5rem;
+            --text-body-lg-size: 1.125rem;
+            --tracking-tight: -0.018em;
+            --tracking-body: -0.01em;
+        }
+
+        [data-theme="dark"] {
+            --bg-page: #0a0a0a;
+            --bg-section: #0f0f0f;
+            --bg-elevated: #1a1a1a;
+            --bg-elevated-hover: #1f1f1f;
+
+            --text-primary: #f5f5f5;
+            --text-secondary: #d4d4d4;
+            --text-muted: #a3a3a3;
+            --text-inverse: #1a1a1a;
+
+            --border-subtle: #242424;
+            --border-default: #2e2e2e;
+            --border-strong: #404040;
+
+            --cta-primary-bg: #f5f5f5;
+            --cta-primary-bg-hover: #ffffff;
+            --cta-primary-text: #1a1a1a;
+
+            --cta-secondary-bg: transparent;
+            --cta-secondary-bg-hover: #1a1a1a;
+            --cta-secondary-text: #f5f5f5;
+            --cta-secondary-border: #f5f5f5;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+            --shadow-focus: 0 0 0 3px rgba(245, 245, 245, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: var(--tracking-body);
+            background: var(--bg-page);
+            color: var(--text-secondary);
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 300ms ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+            letter-spacing: var(--tracking-tight);
+        }
+
+        h1 { font-size: var(--text-h1-size); line-height: 0.9; }
+        h2 { font-size: var(--text-h2-size); line-height: 0.95; }
+        h3 { font-size: var(--text-h3-size); }
+
+        .font-serif { font-family: var(--font-serif); font-style: italic; }
+        .font-mono { font-family: var(--font-mono); }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--duration-medium) var(--ease-smooth);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--cta-primary-bg);
+            color: var(--cta-primary-text);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--cta-primary-bg-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--cta-secondary-bg);
+            color: var(--cta-secondary-text);
+            border: 2px solid var(--cta-secondary-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cta-secondary-bg-hover);
+            border-color: var(--cta-secondary-border-hover);
+        }
+
+        .btn-lg {
+            padding: 1.125rem 3rem;
+            font-size: 1.125rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-default);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all var(--duration-medium) var(--ease-smooth);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-highlighted {
+            border: 2px solid var(--text-primary);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        /* BADGE */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.875rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-default);
+        }
+
+        .badge-primary {
+            background: var(--text-primary);
+            color: var(--text-inverse);
+            border: none;
+        }
+
+        /* INPUTS */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        .input-field {
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--border-default);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: var(--bg-section);
+            color: var(--text-primary);
+            transition: all var(--duration-fast) var(--ease-out);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            box-shadow: var(--shadow-focus);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--bg-overlay-light);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-dark {
+            background: var(--bg-section);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .text-center { text-align: center; }
+        .text-muted { color: var(--text-muted); }
+        .max-w-3xl { max-width: 48rem; margin-left: auto; margin-right: auto; }
+        .max-w-4xl { max-width: 56rem; margin-left: auto; margin-right: auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-12 { margin-top: 3rem; }
+        .mt-16 { margin-top: 4rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--bg-elevated);
+        }
+
+        .comparison-table td {
+            color: var(--text-secondary);
+        }
+
+        /* ACCORDION FAQ */
+        .faq-item {
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            background: none;
+            border: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+
+        /* CHECKMARKS */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-top: 0.125rem;
+        }
+
+        /* STATS */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            font-family: var(--font-mono);
+        }
+
+        /* THEME TOGGLE */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: var(--cta-primary-bg);
+            color: var(--cta-primary-text);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--duration-medium) var(--ease-smooth);
+            z-index: 50;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container" style="padding-top: 1.25rem; padding-bottom: 1.25rem;">
+            <div class="flex" style="justify-content: space-between; align-items: center;">
+                <div style="font-weight: 700; font-size: 1.25rem; color: var(--text-primary);">CAMMUS</div>
+                <a href="#cta-final" class="btn btn-primary">Começar Agora</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="section" style="padding-top: 8rem; padding-bottom: 5rem;">
+        <div class="container">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="badge mb-6">Content Intelligence Platform</div>
+
+                <h1 class="mb-6">
+                    Pare de criar conteúdo no escuro.<br>
+                    Comece com <span class="font-serif">dados</span> do que já funciona.
+                </h1>
+
+                <p class="text-muted mb-8" style="font-size: 1.25rem; line-height: 1.6; max-width: 42rem; margin-left: auto; margin-right: auto;">
+                    CAMMUS é a plataforma de Content Intelligence que analisa <strong style="color: var(--text-primary);">+10.000 posts</strong> de alto engajamento no seu nicho e mostra exatamente o que, como e quando criar conteúdo que converte.
+                </p>
+
+                <div class="flex gap-4" style="justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <a href="#como-funciona" class="btn btn-primary btn-lg">Ver Análise de Exemplo</a>
+                    <a href="#cta-final" class="btn btn-secondary btn-lg">Começar Teste Grátis</a>
+                </div>
+
+                <p class="text-muted" style="font-size: 0.875rem;">
+                    <span class="font-mono" style="color: var(--text-primary); font-weight: 600;">Primeiros 50 clientes:</span> 60% de desconto vitalício · Sem cartão de crédito
+                </p>
+
+                <div class="mt-12 flex gap-6" style="justify-content: center; align-items: center; flex-wrap: wrap;">
+                    <p class="text-muted" style="font-size: 0.875rem;">LinkedIn · Instagram · YouTube</p>
+                    <p class="font-mono" style="font-size: 0.875rem; color: var(--text-primary);">+5.2 milhões de posts analisados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-12">Você está criando conteúdo no escuro</h2>
+
+                <div class="grid-2 mb-12">
+                    <div class="card">
+                        <h3 class="mb-4">A Realidade</h3>
+                        <p class="text-muted mb-4">Toda semana você:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Passa 10 horas criando posts</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Testa formatos diferentes</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Muda copy, muda visual, muda tudo</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>E ainda assim não viraliza</span>
+                            </li>
+                        </ul>
+                        <p class="mt-6" style="font-weight: 600; color: var(--text-primary);">Por quê?</p>
+                        <p class="text-muted">Porque você não sabe O QUÊ funciona no seu nicho.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">As Alternativas Ruins</h3>
+                        <p class="text-muted mb-6">Então você faz uma dessas três coisas:</p>
+
+                        <div class="mb-6">
+                            <p class="font-weight-600 mb-2" style="color: var(--text-primary); font-weight: 600;">1. Copia o que vê por aí</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Mas não sabe se aquilo realmente converteu ou foi só vaidade métrica.</p>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="font-weight-600 mb-2" style="color: var(--text-primary); font-weight: 600;">2. Contrata agência (R$15k-R$30k/mês)</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Que usa "experiência" e achismo com nome bonito. 60-90 dias para entregar campanhas genéricas.</p>
+                        </div>
+
+                        <div>
+                            <p class="font-weight-600 mb-2" style="color: var(--text-primary); font-weight: 600;">3. Testa no escuro</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">E desperdiça 3-6 meses até descobrir (por tentativa e erro) o que não funciona.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-highlighted text-center">
+                    <h3 class="mb-4">Enquanto isso:</h3>
+                    <p class="mb-2" style="font-size: 1.125rem;">Seu concorrente que descobriu a fórmula cresce 10x.</p>
+                    <p class="mb-2" style="font-size: 1.125rem;">Você continua atirando no escuro.</p>
+                    <p class="mb-6" style="font-size: 1.125rem;">Queimando tempo, energia e oportunidades.</p>
+                    <p class="text-muted mb-4">E você tem <strong style="color: var(--text-primary);">zero visibilidade</strong> do que está realmente funcionando no seu mercado.</p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Até agora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="section">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-6">CAMMUS é o Google Analytics do conteúdo que funciona</h2>
+
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary);">
+                        Não somos agência. Não criamos conteúdo por você. Não prometemos fazer seu marketing.
+                    </p>
+                    <p class="mt-4" style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">
+                        Somos a plataforma de Content Intelligence que mostra O QUÊ criar baseado no que JÁ está funcionando no seu nicho.
+                    </p>
+                </div>
+
+                <div class="card mb-12">
+                    <h3 class="mb-6">Como Funciona</h3>
+                    <p class="mb-4" style="font-size: 1.125rem;">Nossa IA vasculha <strong style="color: var(--text-primary);">+10.000 posts por semana</strong> no seu mercado:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="check-item mb-4">
+                            <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Identifica padrões de alto engajamento</span>
+                        </li>
+                        <li class="check-item mb-4">
+                            <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Analisa copy, formato, timing, CTAs</span>
+                        </li>
+                        <li class="check-item mb-4">
+                            <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Filtra ruído (posts com curtidas mas sem resultado real)</span>
+                        </li>
+                        <li class="check-item">
+                            <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Entrega insights acionáveis para você replicar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h4 class="mb-4">O Diferencial</h4>
+                        <p class="text-muted mb-4">Enquanto agências brasileiras cobram R$30 mil/mês para <strong>ACHAR</strong> o que funciona, CAMMUS já sabe porque analisa dados reais de performance de milhares de posts.</p>
+                        <p class="text-muted">Enquanto você gasta 20 horas/semana pesquisando manualmente no LinkedIn, CAMMUS processa e filtra tudo em minutos com precisão que humanos não conseguem.</p>
+                    </div>
+
+                    <div class="card">
+                        <h4 class="mb-4">Por Que Agora</h4>
+                        <p class="text-muted mb-4">2026 é o ano que separa quem cria com dados de quem cria no achismo.</p>
+                        <p style="font-weight: 600; color: var(--text-primary);">Seus concorrentes já estão usando inteligência competitiva para crescer. Quanto mais você espera, mais eles se distanciam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="como-funciona" class="section section-dark">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">Da sua dúvida ao seu próximo viral em 72 horas</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                    Processo simples, resultado comprovado
+                </p>
+
+                <div class="grid-2 gap-8">
+                    <div class="card">
+                        <div class="badge badge-primary mb-4">Passo 1</div>
+                        <h3 class="mb-4">Você define seu nicho (2 minutos)</h3>
+                        <p class="text-muted mb-4">Preenche formulário simples:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Área de atuação (ex: SaaS B2B, Marketing para médicos)</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Tipo de conteúdo (Educativo, Inspiracional, Case studies)</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Rede social principal (LinkedIn, Instagram, YouTube)</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4 font-mono" style="font-size: 0.875rem; color: var(--text-muted);">Exemplo: "SaaS B2B" + "Educativo" + "LinkedIn"</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="badge badge-primary mb-4">Passo 2</div>
+                        <h3 class="mb-4">IA analisa seu mercado (48 horas)</h3>
+                        <p class="text-muted mb-4">Nossa engine de Content Intelligence:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Vasculha <strong>+5.000 posts</strong> similares ao seu nicho</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Filtra os <strong>top 50</strong> com melhor engajamento REAL</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Identifica padrões, formatos e estratégias que funcionam</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Elimina posts com métricas de vaidade</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="badge badge-primary mb-4">Passo 3</div>
+                        <h3 class="mb-4">Você recebe inteligência acionável</h3>
+                        <p class="text-muted mb-4">Relatório completo (Notion + PDF) com:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span><strong>Análise de Mercado:</strong> Top 20 posts para se inspirar</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span><strong>Insights Acionáveis:</strong> 10 ideias validadas por dados</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span><strong>Benchmark:</strong> O que seus concorrentes fazem de certo</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="badge badge-primary mb-4">Passo 4</div>
+                        <h3 class="mb-4">Você cria conteúdo com confiança</h3>
+                        <p class="text-muted mb-4">Menos teste cego. Mais replicação de sucesso comprovado.</p>
+                        <p style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary);">
+                            Resultado: Seu próximo post tem <strong>10x mais chance</strong> de viralizar porque você já sabe o que funciona.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU RECEIVE -->
+    <section class="section">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">Entregável completo de Content Intelligence</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem;">
+                    Tudo que você recebe mensalmente
+                </p>
+
+                <div class="grid-2 gap-8 mb-12">
+                    <div class="card">
+                        <h3 class="mb-6">📊 Análise Quantitativa</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Top 50 posts com melhor performance no seu nicho</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Métricas detalhadas (engajamento, alcance, conversão)</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Comparação de formatos (carrossel vs vídeo vs texto)</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Horários e dias de melhor performance</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-6">🧠 Análise Qualitativa</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Breakdown de copy (ganchos, storytelling, CTAs)</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Padrões visuais que performam</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Tom de voz e linguagem que conecta</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Estruturas de post que convertem</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-6">💡 Insights Acionáveis</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>10 ideias de conteúdo validadas por dados</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Templates de copy prontos para adaptar</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Recomendações de formato por mensagem</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Estratégias de engajamento testadas</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-6">🎯 Inteligência Competitiva</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Análise dos 5 principais players do seu nicho</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>O que está funcionando para cada um</span>
+                            </li>
+                            <li class="check-item mb-4">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Gaps de oportunidade que você pode explorar</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Tendências emergentes antes de saturarem</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card card-highlighted">
+                    <h3 class="mb-6">Formato de Entrega</h3>
+                    <div class="grid-3 gap-6">
+                        <div>
+                            <h4 class="mb-3">Dashboard Notion</h4>
+                            <p class="text-muted">Interativo e navegável, atualizado semanalmente, com histórico completo e filtros por formato e performance.</p>
+                        </div>
+                        <div>
+                            <h4 class="mb-3">PDF Executivo</h4>
+                            <p class="text-muted">Resumo mensal estratégico com principais tendências e recomendações priorizadas.</p>
+                        </div>
+                        <div>
+                            <h4 class="mb-3">Chamadas 2x/mês</h4>
+                            <p class="text-muted">30 min com nosso time para discutir insights e aplicação prática personalizada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-16">Transformação garantida em 6 áreas</h2>
+
+                <div class="grid-2 gap-8">
+                    <div class="card">
+                        <h3 class="mb-4">Economize 20 horas/semana de pesquisa</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">Horas no LinkedIn procurando referências. Anota posts manualmente. Tenta identificar padrões sozinho.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">IA analisa 10.000 posts enquanto você dorme. 20h/semana voltam para execução, não research.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">Acabe com a síndrome da página em branco</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">"O que eu posto hoje?" vira bloqueio criativo diário. Inconsistência, posts de última hora.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">10 ideias validadas por semana. Nunca mais fica sem saber o que criar.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">Pare de desperdiçar esforço em conteúdo que não converte</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">Cria 20 posts, 2 funcionam (taxa de erro de 90%). 18 posts desperdiçados = 30-40 horas perdidas.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">Replica padrões validados (taxa de sucesso 60-70%). CAC de conteúdo cai 40-60%.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">Tenha vantagem competitiva de dados</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">Você vê apenas seu próprio desempenho. Crescimento cego, sem contexto de mercado.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">Vê o mercado INTEIRO. Encontra brechas que concorrentes não viram.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">Aprenda 10x mais rápido que seus concorrentes</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">Leva 6-12 meses para descobrir o que funciona. Desperdiça meio ano testando.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">1 mês para inteligência completa. Em 90 dias você tem maturidade de 2 anos.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">Crie com confiança, não achismo</h3>
+                        <div class="mb-4">
+                            <p class="text-muted mb-2"><strong>Sem CAMMUS:</strong></p>
+                            <p class="text-muted">"Será que funciona?" vira aposta cega. Insegurança, inconsistência, falta de estratégia.</p>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-2"><strong>Com CAMMUS:</strong></p>
+                            <p style="color: var(--text-primary); font-weight: 600;">"Já vi 50 posts similares performarem 8x acima da média." Confiança em cada post.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROOF / CASES -->
+    <section class="section">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">Quem já usa está na frente</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem;">Resultados reais de clientes reais</p>
+
+                <div class="grid-2 gap-8 mb-12">
+                    <div class="card">
+                        <div class="badge mb-4">Case: Startup SaaS B2B</div>
+                        <h3 class="mb-6">De 15 reações para 120 por post em 60 dias</h3>
+
+                        <div class="mb-6">
+                            <p class="text-muted mb-3"><strong>Antes do CAMMUS:</strong></p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>15 reações por post</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>800-1.200 impressões</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>2-3 leads/mês via orgânico</span>
+                                </li>
+                                <li class="check-item">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>15h/semana criando conteúdo</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.75rem;">Depois de 60 dias com CAMMUS:</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>120 reações</strong> por post (8x aumento)</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>8.000-12.000 impressões</strong> (10x aumento)</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>25 leads/mês</strong> (10x aumento)</span>
+                                </li>
+                                <li class="check-item">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>4h/semana</strong> (economia de 11h)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <blockquote class="mt-6" style="border-left: 3px solid var(--border-default); padding-left: 1.25rem; font-style: italic; color: var(--text-secondary);">
+                            "CAMMUS mostrou que posts de 'lição aprendida' performavam 5x melhor no meu nicho. Eu não fazia ideia. Em 2 meses, meu engajamento explodiu."
+                            <footer class="mt-3" style="font-style: normal; font-size: 0.875rem; color: var(--text-muted);">
+                                — João Silva, Founder, SaaS B2B
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="card">
+                        <div class="badge mb-4">Case: Criadora de Conteúdo</div>
+                        <h3 class="mb-6">Dobrou audiência em 90 dias com dados, não achismo</h3>
+
+                        <div class="mb-6">
+                            <p class="text-muted mb-3"><strong>Antes do CAMMUS:</strong></p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>8.500 seguidores</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>2-3% engajamento</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>+200 seguidores/mês</span>
+                                </li>
+                                <li class="check-item">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-muted)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>1-2 vendas/mês</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.75rem;">Depois de 90 dias com CAMMUS:</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>16.800 seguidores</strong> (2x crescimento)</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>6-8% engajamento</strong> (3x aumento)</span>
+                                </li>
+                                <li class="check-item mb-2">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>+900 seguidores/mês</strong> (4.5x)</span>
+                                </li>
+                                <li class="check-item">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>12-15 vendas/mês</strong> (10x+)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <blockquote class="mt-6" style="border-left: 3px solid var(--border-default); padding-left: 1.25rem; font-style: italic; color: var(--text-secondary);">
+                            "CAMMUS me mostrou que carrosséis com 'passo a passo prático' tinham 12x mais saves no meu nicho. Mudei minha estratégia e em 3 meses dobrei minha audiência."
+                            <footer class="mt-3" style="font-style: normal; font-size: 0.875rem; color: var(--text-muted);">
+                                — Maria Santos, @marketingcomimpacto
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="card card-highlighted text-center">
+                    <h3 class="mb-8">Métricas Gerais (Desde o Lançamento)</h3>
+                    <div class="grid-3 gap-8">
+                        <div>
+                            <div class="stat-number mb-2">5.2M</div>
+                            <p class="text-muted">Posts analisados</p>
+                        </div>
+                        <div>
+                            <div class="stat-number mb-2">50+</div>
+                            <p class="text-muted">Empresas atendidas</p>
+                        </div>
+                        <div>
+                            <div class="stat-number mb-2">85%</div>
+                            <p class="text-muted">Taxa de renovação</p>
+                        </div>
+                        <div>
+                            <div class="stat-number mb-2">10x</div>
+                            <p class="text-muted">Média aumento engajamento (90 dias)</p>
+                        </div>
+                        <div>
+                            <div class="stat-number mb-2">20h</div>
+                            <p class="text-muted">Economia média/semana</p>
+                        </div>
+                        <div>
+                            <div class="stat-number mb-2">300+</div>
+                            <p class="text-muted">Relatórios entregues</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOR WHO / NOT FOR -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">CAMMUS é ideal para 3 perfis específicos</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem;">Identifique se você se encaixa</p>
+
+                <div class="grid-3 gap-8 mb-16">
+                    <div class="card">
+                        <h3 class="mb-6">👤 Founders de Startups B2B</h3>
+                        <p class="text-muted mb-4">Você se encaixa perfeitamente se:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Usa <strong>LinkedIn</strong> como principal canal de aquisição</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Resultado é <strong>inconsistente</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Não tem tempo para <strong>research</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Quer <strong>dados reais</strong>, não achismo</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Precisa <strong>escalar inbound</strong></span>
+                            </li>
+                        </ul>
+                        <p class="mt-6" style="font-weight: 600; color: var(--text-primary);">Resultado esperado: Inbound previsível em 90 dias</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-6">👤 Criadores / Personal Brands</h3>
+                        <p class="text-muted mb-4">Você se encaixa perfeitamente se:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Posta com frequência mas <strong>engajamento varia</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Quer escalar <strong>data-driven</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Precisa entender <strong>o que funciona</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Não tem 20h/semana para <strong>pesquisar</strong></span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Quer <strong>monetizar melhor</strong></span>
+                            </li>
+                        </ul>
+                        <p class="mt-6" style="font-weight: 600; color: var(--text-primary);">Resultado esperado: Dobrar engajamento em 60 dias</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-6">👤 Agências de Conteúdo</h3>
+                        <p class="text-muted mb-4">Você se encaixa perfeitamente se:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Atende <strong>múltiplos clientes</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Precisa de <strong>inteligência escalável</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Quer entregar <strong>estratégia baseada em dados</strong></span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Busca <strong>diferencial competitivo</strong></span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Precisa <strong>reduzir tempo de research</strong></span>
+                            </li>
+                        </ul>
+                        <p class="mt-6" style="font-weight: 600; color: var(--text-primary);">Resultado esperado: Entrega 10x mais embasada em 30 dias</p>
+                    </div>
+                </div>
+
+                <div class="card card-highlighted">
+                    <h3 class="mb-6 text-center">❌ CAMMUS NÃO é para você se:</h3>
+                    <div class="grid-2 gap-6">
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Você quer que criem conteúdo por você</p>
+                            <p class="text-muted">Somos inteligência, não execução. Entregamos dados, você cria.</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Não posta nas redes ou posta <1x/semana</p>
+                            <p class="text-muted">CAMMUS é para quem executa. Se não aplica, não verá resultado.</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Quer resultado sem aplicar os insights</p>
+                            <p class="text-muted">Entregamos dados. Você precisa aplicar. Não fazemos por você.</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Busca ferramenta de agendamento/automação</p>
+                            <p class="text-muted">Não somos Hootsuite. Somos análise e inteligência.</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Seu produto não está validado ainda</p>
+                            <p class="text-muted">Foque em validar fit primeiro. CAMMUS é para escalar.</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600; color: var(--text-primary);">✗ Quer resultado em 1 semana</p>
+                            <p class="text-muted">Primeiro relatório em 72h, mas resultado real leva 30-60 dias.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">Preço de Validação (Tempo Limitado)</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem;">Primeiros 50 clientes garantem condições especiais para sempre</p>
+
+                <div class="card mb-12" style="background: var(--bg-page-alt);">
+                    <h3 class="mb-8">Quanto Custa NÃO Ter CAMMUS?</h3>
+                    <div class="grid-3 gap-6">
+                        <div>
+                            <h4 class="mb-3">Opção 1: Agência</h4>
+                            <p class="font-mono stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">R$180k-360k</p>
+                            <p class="text-muted mb-4">Custo anual</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">R$15k-30k/mês · 60-90 dias para primeira entrega · Estratégia genérica</p>
+                        </div>
+                        <div>
+                            <h4 class="mb-3">Opção 2: Fazer Você Mesmo</h4>
+                            <p class="font-mono stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">R$192k</p>
+                            <p class="text-muted mb-4">Custo anual (20h/semana)</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Análise superficial · Sem escala · Tempo que deveria ir para execução</p>
+                        </div>
+                        <div>
+                            <h4 class="mb-3">Opção 3: Teste & Erro</h4>
+                            <p class="font-mono stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">???</p>
+                            <p class="text-muted mb-4">Impossível calcular</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">6-12 meses perdidos · Conteúdo desperdiçado · Oportunidades perdidas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2 gap-8 mb-12">
+                    <div class="card">
+                        <div class="badge mb-4">Após Validação</div>
+                        <h3 class="mb-6">Preço Público</h3>
+                        <div class="mb-6">
+                            <p class="stat-number" style="font-size: 3.5rem;">R$4.997</p>
+                            <p class="text-muted">/mês</p>
+                        </div>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Análise semanal completa</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Relatório Notion + PDF</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Benchmark competitivo</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Suporte via WhatsApp</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-highlighted" style="position: relative;">
+                        <div class="badge badge-primary mb-4" style="position: absolute; top: -1rem; left: 50%; transform: translateX(-50%);">⚡ Primeiros 50 Clientes</div>
+                        <div style="padding-top: 1rem;">
+                            <h3 class="mb-6">Preço de Validação</h3>
+                            <div class="mb-2">
+                                <p class="stat-number" style="font-size: 4rem; color: var(--text-primary);">R$1.997</p>
+                                <p class="text-muted" style="font-size: 1.125rem;">/mês · <strong style="color: var(--text-primary);">travado para sempre</strong></p>
+                            </div>
+                            <div class="mb-6" style="padding: 1rem; background: var(--semantic-success-bg); border-radius: 0.5rem; border: 1px solid var(--semantic-success-border);">
+                                <p style="color: var(--semantic-success-text); font-weight: 600; margin-bottom: 0.25rem;">Você economiza R$3.000/mês</p>
+                                <p style="color: var(--semantic-success-text); font-size: 0.875rem;">= R$36.000/ano vs preço público</p>
+                            </div>
+                            <p class="mb-4" style="font-weight: 600; color: var(--text-primary);">Tudo do plano público MAIS:</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li class="check-item mb-3">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>2 chamadas/mês</strong> com nosso time (30 min)</span>
+                                </li>
+                                <li class="check-item mb-3">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>Prioridade no roadmap</strong> - suas demandas viram features</span>
+                                </li>
+                                <li class="check-item mb-3">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>Early access</strong> a todos os novos recursos</span>
+                                </li>
+                                <li class="check-item mb-3">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>Acesso direto aos fundadores</strong></span>
+                                </li>
+                                <li class="check-item">
+                                    <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span><strong>Comunidade exclusiva</strong> de early adopters</span>
+                                </li>
+                            </ul>
+                            <div class="mt-8">
+                                <a href="#cta-final" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">Garantir Preço de Validação</a>
+                                <p class="text-center mt-4 font-mono" style="font-size: 0.875rem; color: var(--text-primary);">
+                                    <strong>31 clientes ativos</strong> · 19 vagas restantes
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card text-center">
+                    <h3 class="mb-4">Garantia Incondicional de 30 Dias</h3>
+                    <p class="mb-4" style="font-size: 1.125rem; color: var(--text-secondary);">
+                        Se em <strong style="color: var(--text-primary);">30 dias</strong> você não tiver pelo menos <strong style="color: var(--text-primary);">5 insights acionáveis</strong> que melhorem sua estratégia de conteúdo, devolvemos <strong style="color: var(--text-primary);">100% do valor investido</strong>.
+                    </p>
+                    <p style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Sem perguntas. Sem burocracia. Zero risco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- URGENCY -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center mb-4">Por que decidir agora (não depois)?</h2>
+                <p class="text-center text-muted mb-16" style="font-size: 1.125rem;">4 razões reais, não artificiais</p>
+
+                <div class="grid-2 gap-8">
+                    <div class="card">
+                        <h3 class="mb-4">1. Preço Sobe Quando Atingirmos 50 Clientes</h3>
+                        <div class="mb-4" style="padding: 1rem; background: var(--bg-page-alt); border-radius: 0.5rem;">
+                            <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">R$1.997 → R$4.997</p>
+                            <p class="text-muted">Diferença em 12 meses: <strong style="color: var(--text-primary);">R$36.000</strong></p>
+                        </div>
+                        <p class="text-muted">Se você entrar agora: R$1.997/mês <strong style="color: var(--text-primary);">para sempre</strong> (preço travado)</p>
+                        <p class="text-muted">Se você esperar: R$4.997/mês (sem lock)</p>
+                        <p class="mt-4" style="font-weight: 600; color: var(--text-primary);">Não sabemos quando vai acontecer. Pode ser daqui a 2 semanas. Mas quando acontecer, não volta.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">2. Seus Concorrentes Não Vão Esperar</h3>
+                        <div class="mb-4">
+                            <p class="mb-2" style="font-weight: 600;">Semana 1 sem CAMMUS:</p>
+                            <p class="text-muted">Concorrente descobre que "case study detalhado" performa 8x melhor. Você continua testando no escuro.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="mb-2" style="font-weight: 600;">Semana 4:</p>
+                            <p class="text-muted">Concorrente já publicou 12 posts data-driven. Engajamento cresceu 3x. Você ainda está "na dúvida".</p>
+                        </div>
+                        <div>
+                            <p class="mb-2" style="font-weight: 600;">Mês 6:</p>
+                            <p class="text-muted">Concorrente domina o nicho. É referência. Tem inbound previsível. <strong style="color: var(--text-primary);">E a diferença é irreversível.</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">3. Oportunidades de Nicho Fecham Rápido</h3>
+                        <p class="text-muted mb-4">Com CAMMUS, você identifica oportunidades <strong style="color: var(--text-primary);">antes</strong> de saturarem.</p>
+                        <div class="mb-4" style="padding: 1rem; background: var(--bg-page-alt); border-radius: 0.5rem;">
+                            <p class="mb-2" style="font-weight: 600;">Exemplo real:</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Março/2025: posts de "bastidores de startup" performavam 12x melhor no SaaS B2B.</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Clientes que aplicaram: cresceram 300-500%.</p>
+                            <p class="text-muted" style="font-size: 0.9375rem;">Julho/2025: formato saturado. Performance caiu 60%.</p>
+                        </div>
+                        <p style="font-weight: 600; color: var(--text-primary);">Janela de oportunidade: 3-4 meses. Quanto mais você espera, menos brechas restam.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-4">4. Benefícios de Early Adopter Encerram</h3>
+                        <p class="text-muted mb-4">Depois dos primeiros 50 clientes, você perde:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span><strong>Preço travado:</strong> Diferença de R$36k/ano</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span><strong>Chamadas com fundadores:</strong> Acesso direto ao time core</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span><strong>Prioridade no roadmap:</strong> Suas demandas viram features</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span><strong>Early access:</strong> Testa recursos antes de todo mundo</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4" style="font-weight: 600; color: var(--text-primary);">Early adopter não é só desconto. É ter controle sobre o que construímos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta-final" class="section" style="background: var(--bg-section);">
+        <div class="container">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-center mb-4">Última chance de garantir vantagem competitiva</h2>
+                <p class="text-center text-muted mb-12" style="font-size: 1.125rem;">
+                    A escolha é sua. Mas o tempo não espera.
+                </p>
+
+                <div class="grid-2 gap-8 mb-12">
+                    <div class="card" style="background: var(--bg-page-alt); border-color: var(--border-strong);">
+                        <h3 class="mb-4">❌ Opção 1: Continuar no escuro</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span>20 horas/semana pesquisando manualmente</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span>Testar formatos que já falharam para centenas</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span>Desperdiçar 6-12 meses até descobrir o óbvio</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--semantic-error-text)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                <span>Ver concorrentes crescerem enquanto você testa</span>
+                            </li>
+                        </ul>
+                        <p class="mt-6 text-muted"><strong>Custo real:</strong> 6-12 meses de crescimento perdido</p>
+                    </div>
+
+                    <div class="card card-highlighted">
+                        <h3 class="mb-4">✅ Opção 2: Começar com dados</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>IA analisa 10.000 posts/semana enquanto você dorme</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Replica estratégias validadas por dados reais</span>
+                            </li>
+                            <li class="check-item mb-3">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Resultado tangível em 30 dias, não 6 meses</span>
+                            </li>
+                            <li class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Confiança em cada post que publica</span>
+                            </li>
+                        </ul>
+                        <p class="mt-6" style="font-weight: 600; color: var(--text-primary);"><strong>Custo real:</strong> R$1.997/mês (menos que 1 jantar de negócios/semana)</p>
+                    </div>
+                </div>
+
+                <div class="card" style="background: var(--bg-elevated); padding: 3rem;">
+                    <h3 class="text-center mb-8">Comece Agora em 3 Passos</h3>
+
+                    <form style="max-width: 28rem; margin: 0 auto;">
+                        <div class="input-group mb-4">
+                            <label class="input-label">Seu nome completo</label>
+                            <input type="text" class="input-field" placeholder="João Silva" required>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <label class="input-label">Seu email corporativo</label>
+                            <input type="email" class="input-field" placeholder="joao@empresa.com" required>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <label class="input-label">Seu WhatsApp</label>
+                            <input type="tel" class="input-field" placeholder="(11) 99999-9999" required>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <label class="input-label">Seu nicho/área de atuação</label>
+                            <input type="text" class="input-field" placeholder="Ex: SaaS B2B, Marketing para médicos" required>
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <label class="input-label">Rede social principal</label>
+                            <div class="flex gap-4" style="margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="linkedin" style="cursor: pointer;">
+                                    <span>LinkedIn</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="instagram" style="cursor: pointer;">
+                                    <span>Instagram</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="youtube" style="cursor: pointer;">
+                                    <span>YouTube</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-6">
+                            <label class="input-label">Objetivo principal</label>
+                            <div style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="authority" style="cursor: pointer;">
+                                    <span>Construir autoridade</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="leads" style="cursor: pointer;">
+                                    <span>Gerar leads B2B</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="audience" style="cursor: pointer;">
+                                    <span>Crescer audiência</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="monetize" style="cursor: pointer;">
+                                    <span>Monetizar conteúdo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center; font-size: 1.25rem; padding: 1.25rem 2rem;">
+                            Começar Minha Análise Agora →
+                        </button>
+
+                        <p class="text-center mt-4 font-mono" style="font-size: 0.875rem; color: var(--text-primary);">
+                            Preço de validação · <strong>19 vagas restantes</strong> · Preço travado vitalício
+                        </p>
+                    </form>
+
+                    <div class="mt-12" style="padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+                        <h4 class="text-center mb-6">Garantias e Segurança</h4>
+                        <div class="grid-2 gap-4">
+                            <div class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Sem cartão de crédito para começar</span>
+                            </div>
+                            <div class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Garantia incondicional de 30 dias</span>
+                            </div>
+                            <div class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Cancele quando quiser sem multa</span>
+                            </div>
+                            <div class="check-item">
+                                <svg class="check-icon" fill="none" stroke="var(--text-primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Seus dados são privados e protegidos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <p class="mb-2" style="font-size: 1.125rem; color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">P.S.:</strong> Se você chegou até aqui, é porque sabe que precisa mudar a forma como cria conteúdo. Você pode continuar testando no escuro por mais 6 meses. Ou pode ter vantagem competitiva desde amanhã. <strong style="color: var(--text-primary);">A escolha é sua. Mas escolha agora.</strong>
+                    </p>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">P.P.S.:</strong> Não é sobre "se" o preço vai subir. É "quando". E quando subir, essa página desaparece. Os primeiros 50 são os únicos que terão essas condições. <strong style="color: var(--text-primary);">Para sempre.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--bg-section); border-top: 1px solid var(--border-subtle); padding: 3rem 0 2rem;">
+        <div class="container">
+            <div class="max-w-4xl mx-auto text-center">
+                <div style="font-weight: 700; font-size: 1.5rem; color: var(--text-primary); margin-bottom: 1rem;">CAMMUS</div>
+                <p class="text-muted mb-6">Content Intelligence Platform</p>
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 CAMMUS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+    </button>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                answer.classList.toggle('active');
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Formulário enviado! Em breve nossa equipe entrará em contato.');
+        });
+
+        // Smooth scroll padding adjustment
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

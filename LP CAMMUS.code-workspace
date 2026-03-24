@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Downloads/uplane"
+		},
+		{
+			"path": "../../Downloads/typa"
+		},
+		{
+			"path": "../../Downloads/social-grow"
+		},
+		{
+			"path": "../../Downloads/Fundamentos de Vibe Design/Banco de referências/design systems/green-museum"
+		},
+		{
+			"path": "../../Downloads/Fundamentos de Vibe Design/Banco de referências/design systems/glass-effect2"
+		},
+		{
+			"path": "../../Downloads/Fundamentos de Vibe Design/Banco de referências/design systems/parallax-geometry"
+		},
+		{
+			"path": "../../Downloads/Fundamentos de Vibe Design/Banco de referências/referencias/animation-clean"
+		},
+		{
+			"path": "../../Downloads/Fundamentos de Vibe Design/Banco de referências/design systems/lumina-video"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "LP CAMMUS"
+	}
+}

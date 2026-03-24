@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Incorporação do Formulário</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #2e2e2e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            color: #6b6b6b;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        pre {
+            background: #1a1a1a;
+            color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #0d47a1;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #e65100;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #1b5e20;
+        }
+
+        .demo-container {
+            border: 2px dashed #d4d4d4;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #fafafa;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background: #2e2e2e;
+        }
+
+        ul, ol {
+            color: #2e2e2e;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h1>📋 Como Incorporar o Formulário</h1>
+        <p>
+            Este documento mostra as diferentes formas de incorporar o formulário <code>forms-embed.html</code> em outro site.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Método 1: iFrame (Recomendado para Segurança)</h2>
+
+        <div class="alert alert-success">
+            <strong>✅ Melhor escolha para:</strong> Incorporar o formulário em sites de terceiros mantendo isolamento total e segurança.
+        </div>
+
+        <p><strong>Vantagens:</strong></p>
+        <ul>
+            <li>Isolamento total de estilos CSS</li>
+            <li>Segurança (sandbox protection)</li>
+            <li>Fácil de implementar</li>
+            <li>Sem conflitos com o site hospedeiro</li>
+        </ul>
+
+        <p><strong>Desvantagens:</strong></p>
+        <ul>
+            <li>Altura fixa (pode não se ajustar automaticamente)</li>
+            <li>Limitações de localStorage/sessionStorage em alguns navegadores</li>
+            <li>Pode ser bloqueado por Content Security Policy</li>
+        </ul>
+
+        <h3>Código de Incorporação:</h3>
+        <pre><code>&lt;!-- Incorporar via iFrame --&gt;
+&lt;iframe
+    src="https://seudominio.com/forms-embed.html"
+    width="100%"
+    height="1400px"
+    frameborder="0"
+    allow="clipboard-write"
+    sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
+    style="border: none; max-width: 800px; margin: 0 auto; display: block;"
+    title="Formulário de Qualificação"
+&gt;&lt;/iframe&gt;</code></pre>
+
+        <h3>Demonstração (iFrame):</h3>
+        <div class="demo-container">
+            <iframe
+                src="forms-embed.html"
+                width="100%"
+                height="1400px"
+                frameborder="0"
+                allow="clipboard-write"
+                sandbox="allow-scripts allow-forms allow-same-origin allow-popups"
+                style="border: none; max-width: 800px; margin: 0 auto; display: block; background: transparent;"
+                title="Formulário de Qualificação"
+            ></iframe>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>💡 Dica:</strong> Ajuste o atributo <code>height</code> conforme necessário para evitar scroll duplo.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Método 2: Embed Direto via JavaScript</h2>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Atenção:</strong> Este método pode causar conflitos de CSS com o site hospedeiro. Use apenas se você controlar ambos os domínios.
+        </div>
+
+        <p><strong>Vantagens:</strong></p>
+        <ul>
+            <li>Integração mais fluida com o site</li>
+            <li>Altura dinâmica automática</li>
+            <li>Sem limitações de localStorage</li>
+        </ul>
+
+        <p><strong>Desvantagens:</strong></p>
+        <ul>
+            <li>Possibilidade de conflitos CSS</li>
+            <li>Scripts externos podem afetar o site</li>
+            <li>Menor segurança</li>
+        </ul>
+
+        <h3>Código de Incorporação:</h3>
+        <pre><code>&lt;!-- Container onde o formulário será carregado --&gt;
+&lt;div id="flux-aurora-form-container"&gt;
+    &lt;p style="text-align: center; padding: 2rem;"&gt;Carregando formulário...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Script de incorporação --&gt;
+&lt;script&gt;
+(function() {
+    const FORM_URL = 'https://seudominio.com/forms-embed.html';
+
+    fetch(FORM_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar formulário');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Criar um documento temporário para parsear o HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Extrair apenas o conteúdo do body
+            const bodyContent = doc.body.innerHTML;
+
+            // Inserir no container
+            const container = document.getElementById('flux-aurora-form-container');
+            container.innerHTML = bodyContent;
+
+            // Executar scripts do formulário
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+
+                // Adicionar ao final do body para garantir execução
+                document.body.appendChild(newScript);
+            });
+
+            // Copiar estilos do head
+            const styles = doc.querySelectorAll('style, link[rel="stylesheet"]');
+            styles.forEach(style => {
+                const newStyle = style.cloneNode(true);
+                document.head.appendChild(newStyle);
+            });
+
+            console.log('✅ Formulário carregado com sucesso');
+        })
+        .catch(error => {
+            console.error('❌ Erro ao carregar formulário:', error);
+
+            const container = document.getElementById('flux-aurora-form-container');
+            container.innerHTML = `
+                &lt;div style="text-align: center; padding: 2rem; background: #f5e8e8; border-radius: 8px;"&gt;
+                    &lt;p style="color: #5c3333; font-weight: 600; margin-bottom: 0.5rem;"&gt;
+                        Erro ao carregar formulário
+                    &lt;/p&gt;
+                    &lt;p style="color: #6b6b6b; font-size: 0.875rem;"&gt;
+                        Tente recarregar a página ou entre em contato conosco.
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            `;
+        });
+})();
+&lt;/script&gt;</code></pre>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ CORS:</strong> Para este método funcionar, o servidor que hospeda <code>forms-embed.html</code> precisa ter headers CORS configurados:
+            <pre style="margin-top: 0.5rem;"><code>Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🌐 Método 3: Embed via Script Tag (Widget)</h2>
+
+        <div class="alert alert-info">
+            <strong>💡 Melhor para:</strong> Distribuir o formulário como um widget reutilizável em múltiplos sites.
+        </div>
+
+        <p>
+            Neste método, você cria um script centralizado que pode ser incorporado com uma única linha de código.
+        </p>
+
+        <h3>1. Criar arquivo <code>embed-widget.js</code> no seu servidor:</h3>
+        <pre><code>(function() {
+    'use strict';
+
+    // Configuração
+    const FORM_URL = 'https://seudominio.com/forms-embed.html';
+    const CONTAINER_ID = 'flux-aurora-form';
+
+    // Criar container se não existir
+    let container = document.getElementById(CONTAINER_ID);
+    if (!container) {
+        container = document.createElement('div');
+        container.id = CONTAINER_ID;
+        document.currentScript.parentNode.insertBefore(container, document.currentScript);
+    }
+
+    // Criar iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = FORM_URL;
+    iframe.width = '100%';
+    iframe.height = '1400px';
+    iframe.frameBorder = '0';
+    iframe.setAttribute('allow', 'clipboard-write');
+    iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-same-origin allow-popups');
+    iframe.style.cssText = 'border: none; max-width: 800px; margin: 0 auto; display: block;';
+    iframe.title = 'Formulário de Qualificação';
+
+    // Inserir iframe no container
+    container.innerHTML = '';
+    container.appendChild(iframe);
+
+    console.log('✅ Flux Aurora Form Widget carregado');
+})();</code></pre>
+
+        <h3>2. Incorporar no site de destino:</h3>
+        <pre><code>&lt;!-- Basta adicionar uma linha de código --&gt;
+&lt;script src="https://seudominio.com/embed-widget.js" async&gt;&lt;/script&gt;</code></pre>
+
+        <h3>3. (Opcional) Especificar onde o formulário será inserido:</h3>
+        <pre><code>&lt;!-- O widget será inserido dentro desta div --&gt;
+&lt;div id="flux-aurora-form"&gt;&lt;/div&gt;
+
+&lt;script src="https://seudominio.com/embed-widget.js" async&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>🔒 Configuração de Segurança no Servidor N8N</h2>
+
+        <p>Para o formulário funcionar em embed, configure os headers CORS no webhook N8N:</p>
+
+        <h3>Opção 1: Configurar no N8N Workflow</h3>
+        <p>Adicione um nó "Set Headers" antes da resposta do webhook:</p>
+        <pre><code>{
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Accept"
+}</code></pre>
+
+        <h3>Opção 2: Configurar no Nginx (se aplicável)</h3>
+        <pre><code>location /webhook/ {
+    # Headers CORS
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'Content-Type, Accept';
+
+    # Responder OPTIONS com 204
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+
+    # Proxy para N8N
+    proxy_pass http://localhost:5678;
+}</code></pre>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Produção:</strong> Em produção, substitua <code>*</code> por domínios específicos:
+            <pre style="margin-top: 0.5rem;"><code>Access-Control-Allow-Origin: https://seusite.com, https://outro-site.com</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>✅ Checklist de Implementação</h2>
+
+        <ol>
+            <li>
+                <strong>Hospedar o formulário:</strong>
+                <ul>
+                    <li>Upload <code>forms-embed.html</code> para seu servidor</li>
+                    <li>Verificar que o arquivo é acessível via HTTPS</li>
+                    <li>Testar abertura direta no navegador</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Configurar CORS no webhook N8N:</strong>
+                <ul>
+                    <li>Adicionar headers CORS no workflow</li>
+                    <li>Testar requisição POST via Postman/Insomnia</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Escolher método de incorporação:</strong>
+                <ul>
+                    <li>iFrame para máxima segurança</li>
+                    <li>JavaScript direto para integração fluida</li>
+                    <li>Widget para distribuição em múltiplos sites</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Testar em diferentes navegadores:</strong>
+                <ul>
+                    <li>Chrome/Edge</li>
+                    <li>Firefox</li>
+                    <li>Safari</li>
+                    <li>Mobile (iOS Safari, Chrome Android)</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Verificar funcionalidades:</strong>
+                <ul>
+                    <li>Validação de campos funciona</li>
+                    <li>Máscara de telefone aplica corretamente</li>
+                    <li>Dropdowns abrem e fecham sem problemas</li>
+                    <li>Envio do formulário completa com sucesso</li>
+                    <li>Redirecionamento após envio funciona</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>🐛 Troubleshooting</h2>
+
+        <h3>Problema: Formulário não carrega no iframe</h3>
+        <p><strong>Causa:</strong> Content Security Policy (CSP) bloqueando</p>
+        <p><strong>Solução:</strong> Adicionar header no servidor que hospeda forms-embed.html:</p>
+        <pre><code>Content-Security-Policy: frame-ancestors 'self' https://dominio-permitido.com</code></pre>
+
+        <h3>Problema: Erro CORS ao enviar formulário</h3>
+        <p><strong>Causa:</strong> Webhook N8N não configurado para CORS</p>
+        <p><strong>Solução:</strong> Seguir seção "Configuração de Segurança no Servidor N8N" acima</p>
+
+        <h3>Problema: sessionStorage não funciona em iframe</h3>
+        <p><strong>Causa:</strong> Navegador bloqueia storage em contexto de terceiros</p>
+        <p><strong>Solução:</strong>
+            <ol>
+                <li>Passar dados via URL query params</li>
+                <li>Usar postMessage para comunicação entre janelas</li>
+                <li>Ou hospedar formulário no mesmo domínio</li>
+            </ol>
+        </p>
+
+        <h3>Problema: Dropdowns não clicáveis no iframe</h3>
+        <p><strong>Causa:</strong> z-index muito alto causando conflitos</p>
+        <p><strong>Solução:</strong> Já corrigido em forms-embed.html (z-index reduzido de 10000 para 1000)</p>
+
+        <h3>Problema: Estilos quebrados em embed direto</h3>
+        <p><strong>Causa:</strong> Conflito de CSS com site hospedeiro</p>
+        <p><strong>Solução:</strong>
+            <ol>
+                <li>Usar iFrame ao invés de embed direto</li>
+                <li>Ou adicionar prefixo namespace em todas as classes CSS</li>
+                <li>Ou usar Shadow DOM (técnica avançada)</li>
+            </ol>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>📚 Recursos Adicionais</h2>
+
+        <a href="forms-embed.html" class="btn" target="_blank">Ver Formulário</a>
+        <a href="forms.html" class="btn" target="_blank">Ver Versão Original</a>
+
+        <h3>Links Úteis:</h3>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe" target="_blank">MDN: iframe</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">MDN: CORS</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank">MDN: Content Security Policy</a></li>
+        </ul>
+
+        <h3>Diferenças entre forms.html e forms-embed.html:</h3>
+        <ul>
+            <li>✅ Z-index reduzido de 10000 para 1000 (dropdowns)</li>
+            <li>✅ localStorage substituído por sessionStorage</li>
+            <li>✅ Validação de WhatsApp com máscara automática</li>
+            <li>✅ CORS habilitado no fetch (mode: 'cors', credentials: 'omit')</li>
+            <li>✅ Validação em tempo real aprimorada</li>
+            <li>✅ Mensagens de erro mais descritivas</li>
+            <li>✅ Autocomplete habilitado nos campos</li>
+            <li>✅ Metadata indica origem 'flux-aurora-form-embed'</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📞 Suporte</h2>
+        <p>
+            Para dúvidas ou problemas com a incorporação do formulário, entre em contato com a equipe de desenvolvimento.
+        </p>
+    </div>
+</body>
+</html>

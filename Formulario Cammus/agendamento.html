@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agende sua reunião — Flux Aurora</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Meta description -->
+    <meta name="description" content="Escolha o melhor horário para sua reunião estratégica com a Cammus.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════ */
+        /* FLUX AURORA v2 — DESIGN SYSTEM TOKENS          */
+        /* ═══════════════════════════════════════════════ */
+
+        :root {
+            /* BASE */
+            --charcoal-1: #1a1a1a;
+            --charcoal-2: #2e2e2e;
+            --off-white: #f5f5f5;
+
+            /* BACKGROUNDS */
+            --bg-page: #f5f5f5;
+            --bg-section: #ffffff;
+            --bg-elevated: #ffffff;
+
+            /* TEXT */
+            --text-primary: #1a1a1a;
+            --text-secondary: #2e2e2e;
+            --text-muted: #6b6b6b;
+
+            /* BORDERS */
+            --border-subtle: #e5e5e5;
+            --border-default: #d4d4d4;
+            --border-strong: #a3a3a3;
+
+            /* CTA PRIMARY */
+            --cta-primary-bg: #1a1a1a;
+            --cta-primary-bg-hover: #2e2e2e;
+            --cta-primary-text: #f5f5f5;
+
+            /* SHADOWS */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06);
+            --shadow-focus: 0 0 0 3px rgba(26, 26, 26, 0.2);
+
+            /* SEMANTIC */
+            --semantic-success-bg: #e8f0e9;
+            --semantic-success-text: #3d5940;
+
+            /* TIMING */
+            --duration-fast: 150ms;
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+            /* FONT SIZES */
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.375rem;
+            --font-size-hero: clamp(2rem, 5vw, 3rem); /* 32–48px — hero headings */
+
+            /* LINE HEIGHTS */
+            --line-height-tight: 1.3;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+
+            /* LETTER SPACING */
+            --letter-spacing-tight: -0.01em;
+            --letter-spacing-normal: 0;
+            --letter-spacing-wide: 0.04em;
+
+            /* FONT WEIGHTS */
+            --font-weight-regular: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+
+            /* TYPOGRAPHY */
+            --font-display: "Coolvetica", "Impact", "Arial Narrow", sans-serif;
+            --font-body: "Apple Garamond", "Garamond", "EB Garamond", Georgia, serif;
+            --font-sans: "Coolvetica", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-serif: "Apple Garamond", "Garamond", "EB Garamond", Georgia, serif;
+            --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+            /* BACKGROUND GRADIENT */
+            --form-bg-gradient: radial-gradient(circle at 50% 20%, rgba(0,0,0,0.04), transparent 60%);
+
+            /* SHAPE COLOR */
+            --shape-color: rgba(26, 26, 26, 0.10);
+
+            /* CURSOR SPOTLIGHT */
+            --spotlight-color: rgba(0, 0, 0, 0.08);
+            --spotlight-size: 480px;
+            --spotlight-falloff: 60%;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        [data-theme="dark"] {
+            /* BACKGROUNDS */
+            --bg-page: #0a0a0a;
+            --bg-section: #0f0f0f;
+            --bg-elevated: #1a1a1a;
+
+            /* TEXT — warm white para reduzir cansaço visual em dark mode */
+            --text-primary: #f0ede8;
+            --text-secondary: #c8c4bc;
+            --text-muted: #a3a3a3;
+
+            /* BORDERS */
+            --border-subtle: #242424;
+            --border-default: #2e2e2e;
+            --border-strong: #404040;
+
+            /* CTA PRIMARY */
+            --cta-primary-bg: #f5f5f5;
+            --cta-primary-bg-hover: #ffffff;
+            --cta-primary-text: #1a1a1a;
+
+            /* SHADOWS */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-focus: 0 0 0 3px rgba(245, 245, 245, 0.3);
+
+            /* SEMANTIC */
+            --semantic-success-bg: #1a2e1d;
+            --semantic-success-text: #a8c5ab;
+
+            /* BACKGROUND GRADIENT */
+            --form-bg-gradient: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.06), transparent 60%);
+
+            /* SHAPE COLOR */
+            --shape-color: rgba(245, 245, 245, 0.10);
+
+            /* CURSOR SPOTLIGHT */
+            --spotlight-color: rgba(245, 245, 245, 0.06);
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* TIPOGRAFIA — HIERARQUIA CAMMUS                  */
+        /* ═══════════════════════════════════════════════ */
+
+        h1 {
+            font-family: var(--font-display);
+        }
+
+        p {
+            font-family: var(--font-body);
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* BASE STYLES                                     */
+        /* ═══════════════════════════════════════════════ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--form-bg-gradient), var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* CURSOR SPOTLIGHT */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 1;
+            background: radial-gradient(
+                circle var(--spotlight-size) at var(--mouse-x) var(--mouse-y),
+                var(--spotlight-color),
+                transparent var(--spotlight-falloff)
+            );
+            transition: opacity 160ms ease;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* COMPONENTS — BUTTONS                            */
+        /* ═══════════════════════════════════════════════ */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: var(--letter-spacing-wide);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            font-family: var(--font-display);
+            background: var(--cta-primary-bg);
+            color: var(--cta-primary-text);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--cta-primary-bg-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-elevated);
+            border-color: var(--border-strong);
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* COMPONENTS — CARD                               */
+        /* ═══════════════════════════════════════════════ */
+
+        .card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        /* ═══════════════════════════════════════════════ */
+        /* BACKGROUND SHAPES                               */
+        /* ═══════════════════════════════════════════════ */
+
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-shape {
+            position: absolute;
+            border: 1.5px solid var(--shape-color);
+            animation: heroDrift 24s ease-in-out infinite alternate;
+        }
+
+        .bg-shape-circle {
+            top: 10%;
+            right: 15%;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+        }
+
+        .bg-shape-square {
+            bottom: 15%;
+            left: 10%;
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            transform: rotate(15deg);
+            animation: heroDrift 28s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroDrift {
+            0% {
+                transform: translate(0px, 0px) rotate(0deg);
+            }
+            50% {
+                transform: translate(12px, -8px) rotate(2deg);
+            }
+            100% {
+                transform: translate(0px, 0px) rotate(0deg);
+            }
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* THEME TOGGLE                                    */
+        /* ═══════════════════════════════════════════════ */
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-default);
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-out);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--border-strong);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle svg {
+            width: 1.125rem;
+            height: 1.125rem;
+            color: var(--text-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .theme-icon-sun {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .theme-icon-moon {
+            opacity: 0;
+            transform: scale(0.8) rotate(90deg);
+        }
+
+        [data-theme="dark"] .theme-icon-sun {
+            opacity: 0;
+            transform: scale(0.8) rotate(90deg);
+        }
+
+        [data-theme="dark"] .theme-icon-moon {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* RESPONSIVE                                      */
+        /* ═══════════════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* ACCESSIBILITY                                   */
+        /* ═══════════════════════════════════════════════ */
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            body::before {
+                display: none !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════ */
+        /* CALENDLY INLINE WIDGET                          */
+        /* ═══════════════════════════════════════════════ */
+
+        .calendly-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 0;
+        }
+
+        .calendly-inline-widget {
+            width: 100% !important;
+            min-width: 320px;
+            height: 700px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .calendly-inline-widget {
+                height: 1000px; /* Calendly needs more height on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes" aria-hidden="true">
+        <div class="bg-shape bg-shape-circle"></div>
+        <div class="bg-shape bg-shape-square"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" type="button">
+        <span class="theme-icon theme-icon-sun">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="theme-icon theme-icon-moon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <!-- Hero Section -->
+    <section style="padding: 4rem 0 2rem; position: relative; z-index: 1;">
+        <div class="container">
+            <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+                <h1 style="font-size: var(--font-size-hero); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: var(--letter-spacing-tight); margin-bottom: 1rem; color: var(--text-primary);">
+                    Agende sua reunião
+                </h1>
+                <p style="font-size: var(--font-size-md); line-height: var(--line-height-relaxed); color: var(--text-secondary); max-width: 540px; margin: 0 auto;">
+                    Escolha o melhor horário para nossa conversa no calendário abaixo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendar Section -->
+    <section style="padding: 2rem 0 4rem; position: relative; z-index: 1;">
+        <div class="container">
+            <div style="max-width: 920px; margin: 0 auto;">
+                <div class="card">
+                    <!-- Calendly inline widget begin -->
+                    <div class="calendly-wrapper">
+                        <div
+                            class="calendly-inline-widget"
+                            data-url="https://calendly.com/brendodaluz/30min?background_color=1a1a1a&text_color=f5f5f5&primary_color=8ba8b8"
+                            style="min-width:320px;height:700px;"
+                        ></div>
+                    </div>
+                    <!-- Calendly inline widget end -->
+
+                    <!-- Divider -->
+                    <div style="height: 1px; background: var(--border-subtle); margin: 2rem 0;"></div>
+
+                    <!-- Botão para pular agendamento (opcional) -->
+                    <div style="padding: 1rem; text-align: center;">
+                        <p style="color: var(--text-muted); font-size: var(--font-size-sm); line-height: var(--line-height-normal); margin-bottom: 1rem;">
+                            Prefere agendar depois?
+                        </p>
+                        <a href="obrigado.html" class="btn btn-secondary">
+                            Pular agendamento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Cursor Spotlight JS -->
+    <script>
+    (function() {
+        // Verificar se usuário prefere movimento reduzido
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (reduceMotion.matches) {
+            return;
+        }
+
+        const root = document.documentElement;
+        let rafId = null;
+
+        // Atualizar posição do spotlight baseado no mouse
+        function updateSpotlightPosition(event) {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                root.style.setProperty('--mouse-x', `${event.clientX}px`);
+                root.style.setProperty('--mouse-y', `${event.clientY}px`);
+                rafId = null;
+            });
+        }
+
+        document.addEventListener('mousemove', updateSpotlightPosition);
+    })();
+    </script>
+
+    <!-- Theme Toggle JS -->
+    <script>
+    (function() {
+        const toggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Função para aplicar tema
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            toggle.setAttribute('aria-label',
+                theme === 'dark' ? 'Alternar para tema claro' : 'Alternar para tema escuro'
+            );
+        }
+
+        // Inicializar tema do localStorage ou usar dark como default
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        // Toggle tema
+        toggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+            localStorage.setItem('theme', nextTheme);
+        });
+    })();
+    </script>
+
+    <!-- Auto-redirect after scheduling (optional) -->
+    <script>
+    (function() {
+        // Verificar se nome do usuário está salvo (validação básica)
+        const userName = localStorage.getItem('userName');
+        if (!userName) {
+            if (window.location.hostname === 'localhost') { console.warn('⚠️ Nome do usuário não encontrado. Redirecionando para formulário...'); }
+            // Opcional: redirecionar de volta para forms.html se não houver nome
+            // window.location.href = 'forms.html';
+        }
+
+        // Detectar interação com o iframe (agendamento)
+        // Nota: Por segurança do browser, não podemos detectar eventos dentro do iframe do Google Calendar
+        // Mas podemos detectar quando o usuário clica fora do iframe ou após um tempo
+
+        // Opção 1: Redirecionar após X segundos de inatividade
+        let inactivityTimer;
+        const INACTIVITY_TIME = 120000; // 2 minutos em milissegundos
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (window.location.hostname === 'localhost') { console.log('⏱️ Inatividade detectada - assumindo que agendamento foi concluído'); }
+                // Opcional: redirecionar automaticamente após inatividade
+                // window.location.href = 'obrigado.html';
+            }, INACTIVITY_TIME);
+        }
+
+        // Resetar timer em qualquer movimento do mouse ou teclado
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
+        document.addEventListener('click', resetInactivityTimer);
+
+        // Iniciar timer
+        resetInactivityTimer();
+
+        if (window.location.hostname === 'localhost') {
+            console.log('📅 Página de agendamento carregada');
+            console.log('👤 Usuário:', userName || 'não identificado');
+        }
+    })();
+    </script>
+    <!-- Calendly widget script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <!-- Calendly event listener — redireciona para obrigado.html após agendamento -->
+    <script>
+    window.addEventListener('message', function(e) {
+        if (e.origin.includes('calendly.com') &&
+            e.data.event &&
+            e.data.event === 'calendly.event_scheduled') {
+            window.location.href = 'obrigado.html';
+        }
+    });
+    </script>
+</body>
+</html>

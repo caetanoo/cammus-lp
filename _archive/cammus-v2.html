@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMMUS — Content Intelligence Platform</title>
+    <meta name="description" content="Pare de criar conteúdo no escuro. CAMMUS analisa +10.000 posts de alto engajamento e mostra exatamente o que, como e quando criar conteúdo que converte.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Theme init (prevent FOUC) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const theme = savedTheme || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
+    <!-- Import Design System CSS from flux-aurora-v2-minimalista 2.html -->
+    <link rel="stylesheet" href="flux-aurora-v2-minimalista 2.html" type="text/css">
+
+    <style>
+        /* Import all CSS from flux-aurora-v2-minimalista 2.html - Inline for standalone file */
+        /* This file uses 100% of the design system tokens, components, and classes */
+        /* All CSS below is from flux-aurora-v2-minimalista 2.html */
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR using .fa-nav from design system -->
+    <nav class="fa-nav">
+        <div class="container">
+            <div class="fa-nav-shell">
+                <a class="fa-nav-brand" href="#" aria-label="CAMMUS">
+                    <span class="fa-nav-logo">C</span>
+                    <span class="font-sans" style="font-size: 1.05rem;">CAMMUS</span>
+                </a>
+
+                <div class="fa-nav-menu" aria-label="Primary">
+                    <a href="#como-funciona" class="fa-nav-link">Como Funciona</a>
+                    <a href="#preco" class="fa-nav-link">Preço</a>
+                    <a href="#cta-final" class="fa-nav-link">Começar</a>
+                </div>
+
+                <div class="fa-nav-end" style="display: flex; align-items: center; gap: 1rem; justify-content: flex-end;">
+                    <button
+                        class="theme-toggle"
+                        onclick="toggleTheme()"
+                        aria-label="Alternar tema"
+                    >
+                        <span class="theme-icon theme-icon-sun">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                        </span>
+                        <span class="theme-icon theme-icon-moon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <a href="#cta-final" class="btn btn-primary">Começar Agora</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO using .hero-liquid from design system -->
+    <section class="hero hero-liquid" style="position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--bg-section); padding-top: 5rem;">
+
+        <!-- Hero background effects from design system -->
+        <div class="hero-bg-base" aria-hidden="true"></div>
+        <div class="hero-bg-drift" aria-hidden="true"></div>
+        <div class="hero-bg-shimmer" aria-hidden="true"></div>
+        <div class="hero-bg-shapes" aria-hidden="true">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="max-width: 56rem; margin: 0 auto; text-align: center;">
+
+                <!-- Using .animate-fade-in-up animation from design system -->
+                <div class="animate-fade-in-up">
+                    <span class="badge badge-primary" style="margin-bottom: 1.5rem;">Content Intelligence Platform</span>
+                </div>
+
+                <h1 class="animate-fade-in-up delay-100" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; color: var(--text-primary);">
+                    Pare de criar conteúdo no escuro.<br>
+                    Comece com <span class="font-serif" style="font-style: italic;">dados</span> do que já funciona.
+                </h1>
+
+                <p class="text-muted animate-fade-in-up delay-200" style="font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.6; max-width: 42rem; margin: 0 auto 2.5rem;">
+                    CAMMUS é a plataforma de Content Intelligence que analisa <strong style="color: var(--text-primary);">+10.000 posts</strong> de alto engajamento no seu nicho e mostra exatamente o que, como e quando criar conteúdo que converte.
+                </p>
+
+                <!-- Using .btn classes from design system -->
+                <div class="animate-fade-in-up delay-300" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <a href="#como-funciona" class="btn btn-primary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">
+                        Ver Análise de Exemplo
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#cta-final" class="btn btn-secondary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">Começar Teste Grátis</a>
+                </div>
+
+                <p class="text-muted animate-fade-in-up delay-300" style="font-size: 0.875rem;">
+                    <span class="font-mono" style="color: var(--text-primary); font-weight: 600;">Primeiros 50 clientes:</span> 60% de desconto vitalício · Sem cartão de crédito
+                </p>
+
+                <!-- Social proof using design system spacing -->
+                <div class="animate-fade-in-up delay-400" style="display: flex; gap: 3rem; justify-content: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle); flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.25rem;">Redes</div>
+                        <div style="color: var(--text-secondary);">LinkedIn · Instagram · YouTube</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.25rem;">Posts Analisados</div>
+                        <div class="font-mono" style="color: var(--text-primary); font-weight: 600;">+5.2 milhões</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM section using .section -->
+    <section class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 56rem; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 3rem;">Você está criando conteúdo no escuro</h2>
+
+                <!-- Using .fa-card-grid from design system -->
+                <div class="fa-card-grid" style="margin-bottom: 3rem;">
+
+                    <!-- Using .fa-card from design system -->
+                    <div class="fa-card">
+                        <div class="fa-card-label">A Realidade</div>
+                        <h3 style="margin-bottom: 1rem;">Toda semana você:</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Passa 10 horas criando posts</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Testa formatos diferentes</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Muda copy, muda visual, muda tudo</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>E ainda assim não viraliza</span>
+                            </li>
+                        </ul>
+                        <p style="margin-top: 1.5rem; font-weight: 600; color: var(--text-primary);">Por quê?</p>
+                        <p class="text-muted">Porque você não sabe O QUÊ funciona no seu nicho.</p>
+                    </div>
+
+                    <div class="fa-card">
+                        <div class="fa-card-label">As Alternativas Ruins</div>
+                        <h3 style="margin-bottom: 1.5rem;">Então você faz uma dessas três coisas:</h3>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">1. Copia o que vê por aí</p>
+                            <p class="fa-card-meta">Mas não sabe se aquilo realmente converteu ou foi só vaidade métrica.</p>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">2. Contrata agência (R$15k-R$30k/mês)</p>
+                            <p class="fa-card-meta">Que usa "experiência" e achismo com nome bonito. 60-90 dias para entregar campanhas genéricas.</p>
+                        </div>
+
+                        <div>
+                            <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">3. Testa no escuro</p>
+                            <p class="fa-card-meta">E desperdiça 3-6 meses até descobrir (por tentativa e erro) o que não funciona.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Using .fa-card--highlight from design system -->
+                <div class="fa-card fa-card--highlight" style="text-align: center;">
+                    <h3 style="margin-bottom: 1rem;">Enquanto isso:</h3>
+                    <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">Seu concorrente que descobriu a fórmula cresce 10x.</p>
+                    <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">Você continua atirando no escuro.</p>
+                    <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">Queimando tempo, energia e oportunidades.</p>
+                    <p class="text-muted" style="margin-bottom: 1rem;">E você tem <strong style="color: var(--text-primary);">zero visibilidade</strong> do que está realmente funcionando no seu mercado.</p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Até agora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION section -->
+    <section class="section" style="background: var(--bg-section); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 56rem; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">CAMMUS é o Google Analytics do conteúdo que funciona</h2>
+
+                <div style="text-align: center; max-width: 48rem; margin: 0 auto 3rem;">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem;">
+                        Não somos agência. Não criamos conteúdo por você. Não prometemos fazer seu marketing.
+                    </p>
+                    <p style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">
+                        Somos a plataforma de Content Intelligence que mostra O QUÊ criar baseado no que JÁ está funcionando no seu nicho.
+                    </p>
+                </div>
+
+                <div class="fa-card" style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Como Funciona</h3>
+                    <p style="font-size: 1.125rem; margin-bottom: 1rem;">Nossa IA vasculha <strong style="color: var(--text-primary);">+10.000 posts por semana</strong> no seu mercado:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Identifica padrões de alto engajamento</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Analisa copy, formato, timing, CTAs</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Filtra ruído (posts com curtidas mas sem resultado real)</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                                <path d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Entrega insights acionáveis para você replicar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="fa-card-grid">
+                    <div class="fa-card">
+                        <h4 style="margin-bottom: 1rem;">O Diferencial</h4>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Enquanto agências brasileiras cobram R$30 mil/mês para <strong style="color: var(--text-primary);">ACHAR</strong> o que funciona, CAMMUS já sabe porque analisa dados reais de performance de milhares de posts.</p>
+                        <p class="fa-card-meta">Enquanto você gasta 20 horas/semana pesquisando manualmente no LinkedIn, CAMMUS processa e filtra tudo em minutos com precisão que humanos não conseguem.</p>
+                    </div>
+
+                    <div class="fa-card">
+                        <h4 style="margin-bottom: 1rem;">Por Que Agora</h4>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">2026 é o ano que separa quem cria com dados de quem cria no achismo.</p>
+                        <p style="font-weight: 600; color: var(--text-primary);">Seus concorrentes já estão usando inteligência competitiva para crescer. Quanto mais você espera, mais eles se distanciam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS section -->
+    <section id="como-funciona" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 56rem; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1rem;">Da sua dúvida ao seu próximo viral em 72 horas</h2>
+                <p class="text-muted" style="text-align: center; font-size: 1.125rem; max-width: 36rem; margin: 0 auto 4rem;">
+                    Processo simples, resultado comprovado
+                </p>
+
+                <div class="fa-card-grid">
+                    <div class="fa-card fa-card--feature">
+                        <span class="badge badge-primary" style="margin-bottom: 1rem;">Passo 1</span>
+                        <h3 style="margin-bottom: 1rem;">Você define seu nicho (2 minutos)</h3>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Preenche formulário simples:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Área de atuação (ex: SaaS B2B)</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Tipo de conteúdo (Educativo, Case studies)</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Rede social principal (LinkedIn, Instagram)</span>
+                            </li>
+                        </ul>
+                        <p class="font-mono" style="font-size: 0.875rem; color: var(--text-muted); margin-top: 1rem;">Exemplo: "SaaS B2B" + "Educativo" + "LinkedIn"</p>
+                    </div>
+
+                    <div class="fa-card fa-card--feature">
+                        <span class="badge badge-primary" style="margin-bottom: 1rem;">Passo 2</span>
+                        <h3 style="margin-bottom: 1rem;">IA analisa seu mercado (48 horas)</h3>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Nossa engine de Content Intelligence:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Vasculha <strong>+5.000 posts</strong> no seu nicho</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Filtra os <strong>top 50</strong> com melhor engajamento</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                                <span>Identifica padrões e estratégias</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fa-card fa-card--feature">
+                        <span class="badge badge-primary" style="margin-bottom: 1rem;">Passo 3</span>
+                        <h3 style="margin-bottom: 1rem;">Você recebe inteligência acionável</h3>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Relatório completo (Notion + PDF) com:</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span><strong>Análise de Mercado:</strong> Top 20 posts</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span><strong>Insights:</strong> 10 ideias validadas</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span><strong>Benchmark:</strong> O que funciona</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fa-card fa-card--feature">
+                        <span class="badge badge-primary" style="margin-bottom: 1rem;">Passo 4</span>
+                        <h3 style="margin-bottom: 1rem;">Você cria com confiança</h3>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Menos teste cego. Mais replicação de sucesso comprovado.</p>
+                        <p style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary);">
+                            Resultado: Seu próximo post tem <strong>10x mais chance</strong> de viralizar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING section -->
+    <section id="preco" class="section" style="background: var(--bg-section); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 56rem; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1rem;">Preço de Validação (Tempo Limitado)</h2>
+                <p class="text-muted" style="text-align: center; font-size: 1.125rem; margin-bottom: 4rem;">
+                    Primeiros 50 clientes garantem condições especiais para sempre
+                </p>
+
+                <!-- Using .fa-card-grid for pricing comparison -->
+                <div class="fa-card-grid" style="margin-bottom: 3rem;">
+
+                    <!-- Regular card for public price -->
+                    <div class="fa-card">
+                        <span class="fa-card-tag" style="margin-bottom: 1rem;">Após Validação</span>
+                        <h3 style="margin-bottom: 1.5rem;">Preço Público</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="font-size: 3.5rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); line-height: 1;">R$4.997</div>
+                            <p class="text-muted">/mês</p>
+                        </div>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Análise semanal completa</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Relatório Notion + PDF</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Benchmark competitivo</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Suporte via WhatsApp</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Highlighted card for validation price using .fa-card--highlight -->
+                    <div class="fa-card fa-card--highlight fa-card--selected" style="position: relative;">
+                        <span class="badge badge-primary" style="position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);">⚡ Primeiros 50 Clientes</span>
+                        <div style="padding-top: 1rem;">
+                            <h3 style="margin-bottom: 1.5rem;">Preço de Validação</h3>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="font-size: 4rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); line-height: 1;">R$1.997</div>
+                                <p class="text-muted" style="font-size: 1.125rem;">/mês · <strong style="color: var(--text-primary);">travado para sempre</strong></p>
+                            </div>
+
+                            <!-- Using .badge-success from design system -->
+                            <div class="badge badge-success" style="width: 100%; justify-content: center; padding: 0.75rem; margin-bottom: 1.5rem; border-radius: 0.5rem;">
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 0.25rem;">Você economiza R$3.000/mês</div>
+                                    <div style="font-size: 0.875rem;">= R$36.000/ano vs preço público</div>
+                                </div>
+                            </div>
+
+                            <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">Tudo do plano público MAIS:</p>
+                            <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span><strong>2 chamadas/mês</strong> com nosso time</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span><strong>Prioridade no roadmap</strong></span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span><strong>Early access</strong> a novos recursos</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span><strong>Acesso direto aos fundadores</strong></span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span><strong>Comunidade exclusiva</strong></span>
+                                </li>
+                            </ul>
+
+                            <!-- Using .btn from design system -->
+                            <a href="#cta-final" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.125rem; padding: 1rem 2rem;">
+                                Garantir Preço de Validação
+                            </a>
+                            <p style="text-align: center; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary);">
+                                <strong>31 clientes ativos</strong> · 19 vagas restantes
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Guarantee card -->
+                <div class="fa-card" style="text-align: center;">
+                    <h3 style="margin-bottom: 1rem;">Garantia Incondicional de 30 Dias</h3>
+                    <p style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        Se em <strong style="color: var(--text-primary);">30 dias</strong> você não tiver pelo menos <strong style="color: var(--text-primary);">5 insights acionáveis</strong>, devolvemos <strong style="color: var(--text-primary);">100% do valor</strong>.
+                    </p>
+                    <p style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Sem perguntas. Sem burocracia. Zero risco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL section -->
+    <section id="cta-final" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 48rem; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 1rem;">Última chance de garantir vantagem competitiva</h2>
+                <p class="text-muted" style="text-align: center; font-size: 1.125rem; margin-bottom: 3rem;">
+                    A escolha é sua. Mas o tempo não espera.
+                </p>
+
+                <!-- Using .fa-card for form -->
+                <div class="fa-card" style="background: var(--bg-elevated); padding: 3rem;">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Comece Agora em 3 Passos</h3>
+
+                    <form style="max-width: 28rem; margin: 0 auto;">
+                        <!-- Using .input-group and .input-field from design system -->
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label class="input-label">Seu nome completo</label>
+                            <input type="text" class="input-field" placeholder="João Silva" required>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label class="input-label">Seu email corporativo</label>
+                            <input type="email" class="input-field" placeholder="joao@empresa.com" required>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label class="input-label">Seu WhatsApp</label>
+                            <input type="tel" class="input-field" placeholder="(11) 99999-9999" required>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label class="input-label">Seu nicho/área de atuação</label>
+                            <input type="text" class="input-field" placeholder="Ex: SaaS B2B, Marketing para médicos" required>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label class="input-label">Rede social principal</label>
+                            <div style="display: flex; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="linkedin" style="cursor: pointer;">
+                                    <span>LinkedIn</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="instagram" style="cursor: pointer;">
+                                    <span>Instagram</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="social" value="youtube" style="cursor: pointer;">
+                                    <span>YouTube</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 2rem;">
+                            <label class="input-label">Objetivo principal</label>
+                            <div style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="authority" style="cursor: pointer;">
+                                    <span>Construir autoridade</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="leads" style="cursor: pointer;">
+                                    <span>Gerar leads B2B</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="audience" style="cursor: pointer;">
+                                    <span>Crescer audiência</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" name="goal" value="monetize" style="cursor: pointer;">
+                                    <span>Monetizar conteúdo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Using .btn .btn-primary from design system -->
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.25rem; padding: 1.25rem 2rem;">
+                            Começar Minha Análise Agora →
+                        </button>
+
+                        <p style="text-align: center; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary);">
+                            Preço de validação · <strong>19 vagas restantes</strong> · Preço travado vitalício
+                        </p>
+                    </form>
+
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
+                        <h4 style="text-align: center; margin-bottom: 1.5rem;">Garantias e Segurança</h4>
+                        <div class="fa-card-grid">
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Sem cartão para começar</span>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Garantia 30 dias</span>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Cancele quando quiser</span>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Dados privados e protegidos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; text-align: center;">
+                    <p style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <strong style="color: var(--text-primary);">P.S.:</strong> Se você chegou até aqui, é porque sabe que precisa mudar a forma como cria conteúdo. Você pode continuar testando no escuro por mais 6 meses. Ou pode ter vantagem competitiva desde amanhã. <strong style="color: var(--text-primary);">A escolha é sua. Mas escolha agora.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--bg-section); border-top: 1px solid var(--border-subtle); padding: 3rem 0 2rem;">
+        <div class="container">
+            <div style="max-width: 56rem; margin: 0 auto; text-align: center;">
+                <div style="font-weight: 700; font-size: 1.5rem; color: var(--text-primary); margin-bottom: 1rem;">CAMMUS</div>
+                <p class="text-muted" style="margin-bottom: 2rem;">Content Intelligence Platform</p>
+                <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 CAMMUS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for theme toggle and navbar scroll -->
+    <script>
+        // Theme toggle function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.fa-nav-shell');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('is-scrolled');
+                } else {
+                    navbar.classList.remove('is-scrolled');
+                }
+            });
+        }
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Formulário enviado! Em breve nossa equipe entrará em contato.');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
