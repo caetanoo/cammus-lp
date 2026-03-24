@@ -21,6 +21,10 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com" defer></script>
 
+    <!-- ✅ CORREÇÃO CRÍTICO-02: DOMPurify para sanitização XSS -->
+    <!-- Protege contra injeção de scripts maliciosos em inputs -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+
     <style>
         /* ═══════════════════════════════════════════════ */
         /* FLUX AURORA v2 — DESIGN SYSTEM TOKENS          */
@@ -2067,6 +2071,41 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
             }
         }
 
+        // ═══════════════════════════════════════════════
+        // ✅ CORREÇÃO CRÍTICO-02: SANITIZAÇÃO XSS
+        // ═══════════════════════════════════════════════
+
+        /**
+         * Sanitiza input removendo todas as tags HTML e scripts
+         * Proteção contra ataques XSS (Cross-Site Scripting)
+         *
+         * @param {string} input - Valor bruto do campo de formulário
+         * @returns {string} Valor sanitizado (sem HTML/scripts)
+         *
+         * @example
+         * sanitizeInput('<script>alert("XSS")</script>João')
+         * // Retorna: 'João'
+         *
+         * sanitizeInput('Empresa <b>XYZ</b>')
+         * // Retorna: 'Empresa XYZ'
+         */
+        function sanitizeInput(input) {
+            // Validar tipo de entrada
+            if (typeof input !== 'string') {
+                return input; // Retorna valores não-string sem modificar
+            }
+
+            // Sanitizar usando DOMPurify
+            // ALLOWED_TAGS: [] = remove TODAS as tags HTML
+            // KEEP_CONTENT: true = mantém o texto entre as tags
+            // ALLOWED_ATTR: [] = remove todos os atributos HTML
+            return DOMPurify.sanitize(input, {
+                ALLOWED_TAGS: [],      // Remove <script>, <img>, <a>, etc
+                KEEP_CONTENT: true,    // Mantém texto: '<b>Oi</b>' → 'Oi'
+                ALLOWED_ATTR: []       // Remove onclick, onerror, etc
+            }).trim(); // Remove espaços extras
+        }
+
         /**
          * Monta payload no formato esperado pelo N8N
          * @param {Object} formData - Dados do formulário
@@ -2292,21 +2331,23 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
             btnText.innerHTML = '<span class="spinner"></span> Enviando...';
 
             try {
-                // Coletar dados do formulário
+                // ✅ CORREÇÃO CRÍTICO-02: Coletar e sanitizar dados do formulário
+                // Todos os inputs de texto são sanitizados para prevenir XSS
                 const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    company: document.getElementById('company').value,
-                    whatsapp: document.getElementById('whatsapp').value,
-                    website: document.getElementById('website').value,
+                    name: sanitizeInput(document.getElementById('name').value),
+                    email: sanitizeInput(document.getElementById('email').value),
+                    company: sanitizeInput(document.getElementById('company').value),
+                    whatsapp: sanitizeInput(document.getElementById('whatsapp').value),
+                    website: sanitizeInput(document.getElementById('website').value),
                     segmentacao: {
-                        nicho: document.getElementById('nicho-value').value,
-                        subnicho: document.getElementById('subnicho-value').value
+                        nicho: sanitizeInput(document.getElementById('nicho-value').value),
+                        subnicho: sanitizeInput(document.getElementById('subnicho-value').value)
                     },
+                    // Radio buttons não precisam de sanitização (valores predefinidos)
                     ticket: document.querySelector('input[name="ticket"]:checked').value,
                     maturity: document.querySelector('input[name="maturity"]:checked').value,
                     urgency: document.querySelector('input[name="urgency"]:checked').value,
-                    additional: document.getElementById('additional').value
+                    additional: sanitizeInput(document.getElementById('additional').value)
                 };
 
                 // Montar payload para N8N
