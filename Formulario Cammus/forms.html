@@ -2711,5 +2711,29 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         });
     })();
     </script>
+
+    <!-- 🔍 Script de Diagnóstico Automático -->
+    <script>
+    console.log('═══════════════════════════════════════');
+    console.log('🔍 DIAGNÓSTICO AUTOMÁTICO');
+    console.log('═══════════════════════════════════════');
+    console.log('1. Form exists:', !!document.getElementById('qualificationForm'));
+    console.log('2. Submit button exists:', !!document.getElementById('submitBtn'));
+    console.log('3. btnText exists:', !!document.getElementById('btnText'));
+    console.log('4. DOMPurify loaded:', typeof DOMPurify !== 'undefined');
+    console.log('5. CSRF token:', !!sessionStorage.getItem('csrfToken'));
+    console.log('═══════════════════════════════════════');
+
+    // Testar se botão responde ao clique
+    const testBtn = document.getElementById('submitBtn');
+    if (testBtn) {
+        console.log('✅ Botão encontrado!');
+        testBtn.addEventListener('click', function(e) {
+            console.log('🔘 CLIQUE DETECTADO no botão!');
+        });
+    } else {
+        console.error('❌ Botão NÃO encontrado!');
+    }
+    </script>
 </body>
 </html>
