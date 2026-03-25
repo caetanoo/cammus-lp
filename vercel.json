@@ -13,6 +13,12 @@
       "destination": "/Formulario Cammus/obrigado.html"
     }
   ],
+  "functions": {
+    "api/submit-lead.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

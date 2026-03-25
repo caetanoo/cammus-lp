@@ -1,38 +1,39 @@
-Implemente apenas as correções necessárias, SEM alterar 
-o fluxo de redirecionamento e SEM alterar o botão 
-"Agendar agora" do obrigado.html. O fluxo atual está correto.
+Me ajude a configurar o deploy correto na Vercel para o 
+repositório cammus-lp.
 
-❌ CORREÇÃO 1 — CRÍTICO: Descomentar proteção em agendamento.html
-Arquivo: agendamento.html (linha 606)
-Remover os // que comentam o redirecionamento:
-// window.location.href = 'forms.html';
-→ window.location.href = 'forms.html';
+A estrutura atual é:
+- Repositório: caetanoo/cammus-lp
+- Frontend: Formulario Cammus/forms.html (página principal)
+- Backend: backend/server.js (proxy do webhook)
+- vercel.json já criado na raiz
 
-❌ CORREÇÃO 2 — MÉDIO: Trocar localStorage por sessionStorage
-forms.html (linha 2609):
-localStorage.setItem('userName', firstName)
-→ sessionStorage.setItem('userName', firstName)
+O PROBLEMA é que o backend Node.js (backend/server.js) 
+não pode rodar na Vercel como está, pois a Vercel é 
+serverless e não suporta Express da forma tradicional.
 
-obrigado.html (linha 631):
-localStorage.getItem('userName')
-→ sessionStorage.getItem('userName')
+Preciso que você:
 
-agendamento.html (linha 602):
-localStorage.getItem('userName')
-→ sessionStorage.getItem('userName')
+1. Converta o backend/server.js para uma Vercel Serverless Function:
+   - Criar pasta /api na raiz do projeto
+   - Criar arquivo /api/submit-lead.js no formato serverless
+   - Manter toda a lógica atual (rate limiting, validações, 
+     proxy do webhook, token de segurança)
 
-⚠️ CORREÇÃO 3 — RECOMENDADO: Proteção em obrigado.html
-Adicionar logo após ler o userName:
-const userName = sessionStorage.getItem('userName');
-if (!userName) {
-    window.location.href = 'forms.html';
-    return;
-}
+2. Configurar variáveis de ambiente:
+   - Listar quais variáveis do .env precisam ser configuradas 
+     no dashboard da Vercel (Settings → Environment Variables)
+   - WEBHOOK_URL e WEBHOOK_TOKEN não podem ficar no código
 
-NÃO alterar:
-- Botão "Agendar agora" do obrigado.html
-- Fluxo de redirecionamento existente
-- Nenhum link ou href dos arquivos
+3. Atualizar o vercel.json:
+   - Garantir que / aponta para Formulario Cammus/forms.html
+   - Garantir que /api/submit-lead aponta para a função serverless
+   - Manter os headers de segurança
 
-Após as correções, faça commit:
-"fix: flow protection and sessionStorage migration"
+4. Atualizar forms.html:
+   - Garantir que WEBHOOK_URL aponta para /api/submit-lead
+   - Funciona tanto em localhost quanto em produção
+
+5. Fazer commit e push para o repositório cammus-lp
+
+Após isso, me diga exatamente quais variáveis de ambiente 
+preciso cadastrar no dashboard da Vercel antes de fazer deploy.

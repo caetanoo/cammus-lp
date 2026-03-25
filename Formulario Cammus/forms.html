@@ -2107,7 +2107,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
 
         // 🔧 CONFIGURAÇÃO — Backend proxy protege o token de autenticação
         // ✅ CORREÇÃO CRÍTICO-01: Token movido para backend (server-side)
-        const WEBHOOK_URL = 'http://localhost:3000/api/submit-lead'; // Backend proxy local
+        // URL relativa funciona em localhost (porta 8000) e produção (Vercel)
+        const WEBHOOK_URL = '/api/submit-lead'; // Serverless function (Vercel) ou proxy local
 
         /**
          * Envia dados para o backend proxy
