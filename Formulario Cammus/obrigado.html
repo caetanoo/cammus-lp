@@ -627,8 +627,15 @@
     <!-- Personalização com nome do usuário -->
     <script>
     (function() {
-        // Recuperar nome do localStorage
-        const userName = localStorage.getItem('userName');
+        // Recuperar nome do sessionStorage
+        const userName = sessionStorage.getItem('userName');
+
+        // ✅ CORREÇÃO: Bloquear acesso direto sem passar pelo formulário
+        if (!userName) {
+            window.location.href = 'forms.html';
+            return;
+        }
+
         const headlineElement = document.getElementById('headline');
 
         if (userName && userName.trim() !== '') {
@@ -638,11 +645,11 @@
         } else {
             // Fallback caso não tenha nome
             headlineElement.textContent = 'Te vejo na nossa reunião!';
-            if (window.location.hostname === 'localhost') { console.warn('⚠️ Nome do usuário não encontrado no localStorage'); }
+            if (window.location.hostname === 'localhost') { console.warn('⚠️ Nome do usuário não encontrado no sessionStorage'); }
         }
 
-        // Opcional: Limpar localStorage após exibir (para segurança)
-        // localStorage.removeItem('userName');
+        // Opcional: Limpar sessionStorage após exibir (para segurança)
+        // sessionStorage.removeItem('userName');
 
         if (window.location.hostname === 'localhost') {
             console.log('📄 Página de obrigado carregada');

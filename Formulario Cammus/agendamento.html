@@ -599,11 +599,11 @@
     <script>
     (function() {
         // Verificar se nome do usuário está salvo (validação básica)
-        const userName = localStorage.getItem('userName');
+        const userName = sessionStorage.getItem('userName');
         if (!userName) {
             if (window.location.hostname === 'localhost') { console.warn('⚠️ Nome do usuário não encontrado. Redirecionando para formulário...'); }
-            // Opcional: redirecionar de volta para forms.html se não houver nome
-            // window.location.href = 'forms.html';
+            // ✅ CORREÇÃO: Bloquear acesso direto sem passar pelo formulário
+            window.location.href = 'forms.html';
         }
 
         // Detectar interação com o iframe (agendamento)

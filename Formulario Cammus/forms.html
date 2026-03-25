@@ -2604,9 +2604,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 // Chamado APENAS após confirmação de sucesso do webhook
                 recordSubmission();
 
-                // Salvar nome no localStorage para usar na página de obrigado
+                // Salvar nome no sessionStorage para usar na página de obrigado
                 const firstName = formData.name.split(' ')[0]; // Apenas o primeiro nome
-                localStorage.setItem('userName', firstName);
+                sessionStorage.setItem('userName', firstName);
 
                 // Mostrar mensagem de sucesso
                 setTimeout(() => {
