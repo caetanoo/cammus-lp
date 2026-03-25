@@ -605,8 +605,15 @@
         }
     })();
     </script>
-    <!-- Calendly widget script -->
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- ✅ CORREÇÃO ALTO-05: Calendly widget hospedado localmente -->
+    <!-- Proteção contra supply chain attacks via hash SRI -->
+    <script
+        type="text/javascript"
+        src="./assets/calendly-widget.js"
+        integrity="sha384-WEEajIp6+kZvWGZBQlBkWmKFk/aPXRqckwSupPdxLgRtChphG3vSWED8ThgLq7xY"
+        crossorigin="anonymous"
+        async>
+    </script>
 
     <!-- Calendly event listener — redireciona para obrigado.html após agendamento -->
     <script>
