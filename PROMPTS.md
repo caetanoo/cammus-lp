@@ -1,247 +1,132 @@
-Quero que você atue como um especialista sênior em:
+Você agora deve atuar como:
 
-- UX/UI para Landing Pages de alta conversão
-- Design Systems
-- Front-end audit
-- CRO (Conversion Rate Optimization)
-- Arquitetura da informação
-- Copy para páginas de aquisição
-- Heurísticas de usabilidade
-- Performance percebida e consistência visual
-
-Sua missão é realizar uma AUDITORIA COMPLETA, PROFUNDA E ESTRATÉGICA da minha Landing Page, com foco em identificar tudo o que precisa ser ajustado para elevar:
-
-1. clareza de proposta de valor
-2. percepção de autoridade
-3. confiança
-4. escaneabilidade
-5. consistência com o Design System
-6. qualidade visual
-7. conversão
+- Senior Product Designer
+- CRO Specialist
+- Front-end Engineer (HTML/CSS)
+- Especialista em Design Systems
 
 ## CONTEXTO
 
-Você deve usar os seguintes arquivos como base da análise:
+Já foi realizada uma auditoria completa da Landing Page.
 
-### Landing Page (HTML)
-/Users/caetanovizel/Desktop/LP CAMMUS/_archive/cammus-final.html
+Use o relatório abaixo como BASE ÚNICA de diagnóstico e decisão:
+
+Arquivo:
+:contentReference[oaicite:0]{index=0}
+
+Você NÃO deve refazer a auditoria.
+Você deve EXECUTAR as melhorias.
+
+## OBJETIVO
+
+Transformar a landing page atual em uma NOVA VERSÃO OTIMIZADA, corrigindo os principais problemas de conversão, confiança e aderência ao Design System.
+
+## PRINCIPAIS PROBLEMAS A CORRIGIR (OBRIGATÓRIO)
+
+1. Falta de prova social real
+2. Falta de evidência concreta do produto
+3. CTA final com fricção alta (formulário longo)
+4. Ausência de FAQ
+5. Promessas agressivas sem sustentação
+6. Inconsistência de números e copy
+7. Sequência narrativa fraca (vai rápido demais para pricing)
+8. Hero com CTA que não entrega o prometido
+9. Footer fraco (baixa credibilidade institucional)
+
+## SUA MISSÃO
+
+Gerar uma NOVA VERSÃO COMPLETA da Landing Page com:
+
+- estrutura corrigida
+- copy reescrita
+- seções reorganizadas
+- melhorias de conversão
+- aderência total ao Design System
+
+## ESTRUTURA OBRIGATÓRIA DA NOVA LP
+
+Siga esta ordem:
+
+1. Hero (corrigido)
+2. Credenciais / prova inicial (logos ou métricas reais)
+3. Problema (simplificado)
+4. Solução (com evidência visual do produto)
+5. Demonstração (sample report ou output real)
+6. Como funciona (máx. 3 passos)
+7. Benefícios claros (não repetir features)
+8. Prova social (depoimentos ou casos)
+9. Pricing (com melhor sustentação)
+10. FAQ (5–8 perguntas)
+11. CTA final (curto, baixo atrito)
+12. Footer robusto
+
+## REGRAS CRÍTICAS
+
+### Copy
+- Elimine hype desnecessário
+- Substitua "viral" por previsibilidade e performance consistente
+- Todas as promessas devem parecer defensáveis
+- Clareza > impacto exagerado
+
+### Conversão
+- Reduzir fricção em todos os CTAs
+- Garantir progressão lógica de confiança
+- Não vender antes de provar
 
 ### Design System
-/Users/caetanovizel/Desktop/LP CAMMUS/design-system
+- NÃO inventar novos componentes
+- Reutilizar padrões existentes
+- Manter consistência visual
+- Se algo não existir no DS → sinalizar
 
-Sua análise deve ser 100% baseada no Design System fornecido.
-Nada deve ser sugerido fora da lógica da marca, da biblioteca visual e das diretrizes do sistema.
-Se algo estiver ausente no Design System, você deve sinalizar isso explicitamente antes de propor qualquer caminho.
+### CTA FINAL
+- Máximo: nome + email
+- Nada além disso
 
-## OBJETIVO PRINCIPAL
-Quero uma auditoria extremamente detalhada da Landing Page e um plano de refinamento muito bem elaborado, priorizado e acionável.
+## SAÍDA ESPERADA
 
-## O QUE VOCÊ DEVE FAZER
+### 1. Nova estrutura da Landing Page
+(Seções + objetivo de cada uma)
 
-### ETAPA 1 — LEITURA E MAPEAMENTO
-Antes de sugerir qualquer melhoria:
+### 2. Copy completa da nova LP
+- Headlines
+- Subheadlines
+- CTAs
+- Seções completas
 
-1. Leia toda a Landing Page
-2. Mapeie toda a estrutura da página seção por seção
-3. Identifique os componentes existentes
-4. Identifique os padrões visuais utilizados
-5. Cruze tudo com o Design System
-6. Liste inconsistências, lacunas, desvios e oportunidades
+### 3. Sugestões de elementos visuais
+- Onde entram screenshots
+- Onde entram provas
+- Onde entram gráficos ou outputs
 
-### ETAPA 2 — AUDITORIA ESTRUTURAL
-Faça uma auditoria da Landing Page considerando:
+### 4. Versão HTML (IMPORTANTE)
+Gerar uma versão HTML estruturada da nova Landing Page:
 
-- hierarquia visual
-- arquitetura da informação
-- fluxo de leitura
-- ordem das seções
-- lógica narrativa da página
-- clareza da headline
-- força da subheadline
-- distribuição dos CTAs
-- densidade informacional
-- ritmo da página
-- escaneabilidade
-- uso de prova social
-- tratamento de objeções
-- clareza da oferta
-- consistência entre promessa e conteúdo
-- legibilidade
-- uso de grids e espaçamentos
-- consistência de componentes
-- coerência entre desktop e possíveis comportamentos responsivos
-- pontos de fricção visual e cognitiva
+- Sem CSS complexo (pode usar classes existentes)
+- Foco em estrutura e semântica
+- Pronta para implementação
 
-### ETAPA 3 — AUDITORIA COM BASE NO DESIGN SYSTEM
-Analise a página contra o Design System em profundidade.
+### 5. Lista de mudanças aplicadas
+Mapear:
+- problema original → solução aplicada
 
-Verifique e documente:
+## MODO DE EXECUÇÃO
 
-#### Identidade visual
-- aderência à linguagem da marca
-- consistência estética
-- coerência com direção de arte
-- tom visual
+Você NÃO deve:
+- repetir o diagnóstico
+- ser genérico
+- sugerir — você deve DECIDIR e ENTREGAR
 
-#### Tipografia
-- famílias tipográficas
-- hierarquia de títulos
-- pesos
-- tamanhos
-- line-height
-- contrastes
-- consistência entre blocos
-- uso correto para headlines, body, labels, captions e CTAs
+Você deve agir como alguém responsável por publicar a próxima versão da página.
 
-#### Cores
-- uso correto da paleta
-- contraste
-- semântica das cores
-- consistência dos estados
-- excesso ou ausência de cor
-- destaque de elementos prioritários
+## FOCO FINAL
 
-#### Espaçamento e layout
-- paddings
-- margins
-- respiros
-- alinhamentos
-- grid
-- ritmo vertical
-- consistência entre seções
+Essa nova versão deve:
 
-#### Componentes
-- botões
-- cards
-- badges
-- seções
-- inputs
-- ícones
-- containers
-- elementos de prova social
-- accordions
-- comparativos
-- FAQs
-- modais
-- headers e footers
+- aumentar confiança
+- reduzir risco percebido
+- melhorar clareza
+- aumentar conversão
+- manter consistência com o Design System
 
-Para cada componente, avalie:
-- aderência ao Design System
-- consistência visual
-- consistência funcional
-- necessidade de refatoração
-- oportunidade de padronização
-
-#### Estados e interação
-- hover
-- active
-- focus
-- disabled
-- feedback visual
-- affordance
-- clareza interativa
-
-#### Imagens e elementos gráficos
-- coerência com a marca
-- qualidade visual
-- função narrativa
-- excesso ou ruído
-- contribuição para conversão
-
-### ETAPA 4 — AUDITORIA DE CONVERSÃO
-Analise a Landing Page como uma página de performance e conversão.
-
-Considere:
-
-- clareza imediata acima da dobra
-- entendimento do produto em poucos segundos
-- força da proposta de valor
-- diferenciação competitiva
-- benefícios versus features
-- nível de confiança transmitido
-- credibilidade dos argumentos
-- presença e qualidade de prova social
-- tratamento de objeções
-- consistência dos CTAs
-- atrito na jornada
-- pontos de abandono
-- excesso de complexidade
-- clareza da oferta e do próximo passo
-
-### ETAPA 5 — DIAGNÓSTICO CRÍTICO
-Quero que você seja rigoroso e honesto.
-Aponte com clareza:
-
-- o que está bom
-- o que está fraco
-- o que está inconsistente
-- o que está prejudicando a conversão
-- o que está fora do Design System
-- o que transmite aparência amadora
-- o que reduz percepção de valor
-- o que gera dúvida
-- o que pode estar quebrando a confiança do usuário
-
-Não suavize a análise.
-Não faça elogios genéricos.
-Quero visão crítica de especialista.
-
-### ETAPA 6 — PLANO DE MELHORIAS PRIORITIZADO
-Depois da auditoria, monte um plano de ação em camadas:
-
-#### Prioridade 1 — impacto alto e esforço baixo
-Quick wins com maior impacto imediato.
-
-#### Prioridade 2 — impacto alto e esforço médio
-Mudanças estruturais importantes.
-
-#### Prioridade 3 — impacto médio e esforço médio/alto
-Refinamentos relevantes.
-
-#### Prioridade 4 — evoluções futuras
-Itens que podem entrar em roadmap.
-
-Para cada item do plano, traga:
-- problema identificado
-- por que isso é um problema
-- impacto esperado
-- recomendação exata
-- seção/componente afetado
-- relação com o Design System
-- prioridade
-- nível de esforço
-- dependências
-
-### ETAPA 7 — ENTREGA EM FORMATO EXECUTIVO E TÉCNICO
-
-# 1. Resumo executivo
-# 2. Mapeamento da Landing Page
-# 3. Auditoria detalhada por seção
-# 4. Auditoria detalhada por componente
-# 5. Auditoria de conversão
-# 6. Lista consolidada de problemas
-# 7. Plano priorizado de melhorias
-# 8. Próxima versão ideal da Landing Page
-
-## CRITÉRIOS IMPORTANTES
-- Baseie tudo estritamente nos arquivos fornecidos
-- Não invente regras de Design System
-- Quando faltar informação, sinalize “lacuna no DS”
-- Diferencie:
-  - problema visual
-  - problema de UX
-  - problema de conversão
-  - problema de consistência com o DS
-- Seja específico, técnico e acionável
-- Evite sugestões genéricas
-
-## SAÍDA EXTRA
-
-Ao final, inclua:
-
-1. Top 10 problemas mais críticos  
-2. Top 10 melhorias com maior impacto  
-3. Riscos de manter a página como está  
-4. Recomendações para a próxima iteração de design e front-end  
-
-Inicie a auditoria agora com base nos arquivos fornecidos.
+Comece agora.
