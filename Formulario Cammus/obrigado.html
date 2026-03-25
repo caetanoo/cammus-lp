@@ -18,8 +18,40 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Tailwind CSS CDN com Fallback -->
+    <!-- ⚠️ Mantido em CDN por ser ferramenta de desenvolvimento (não usar em produção final) -->
+    <!-- ✅ CORREÇÃO ALTO-06: Fallback automático se CDN principal falhar -->
+    <script
+        id="tailwind-cdn"
+        src="https://cdn.tailwindcss.com"
+        defer
+        onerror="loadTailwindFallback()">
+    </script>
+    <script>
+        // ✅ ALTO-06: CDN Fallback System
+        function loadTailwindFallback() {
+            console.warn('⚠️ Tailwind CDN principal falhou. Tentando CDN alternativo...');
+
+            // Fallback 1: unpkg.com
+            const fallback1 = document.createElement('script');
+            fallback1.src = 'https://unpkg.com/tailwindcss-cdn@3.4.1/tailwindcss.js';
+            fallback1.defer = true;
+            fallback1.onerror = function() {
+                console.warn('⚠️ CDN alternativo 1 falhou. Tentando CDN alternativo 2...');
+
+                // Fallback 2: jsDelivr
+                const fallback2 = document.createElement('script');
+                fallback2.src = 'https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.1/tailwindcss.js';
+                fallback2.defer = true;
+                fallback2.onerror = function() {
+                    console.error('❌ Todos os CDNs de Tailwind falharam. Modo degradado ativado.');
+                    // Página continua funcionando - classes customizadas não dependem de Tailwind
+                };
+                document.head.appendChild(fallback2);
+            };
+            document.head.appendChild(fallback1);
+        }
+    </script>
 
     <style>
         /* ═══════════════════════════════════════════════ */
