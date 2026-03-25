@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/Formulario Cammus/forms.html"
-    },
-    {
       "source": "/agendamento",
       "destination": "/Formulario Cammus/agendamento.html"
     },
