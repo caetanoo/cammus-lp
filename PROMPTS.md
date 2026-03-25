@@ -1,132 +1,162 @@
-Você agora deve atuar como:
+PARE.
 
-- Senior Product Designer
-- CRO Specialist
-- Front-end Engineer (HTML/CSS)
-- Especialista em Design Systems
+Você deve trabalhar APENAS no HEADER / NAVBAR da landing page.
 
-## CONTEXTO
+## FOCO
 
-Já foi realizada uma auditoria completa da Landing Page.
+Refinar o menu superior para que ele tenha aparência:
 
-Use o relatório abaixo como BASE ÚNICA de diagnóstico e decisão:
+- premium
+- limpa
+- consistente com o Design System
+- nível produto SaaS maduro (Stripe / Linear / Vercel)
 
-Arquivo:
-:contentReference[oaicite:0]{index=0}
+---
 
-Você NÃO deve refazer a auditoria.
-Você deve EXECUTAR as melhorias.
+## ARQUIVO PRINCIPAL
+
+/Users/caetanovizel/Desktop/LP CAMMUS/index.html
+
+## REFERÊNCIA
+
+- Design System:
+  /Users/caetanovizel/Desktop/LP CAMMUS/design-system/design-system.html
+
+- Spec:
+  /Users/caetanovizel/Desktop/LP CAMMUS/docs/design-system-spec.md
+
+---
 
 ## OBJETIVO
 
-Transformar a landing page atual em uma NOVA VERSÃO OTIMIZADA, corrigindo os principais problemas de conversão, confiança e aderência ao Design System.
+Melhorar o HEADER mantendo estrutura base, mas refinando:
 
-## PRINCIPAIS PROBLEMAS A CORRIGIR (OBRIGATÓRIO)
+- espaçamento
+- alinhamento
+- hierarquia
+- peso visual
+- consistência com DS
+- percepção de qualidade
 
-1. Falta de prova social real
-2. Falta de evidência concreta do produto
-3. CTA final com fricção alta (formulário longo)
-4. Ausência de FAQ
-5. Promessas agressivas sem sustentação
-6. Inconsistência de números e copy
-7. Sequência narrativa fraca (vai rápido demais para pricing)
-8. Hero com CTA que não entrega o prometido
-9. Footer fraco (baixa credibilidade institucional)
+---
 
-## SUA MISSÃO
+## ELEMENTOS DO HEADER
 
-Gerar uma NOVA VERSÃO COMPLETA da Landing Page com:
+Você deve revisar e melhorar:
 
-- estrutura corrigida
-- copy reescrita
-- seções reorganizadas
-- melhorias de conversão
-- aderência total ao Design System
+1. Logo (CAMMUS)
+2. Links:
+   - Como funciona
+   - Preço
+   - FAQ
+   - Começar
+3. Botão: "Solicitar Acesso"
+4. Container geral do header
 
-## ESTRUTURA OBRIGATÓRIA DA NOVA LP
+---
 
-Siga esta ordem:
+## PROBLEMAS A CORRIGIR (IMPORTANTE)
 
-1. Hero (corrigido)
-2. Credenciais / prova inicial (logos ou métricas reais)
-3. Problema (simplificado)
-4. Solução (com evidência visual do produto)
-5. Demonstração (sample report ou output real)
-6. Como funciona (máx. 3 passos)
-7. Benefícios claros (não repetir features)
-8. Prova social (depoimentos ou casos)
-9. Pricing (com melhor sustentação)
-10. FAQ (5–8 perguntas)
-11. CTA final (curto, baixo atrito)
-12. Footer robusto
+- header parece "ok", mas não premium
+- espaçamento pode estar genérico
+- links têm pouco contraste hierárquico
+- CTA não está suficientemente destacado ou refinado
+- falta sensação de precisão e sistema
+
+---
+
+## MELHORIAS OBRIGATÓRIAS
+
+### 1. ESPAÇAMENTO E GRID
+- alinhar todos os elementos com precisão
+- melhorar padding horizontal
+- garantir respiro adequado entre logo, links e CTA
+- aplicar padrão consistente do DS
+
+---
+
+### 2. HIERARQUIA VISUAL
+- links secundários menos chamativos
+- CTA principal mais evidente
+- diferenciar claramente navegação vs ação
+
+---
+
+### 3. TIPOGRAFIA
+- ajustar peso dos links
+- melhorar legibilidade
+- evitar aparência "default"
+
+---
+
+### 4. BOTÃO (CTA)
+- deve parecer mais importante que os links
+- aplicar estilo consistente com DS
+- ajustar padding, border-radius, contraste
+
+---
+
+### 5. INTERAÇÃO (MESMO QUE SÓ ESTRUTURAL)
+Adicionar comentários para estados:
+
+<!-- hover state -->
+<!-- active state -->
+
+---
+
+### 6. CONTAINER DO HEADER
+
+Refinar:
+- largura máxima
+- alinhamento central
+- consistência com restante da página
+- possível uso de:
+  - border sutil
+  - background refinado
+  - blur (se já existir no DS)
+
+---
+
+### 7. POLIMENTO PREMIUM
+
+- remover qualquer aparência “genérica”
+- garantir que tudo pareça intencional
+- micro ajustes de alinhamento fazem diferença
+
+---
 
 ## REGRAS CRÍTICAS
 
-### Copy
-- Elimine hype desnecessário
-- Substitua "viral" por previsibilidade e performance consistente
-- Todas as promessas devem parecer defensáveis
-- Clareza > impacto exagerado
+- NÃO criar novo design fora do Design System
+- NÃO reinventar componentes
+- NÃO mexer no resto da página
+- NÃO explicar fora do código
 
-### Conversão
-- Reduzir fricção em todos os CTAs
-- Garantir progressão lógica de confiança
-- Não vender antes de provar
+---
 
-### Design System
-- NÃO inventar novos componentes
-- Reutilizar padrões existentes
-- Manter consistência visual
-- Se algo não existir no DS → sinalizar
+## SAÍDA
 
-### CTA FINAL
-- Máximo: nome + email
-- Nada além disso
+Retorne APENAS:
 
-## SAÍDA ESPERADA
+### HTML DO HEADER ATUALIZADO
 
-### 1. Nova estrutura da Landing Page
-(Seções + objetivo de cada uma)
+Com comentários como:
 
-### 2. Copy completa da nova LP
-- Headlines
-- Subheadlines
-- CTAs
-- Seções completas
+<!-- ajuste de espaçamento -->
+<!-- melhoria de hierarquia -->
+<!-- uso de padrão do DS -->
 
-### 3. Sugestões de elementos visuais
-- Onde entram screenshots
-- Onde entram provas
-- Onde entram gráficos ou outputs
-
-### 4. Versão HTML (IMPORTANTE)
-Gerar uma versão HTML estruturada da nova Landing Page:
-
-- Sem CSS complexo (pode usar classes existentes)
-- Foco em estrutura e semântica
-- Pronta para implementação
-
-### 5. Lista de mudanças aplicadas
-Mapear:
-- problema original → solução aplicada
-
-## MODO DE EXECUÇÃO
-
-Você NÃO deve:
-- repetir o diagnóstico
-- ser genérico
-- sugerir — você deve DECIDIR e ENTREGAR
-
-Você deve agir como alguém responsável por publicar a próxima versão da página.
+---
 
 ## FOCO FINAL
 
-Essa nova versão deve:
+O header deve parecer:
 
-- aumentar confiança
-- reduzir risco percebido
-- melhorar clareza
-- aumentar conversão
-- manter consistência com o Design System
+- mais caro
+- mais preciso
+- mais limpo
+- mais confiável
+
+Se ainda parecer “template comum”, você falhou.
 
 Comece agora.

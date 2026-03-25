@@ -619,11 +619,11 @@
         .fa-nav-shell {
             position: relative;
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
-            gap: 2rem;
-            height: 3rem;
-            padding: 0 1.5rem;
+            gap: 1rem;
+            min-height: 3.5rem;
+            padding: 0.5rem 0.75rem 0.5rem 1rem;
             border-radius: 9999px;
             background: var(--nav-bg);
             border: 1px solid var(--nav-border);
@@ -653,8 +653,9 @@
             gap: 0.5rem;
             color: var(--nav-text);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: opacity var(--duration-fast) var(--ease-out);
+            white-space: nowrap;
         }
 
         .fa-nav-brand:hover {
@@ -677,12 +678,14 @@
         .fa-nav-menu {
             display: none;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.375rem;
             justify-content: center;
+            justify-self: center;
             font-size: 0.8125rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--nav-link);
+            min-width: 0;
         }
 
         .fa-nav-link {
@@ -691,8 +694,9 @@
             color: var(--nav-muted);
             transition: color var(--duration-fast) var(--ease-out),
                         background var(--duration-fast) var(--ease-out);
-            padding: 0.4rem 0.875rem;
+            padding: 0.45rem 0.875rem;
             border-radius: 9999px;
+            white-space: nowrap;
         }
 
         .fa-nav-link:hover {
@@ -713,6 +717,14 @@
 
         .fa-nav-end {
             justify-self: end;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .fa-nav-cta {
+            padding: 0.75rem 1.125rem;
+            font-size: 0.95rem;
         }
 
         .fa-nav-shell.is-scrolled {
@@ -723,9 +735,15 @@
         @media (max-width: 767px) {
             .fa-nav-shell {
                 grid-template-columns: auto 1fr;
+                padding: 0.5rem 0.625rem 0.5rem 0.875rem;
             }
             .fa-nav-end {
                 justify-self: end;
+                gap: 0.5rem;
+            }
+            .fa-nav-cta {
+                padding: 0.7rem 0.95rem;
+                font-size: 0.875rem;
             }
         }
 
@@ -1234,6 +1252,128 @@
             padding: 0 1.5rem 1.5rem;
         }
 
+        .section-intro {
+            max-width: 42rem;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .section-intro p {
+            font-size: 1.125rem;
+        }
+
+        .trust-strip {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .trust-pill strong {
+            color: var(--text-primary);
+        }
+
+        .preview-shell {
+            border: 1px solid var(--border-subtle);
+            border-radius: 1rem;
+            overflow: hidden;
+            background: var(--bg-section);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .preview-main {
+            padding: 1rem;
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .preview-side {
+            padding: 1rem;
+        }
+
+        .signal-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .signal-card {
+            padding: 0.875rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.75rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        }
+
+        .signal-card--soft {
+            background: var(--bg-page-alt);
+            border-color: transparent;
+        }
+
+        .cta-panel {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top, rgba(245, 245, 245, 0.06), transparent 35%),
+                var(--bg-elevated);
+        }
+
+        .cta-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 28%);
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 767px) {
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-main {
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .trust-strip {
+                gap: 0.5rem;
+            }
+
+            .trust-pill {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         /* ═══════════════════════════════════════════════ */
         /* ANIMATIONS                                      */
         /* ═══════════════════════════════════════════════ */
@@ -1679,10 +1819,11 @@
                 <div class="fa-nav-menu" aria-label="Primary">
                     <a href="#como-funciona" class="fa-nav-link">Como Funciona</a>
                     <a href="#preco" class="fa-nav-link">Preço</a>
+                    <a href="#faq" class="fa-nav-link">FAQ</a>
                     <a href="#cta-final" class="fa-nav-link">Começar</a>
                 </div>
 
-                <div class="fa-nav-end" style="display: flex; align-items: center; gap: 1rem; justify-content: flex-end;">
+                <div class="fa-nav-end">
                     <button
                         class="theme-toggle"
                         onclick="toggleTheme()"
@@ -1707,7 +1848,7 @@
                             </svg>
                         </span>
                     </button>
-                    <a href="#cta-final" class="btn btn-primary">Começar Agora</a>
+                    <a href="#cta-final" class="btn btn-primary fa-nav-cta">Solicitar Acesso</a>
                 </div>
             </div>
         </div>
@@ -1743,33 +1884,37 @@
                 </h1>
 
                 <p class="text-muted animate-fade-in-up delay-200" style="font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.6; max-width: 42rem; margin: 0 auto 2.5rem;">
-                    CAMMUS é a plataforma de Content Intelligence que analisa <strong style="color: var(--text-primary);">+10.000 posts</strong> de alto engajamento no seu nicho e mostra exatamente o que, como e quando criar conteúdo que converte.
+                    CAMMUS analisa <strong style="color: var(--text-primary);">+10.000 posts por semana</strong> no seu nicho e transforma sinais de performance em pautas, formatos e ângulos mais fáceis de executar com consistência.
                 </p>
 
                 <!-- Using .btn classes from design system -->
                 <div class="animate-fade-in-up delay-300" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                    <a href="#como-funciona" class="btn btn-primary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">
-                        Ver Análise de Exemplo
+                    <a href="#analise-exemplo" class="btn btn-primary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">
+                        Ver Como Entregamos
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </a>
-                    <a href="#cta-final" class="btn btn-secondary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">Começar Teste Grátis</a>
+                    <a href="#cta-final" class="btn btn-secondary" style="padding: 0.875rem 2.5rem; font-size: 1.125rem;">Solicitar Acesso</a>
                 </div>
 
                 <p class="text-muted animate-fade-in-up delay-300" style="font-size: 0.875rem;">
-                    <span class="font-mono" style="color: var(--text-primary); font-weight: 600;">Primeiros 50 clientes:</span> 60% de desconto vitalício · Sem cartão de crédito
+                    <span class="font-mono" style="color: var(--text-primary); font-weight: 600;">Programa de validação:</span> preço especial para os primeiros clientes · sem cartão para solicitar
                 </p>
 
                 <!-- Social proof using design system spacing -->
-                <div class="animate-fade-in-up delay-400" style="display: flex; gap: 3rem; justify-content: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-subtle); flex-wrap: wrap;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.25rem;">Redes</div>
-                        <div style="color: var(--text-secondary);">LinkedIn · Instagram · YouTube</div>
+                <div class="animate-fade-in-up delay-400 trust-strip">
+                    <div class="trust-pill">
+                        <span class="font-mono">01</span>
+                        <span>Leitura de sinais em <strong>LinkedIn, Instagram e YouTube</strong></span>
                     </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.25rem;">Posts Analisados</div>
-                        <div class="font-mono" style="color: var(--text-primary); font-weight: 600;">+5.2 milhões</div>
+                    <div class="trust-pill">
+                        <span class="font-mono">02</span>
+                        <span><strong>10.000+ posts por semana</strong> analisados por nicho</span>
+                    </div>
+                    <div class="trust-pill">
+                        <span class="font-mono">03</span>
+                        <span>Entrega inicial em ate <strong>72 horas</strong></span>
                     </div>
                 </div>
 
@@ -1918,13 +2063,94 @@
         </div>
     </section>
 
+    <section id="analise-exemplo" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 64rem; margin: 0 auto;">
+                <div class="section-intro">
+                    <h2 style="margin-bottom: 1rem;">O que você recebe na prática</h2>
+                    <p class="text-muted">
+                        Antes de falar de preço, mostramos o formato da entrega: sinais do mercado, padrões de conteúdo e recomendações acionáveis em uma estrutura simples de consumir.
+                    </p>
+                </div>
+
+                <div class="fa-card fa-card--highlight" style="padding: 2rem;">
+                    <div class="fa-card-label">Sample Report</div>
+                    <div class="fa-card-grid" style="align-items: start;">
+                        <div class="fa-card" style="padding: 1.5rem;">
+                            <div class="fa-card-label">Resumo Executivo</div>
+                            <h3 style="margin-bottom: 1rem;">Leitura rápida do que está puxando resultado</h3>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>Top formatos por rede e por nicho</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>Ângulos de copy mais recorrentes</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
+                                        <path d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>Hipóteses prioritárias para o próximo ciclo</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="fa-card fa-card--glass" style="padding: 1.5rem;">
+                            <div class="fa-card-label">Preview da Entrega</div>
+                            <div class="preview-shell">
+                                <div class="preview-grid">
+                                    <div class="preview-main">
+                                        <div class="font-mono" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">INSIGHTS PRIORITARIOS</div>
+                                        <div class="signal-stack">
+                                            <div class="signal-card">
+                                                <strong style="display: block; color: var(--text-primary); margin-bottom: 0.25rem;">Hook direto com contraste forte</strong>
+                                                <span class="fa-card-meta">Abordagens com tese forte performam melhor que aberturas genéricas.</span>
+                                            </div>
+                                            <div class="signal-card">
+                                                <strong style="display: block; color: var(--text-primary); margin-bottom: 0.25rem;">Carrossel de diagnóstico</strong>
+                                                <span class="fa-card-meta">Posts que começam com problema específico geram mais salvamentos.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-side">
+                                        <div class="font-mono" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">MERCADO</div>
+                                        <div class="signal-stack">
+                                            <div class="signal-card signal-card--soft">
+                                                <strong style="display: block; color: var(--text-primary); margin-bottom: 0.25rem;">Volume semanal</strong>
+                                                <span class="font-mono">10.000+ posts</span>
+                                            </div>
+                                            <div class="signal-card signal-card--soft">
+                                                <strong style="display: block; color: var(--text-primary); margin-bottom: 0.25rem;">Entrega</strong>
+                                                <span class="fa-card-meta">Relatorio estruturado + recomendacoes acionaveis</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 1rem; background: var(--bg-page-alt);">
+                                    <div class="font-mono" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">PROXIMO PASSO RECOMENDADO</div>
+                                    <strong style="color: var(--text-primary);">Testar 3 temas com hook de dor especifica e CTA consultivo no fechamento.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- HOW IT WORKS section -->
     <section id="como-funciona" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
         <div class="container">
             <div style="max-width: 56rem; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: 1rem;">Da sua dúvida ao seu próximo viral em 72 horas</h2>
+                <h2 style="text-align: center; margin-bottom: 1rem;">Da sua dúvida ao seu próximo plano editorial em 72 horas</h2>
                 <p class="text-muted" style="text-align: center; font-size: 1.125rem; max-width: 36rem; margin: 0 auto 4rem;">
-                    Processo simples, resultado comprovado
+                    Processo simples, com menos achismo e mais direção acionável
                 </p>
 
                 <div class="fa-card-grid">
@@ -1964,7 +2190,7 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
                                     <path d="M9 5l7 7-7 7"/>
                                 </svg>
-                                <span>Vasculha <strong>+5.000 posts</strong> no seu nicho</span>
+                                <span>Vasculha <strong>+10.000 posts</strong> no seu nicho</span>
                             </li>
                             <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
@@ -1984,7 +2210,7 @@
                     <div class="fa-card fa-card--feature">
                         <span class="badge badge-primary" style="margin-bottom: 1rem;">Passo 3</span>
                         <h3 style="margin-bottom: 1rem;">Você recebe inteligência acionável</h3>
-                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Relatório completo (Notion + PDF) com:</p>
+                        <p class="fa-card-meta" style="margin-bottom: 1rem;">Relatório estruturado com:</p>
                         <ul style="list-style: none; padding: 0;">
                             <li style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" style="flex-shrink: 0;">
@@ -2012,7 +2238,7 @@
                         <h3 style="margin-bottom: 1rem;">Você cria com confiança</h3>
                         <p class="fa-card-meta" style="margin-bottom: 1rem;">Menos teste cego. Mais replicação de sucesso comprovado.</p>
                         <p style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary);">
-                            Resultado: Seu próximo post tem <strong>10x mais chance</strong> de viralizar.
+                            Resultado: seu time cria com mais clareza, menos desperdício e critérios melhores para decidir o que publicar.
                         </p>
                     </div>
                 </div>
@@ -2026,7 +2252,7 @@
             <div style="max-width: 56rem; margin: 0 auto;">
                 <h2 style="text-align: center; margin-bottom: 1rem;">Preço de Validação (Tempo Limitado)</h2>
                 <p class="text-muted" style="text-align: center; font-size: 1.125rem; margin-bottom: 4rem;">
-                    Primeiros 50 clientes garantem condições especiais para sempre
+                    Condição especial para o programa inicial de validação
                 </p>
 
                 <!-- Using .fa-card-grid for pricing comparison -->
@@ -2125,7 +2351,7 @@
                                 Garantir Preço de Validação
                             </a>
                             <p style="text-align: center; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary);">
-                                <strong>31 clientes ativos</strong> · 19 vagas restantes
+                                Condicao de validacao por tempo limitado
                             </p>
                         </div>
                     </div>
@@ -2144,23 +2370,84 @@
         </div>
     </section>
 
+    <section id="faq" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
+        <div class="container">
+            <div style="max-width: 48rem; margin: 0 auto;">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h2 style="margin-bottom: 1rem;">Perguntas frequentes</h2>
+                    <p class="text-muted" style="font-size: 1.125rem;">As principais dúvidas antes de entrar no programa de validação.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span>O que exatamente eu recebo na entrega?</span>
+                        <div class="faq-icon" style="width: 2rem; height: 2rem; background: var(--bg-section); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 300;">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Um relatorio estruturado com sinais do mercado, formatos mais recorrentes, angulos de copy, benchmarks e proximas recomendacoes para o seu nicho.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span>CAMMUS cria o conteudo por mim?</span>
+                        <div class="faq-icon" style="width: 2rem; height: 2rem; background: var(--bg-section); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 300;">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nao. A plataforma reduz o achismo e ajuda o time a decidir melhor o que criar, com base em sinais reais do mercado.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span>Quanto tempo leva para receber os insights?</span>
+                        <div class="faq-icon" style="width: 2rem; height: 2rem; background: var(--bg-section); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 300;">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O fluxo inicial de validacao foi desenhado para entregar direcionamento em ate 72 horas apos o briefing do nicho.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span>Preciso informar cartao para solicitar acesso?</span>
+                        <div class="faq-icon" style="width: 2rem; height: 2rem; background: var(--bg-section); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 300;">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nao. O primeiro passo e apenas solicitar acesso com seus dados de contato para avaliarmos aderencia ao programa.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" type="button" onclick="toggleFaq(this)">
+                        <span>Como funciona a garantia?</span>
+                        <div class="faq-icon" style="width: 2rem; height: 2rem; background: var(--bg-section); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 300;">+</div>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Se em 30 dias a entrega nao gerar pelo menos cinco insights acionaveis para o seu contexto, o valor e devolvido integralmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA FINAL section -->
     <section id="cta-final" class="section" style="background: var(--bg-page-alt); padding: 5rem 0;">
         <div class="container">
             <div style="max-width: 48rem; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: 1rem;">Última chance de garantir vantagem competitiva</h2>
+                <h2 style="text-align: center; margin-bottom: 1rem;">Solicite acesso ao programa inicial</h2>
                 <p class="text-muted" style="text-align: center; font-size: 1.125rem; margin-bottom: 3rem;">
-                    A escolha é sua. Mas o tempo não espera.
+                    Comece com o minimo de friccao. O restante da qualificacao acontece na proxima etapa.
                 </p>
 
                 <!-- Using .fa-card for form -->
-                <div class="fa-card" style="background: var(--bg-elevated); padding: 3rem;">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">Comece Agora em 3 Passos</h3>
+                <div class="fa-card cta-panel" style="padding: 3rem;">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">Deixe seus dados e receba o proximo passo</h3>
 
                     <form style="max-width: 28rem; margin: 0 auto;">
                         <!-- Using .input-group and .input-field from design system -->
                         <div class="input-group" style="margin-bottom: 1.5rem;">
-                            <label class="input-label">Seu nome completo</label>
+                            <label class="input-label">Seu nome</label>
                             <input type="text" class="input-field" placeholder="João Silva" required>
                         </div>
 
@@ -2169,63 +2456,18 @@
                             <input type="email" class="input-field" placeholder="joao@empresa.com" required>
                         </div>
 
-                        <div class="input-group" style="margin-bottom: 1.5rem;">
-                            <label class="input-label">Seu WhatsApp</label>
-                            <input type="tel" class="input-field" placeholder="(11) 99999-9999" required>
-                        </div>
-
-                        <div class="input-group" style="margin-bottom: 1.5rem;">
-                            <label class="input-label">Seu nicho/área de atuação</label>
-                            <input type="text" class="input-field" placeholder="Ex: SaaS B2B, Marketing para médicos" required>
-                        </div>
-
-                        <div class="input-group" style="margin-bottom: 1.5rem;">
-                            <label class="input-label">Rede social principal</label>
-                            <div style="display: flex; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="social" value="linkedin" style="cursor: pointer;">
-                                    <span>LinkedIn</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="social" value="instagram" style="cursor: pointer;">
-                                    <span>Instagram</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="social" value="youtube" style="cursor: pointer;">
-                                    <span>YouTube</span>
-                                </label>
-                            </div>
-                        </div>
-
                         <div class="input-group" style="margin-bottom: 2rem;">
-                            <label class="input-label">Objetivo principal</label>
-                            <div style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="goal" value="authority" style="cursor: pointer;">
-                                    <span>Construir autoridade</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="goal" value="leads" style="cursor: pointer;">
-                                    <span>Gerar leads B2B</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="goal" value="audience" style="cursor: pointer;">
-                                    <span>Crescer audiência</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                                    <input type="radio" name="goal" value="monetize" style="cursor: pointer;">
-                                    <span>Monetizar conteúdo</span>
-                                </label>
-                            </div>
+                            <label class="input-label">Site ou empresa</label>
+                            <input type="text" class="input-field" placeholder="Ex: Empresa X ou empresa.com" required>
                         </div>
 
                         <!-- Using .btn .btn-primary from design system -->
                         <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.25rem; padding: 1.25rem 2rem;">
-                            Começar Minha Análise Agora →
+                            Solicitar Acesso Agora
                         </button>
 
                         <p style="text-align: center; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary);">
-                            Preço de validação · <strong>19 vagas restantes</strong> · Preço travado vitalício
+                            Sem cartao · resposta inicial por email
                         </p>
                     </form>
 
@@ -2262,7 +2504,7 @@
 
                 <div style="margin-top: 3rem; text-align: center;">
                     <p style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                        <strong style="color: var(--text-primary);">P.S.:</strong> Se você chegou até aqui, é porque sabe que precisa mudar a forma como cria conteúdo. Você pode continuar testando no escuro por mais 6 meses. Ou pode ter vantagem competitiva desde amanhã. <strong style="color: var(--text-primary);">A escolha é sua. Mas escolha agora.</strong>
+                        <strong style="color: var(--text-primary);">P.S.:</strong> Se hoje voce ainda decide pauta no escuro, o custo nao e so de tempo. E de oportunidade. Comece pequeno, valide rapido e avance com mais clareza.
                     </p>
                 </div>
             </div>
@@ -2277,7 +2519,12 @@
         <div class="container">
             <div style="max-width: 56rem; margin: 0 auto; text-align: center;">
                 <div style="font-weight: 700; font-size: 1.5rem; color: var(--text-primary); margin-bottom: 1rem;">CAMMUS</div>
-                <p class="text-muted" style="margin-bottom: 2rem;">Content Intelligence Platform</p>
+                <p class="text-muted" style="margin-bottom: 1.5rem;">Content Intelligence Platform</p>
+                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; font-size: 0.875rem;">
+                    <a href="#como-funciona" class="footer-link">Como Funciona</a>
+                    <a href="#faq" class="footer-link">FAQ</a>
+                    <a href="#cta-final" class="footer-link">Solicitar Acesso</a>
+                </div>
                 <p class="text-muted" style="font-size: 0.875rem;">&copy; 2026 CAMMUS. Todos os direitos reservados.</p>
             </div>
         </div>
@@ -2306,11 +2553,47 @@
             });
         }
 
+        const navLinks = document.querySelectorAll('.fa-nav-menu .fa-nav-link[href^="#"]');
+        const navSections = Array.from(navLinks)
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        function updateActiveNavLink() {
+            if (!navLinks.length || !navSections.length) return;
+            const offset = 140;
+            let activeId = '';
+
+            navSections.forEach(section => {
+                const top = section.offsetTop - offset;
+                const bottom = top + section.offsetHeight;
+                if (window.scrollY >= top && window.scrollY < bottom) {
+                    activeId = `#${section.id}`;
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === activeId) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        }
+
+        updateActiveNavLink();
+        window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+
         // Form submission
         document.querySelector('form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Formulário enviado! Em breve nossa equipe entrará em contato.');
         });
+
+        function toggleFaq(button) {
+            const item = button.closest('.faq-item');
+            if (!item) return;
+            item.classList.toggle('open');
+        }
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

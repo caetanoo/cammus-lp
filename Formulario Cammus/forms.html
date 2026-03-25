@@ -2268,6 +2268,67 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         // Flag para prevenir múltiplos envios
         let isSubmitting = false;
 
+        // ═══════════════════════════════════════════════
+        // ✅ CORREÇÃO ALTO-04: RATE LIMITING
+        // ═══════════════════════════════════════════════
+
+        const RATE_LIMIT_KEY = 'form_submission_history';
+        const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hora em milissegundos
+        const MAX_SUBMISSIONS_PER_HOUR = 3;
+
+        /**
+         * Verifica se o usuário excedeu o limite de envios
+         * @returns {Object} { allowed: boolean, waitMinutes: number }
+         */
+        function checkRateLimit() {
+            const now = Date.now();
+            let history = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '[]');
+
+            // Remover submissões antigas (fora da janela de 1 hora)
+            history = history.filter(timestamp => now - timestamp < RATE_LIMIT_WINDOW);
+
+            // Atualizar localStorage com histórico filtrado
+            localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(history));
+
+            // Verificar se excedeu o limite
+            if (history.length >= MAX_SUBMISSIONS_PER_HOUR) {
+                // Calcular tempo de espera até a submissão mais antiga expirar
+                const oldestSubmission = Math.min(...history);
+                const waitTime = RATE_LIMIT_WINDOW - (now - oldestSubmission);
+                const waitMinutes = Math.ceil(waitTime / 60000); // Converter para minutos
+
+                return {
+                    allowed: false,
+                    waitMinutes: waitMinutes,
+                    submissionsCount: history.length
+                };
+            }
+
+            return {
+                allowed: true,
+                submissionsCount: history.length
+            };
+        }
+
+        /**
+         * Registra uma submissão bem-sucedida no histórico
+         * Chamado APENAS após envio bem-sucedido ao webhook
+         */
+        function recordSubmission() {
+            const now = Date.now();
+            let history = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '[]');
+
+            // Adicionar timestamp atual
+            history.push(now);
+
+            // Salvar no localStorage
+            localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(history));
+
+            if (window.location.hostname === 'localhost') {
+                console.log('📊 Rate Limit: Submissão registrada (' + history.length + '/' + MAX_SUBMISSIONS_PER_HOUR + ')');
+            }
+        }
+
         // Validar campos de texto em tempo real
         requiredFields.forEach(fieldName => {
             const field = document.getElementById(fieldName);
@@ -2323,6 +2384,25 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         // Submit handler
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // ✅ CORREÇÃO ALTO-04: Verificar rate limit ANTES de todas as validações
+            // Previne spam automatizado e múltiplas submissões
+            const rateCheck = checkRateLimit();
+            if (!rateCheck.allowed) {
+                // Limite excedido - exibir mensagem ao usuário
+                const message = `Você atingiu o limite de ${MAX_SUBMISSIONS_PER_HOUR} envios por hora.\n\n` +
+                               `Por favor, aguarde ${rateCheck.waitMinutes} minuto(s) antes de enviar novamente.`;
+
+                alert(message);
+
+                if (window.location.hostname === 'localhost') {
+                    console.warn('🚫 Rate Limit: Limite excedido');
+                    console.warn(`Submissões na última hora: ${rateCheck.submissionsCount}/${MAX_SUBMISSIONS_PER_HOUR}`);
+                    console.warn(`Tempo de espera: ${rateCheck.waitMinutes} minuto(s)`);
+                }
+
+                return; // Bloquear submit
+            }
 
             // Prevenir múltiplos envios
             if (isSubmitting) {
@@ -2483,6 +2563,10 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 if (window.location.hostname === 'localhost') {
                     console.log('🔄 Token CSRF renovado após sucesso:', newCsrfToken.substring(0, 8) + '...');
                 }
+
+                // ✅ CORREÇÃO ALTO-04: Registrar submissão bem-sucedida no rate limit
+                // Chamado APENAS após confirmação de sucesso do webhook
+                recordSubmission();
 
                 // Salvar nome no localStorage para usar na página de obrigado
                 const firstName = formData.name.split(' ')[0]; // Apenas o primeiro nome
