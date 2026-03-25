@@ -6,6 +6,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,39 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // ═══════════════════════════════════════════════════════════
+// ✅ CORREÇÃO ALTO-04: RATE LIMITING SERVER-SIDE
+// ═══════════════════════════════════════════════════════════
+
+// Configurar rate limiter: 5 requisições por IP por hora
+// Defesa em profundidade: frontend (3/hora) + backend (5/hora)
+const submitLeadLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hora
+    max: 5, // Máximo 5 requisições por IP
+    message: {
+        error: 'Muitas requisições deste IP. Por favor, aguarde 1 hora antes de tentar novamente.'
+    },
+    standardHeaders: true, // Retorna info de rate limit nos headers `RateLimit-*`
+    legacyHeaders: false, // Desabilita headers `X-RateLimit-*`
+
+    // Handler customizado para logs
+    handler: (req, res) => {
+        const clientIP = req.headers['x-forwarded-for'] ||
+                         req.headers['x-real-ip'] ||
+                         req.socket.remoteAddress;
+
+        console.warn(`⚠️ RATE LIMIT: IP ${clientIP} excedeu limite de 5 requisições/hora`);
+
+        res.status(429).json({
+            error: 'Muitas requisições deste IP. Por favor, aguarde 1 hora antes de tentar novamente.',
+            retryAfter: '1 hour'
+        });
+    },
+
+    // Skip function para ignorar health checks
+    skip: (req) => req.path === '/health'
+});
+
+// ═══════════════════════════════════════════════════════════
 // VALIDAÇÃO DE CONFIGURAÇÃO
 // ═══════════════════════════════════════════════════════════
 
@@ -49,9 +83,10 @@ if (!process.env.WEBHOOK_URL) {
 // ═══════════════════════════════════════════════════════════
 // ENDPOINT: /api/submit-lead
 // Proxy que adiciona o token de autenticação server-side
+// ✅ CORREÇÃO ALTO-04: Rate limiting aplicado (5 req/hora por IP)
 // ═══════════════════════════════════════════════════════════
 
-app.post('/api/submit-lead', async (req, res) => {
+app.post('/api/submit-lead', submitLeadLimiter, async (req, res) => {
     try {
         // 1. Validar que o payload não está vazio
         if (!req.body || Object.keys(req.body).length === 0) {

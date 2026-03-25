@@ -88,6 +88,21 @@ Recebe dados do formulário e encaminha ao webhook N8N.
 }
 ```
 
+**Response (rate limit excedido - 429):**
+```json
+{
+  "error": "Muitas requisições deste IP. Por favor, aguarde 1 hora antes de tentar novamente.",
+  "retryAfter": "1 hour"
+}
+```
+
+**Headers de Rate Limit:**
+```
+RateLimit-Limit: 5
+RateLimit-Remaining: 2
+RateLimit-Reset: 1711278000
+```
+
 ### GET `/health`
 
 Verifica status do servidor.
@@ -98,6 +113,40 @@ Verifica status do servidor.
   "status": "ok",
   "timestamp": "2026-03-24T10:30:00.000Z",
   "webhook_configured": true
+}
+```
+
+## 🛡️ Rate Limiting (Proteção Anti-Spam)
+
+O servidor implementa rate limiting server-side para prevenir spam automatizado:
+
+**Configuração**:
+- **Limite**: 5 requisições por IP por hora
+- **Janela**: 60 minutos (janela deslizante)
+- **Ação**: Retorna HTTP 429 (Too Many Requests)
+
+**Defesa em Profundidade**:
+- Frontend: 3 submissões/hora por browser (localStorage)
+- Backend: 5 submissões/hora por IP (express-rate-limit)
+
+**Como funciona**:
+1. Cada requisição ao `/api/submit-lead` consome 1 quota
+2. Quando 5 requisições são feitas em 1 hora, novas requisições são bloqueadas
+3. Após 1 hora da primeira requisição, o limite é resetado
+4. Health checks (`/health`) não são afetados pelo rate limit
+
+**Headers retornados**:
+```
+RateLimit-Limit: 5           // Limite máximo
+RateLimit-Remaining: 2       // Requisições restantes
+RateLimit-Reset: 1711278000  // Timestamp de reset
+```
+
+**Exemplo de erro (429)**:
+```json
+{
+  "error": "Muitas requisições deste IP. Por favor, aguarde 1 hora antes de tentar novamente.",
+  "retryAfter": "1 hour"
 }
 ```
 
