@@ -1,162 +1,247 @@
-Você é um especialista em segurança web (AppSec) e sua missão é realizar 
-uma auditoria COMPLETA de vulnerabilidades no site, analisando os arquivos:
+Quero que você atue como um especialista sênior em:
 
-📁 ESCOPO:
-- agendamento.html
-- forms.html (ou forms.htm)
-- obrigado.html
-- Qualquer arquivo JS, CSS ou backend conectado a esses arquivos
+- UX/UI para Landing Pages de alta conversão
+- Design Systems
+- Front-end audit
+- CRO (Conversion Rate Optimization)
+- Arquitetura da informação
+- Copy para páginas de aquisição
+- Heurísticas de usabilidade
+- Performance percebida e consistência visual
 
-⚠️ IMPORTANTE: Esta é uma auditoria defensiva para PROTEGER o site.
-Identifique vulnerabilidades e proponha correções — não explore nada.
+Sua missão é realizar uma AUDITORIA COMPLETA, PROFUNDA E ESTRATÉGICA da minha Landing Page, com foco em identificar tudo o que precisa ser ajustado para elevar:
 
-═══════════════════════════════════════
-## FASE 1 — RECONHECIMENTO (NÃO ALTERE NADA)
-═══════════════════════════════════════
+1. clareza de proposta de valor
+2. percepção de autoridade
+3. confiança
+4. escaneabilidade
+5. consistência com o Design System
+6. qualidade visual
+7. conversão
 
-Mapeie toda a superfície de ataque:
-- Todos os campos de input e formulários
-- Scripts externos carregados (CDNs, APIs, Calendly, etc.)
-- Dados coletados e onde são enviados
-- Métodos HTTP utilizados
-- Presença ou ausência de HTTPS
-- Headers de segurança presentes/ausentes
-- Cookies e armazenamento local utilizado
+## CONTEXTO
 
-═══════════════════════════════════════
-## FASE 2 — AUDITORIA OWASP TOP 10
-═══════════════════════════════════════
+Você deve usar os seguintes arquivos como base da análise:
 
-Verifique cada item da lista OWASP Top 10 nos arquivos:
+### Landing Page (HTML)
+/Users/caetanovizel/Desktop/LP CAMMUS/_archive/cammus-final.html
 
-A01 — Broken Access Control
-□ Existem páginas acessíveis sem autenticação que deveriam ser protegidas?
-□ O obrigado.html é acessível diretamente via URL sem passar pelo form?
-□ Há parâmetros na URL que podem ser manipulados?
+### Design System
+/Users/caetanovizel/Desktop/LP CAMMUS/design-system
 
-A02 — Cryptographic Failures
-□ Dados sensíveis trafegam em texto puro?
-□ Formulários submetidos via HTTP em vez de HTTPS?
-□ Senhas ou tokens expostos no código-fonte?
+Sua análise deve ser 100% baseada no Design System fornecido.
+Nada deve ser sugerido fora da lógica da marca, da biblioteca visual e das diretrizes do sistema.
+Se algo estiver ausente no Design System, você deve sinalizar isso explicitamente antes de propor qualquer caminho.
 
-A03 — Injection (XSS, HTML Injection)
-□ Campos de input sanitizados antes de exibir na tela?
-□ Possibilidade de Cross-Site Scripting (XSS) refletido ou armazenado?
-□ Inputs aceitam scripts como: <script>alert(1)</script> ?
-□ Campos como nome, email, whatsapp validados e escapados?
+## OBJETIVO PRINCIPAL
+Quero uma auditoria extremamente detalhada da Landing Page e um plano de refinamento muito bem elaborado, priorizado e acionável.
 
-A04 — Insecure Design
-□ Fluxo do formulário pode ser bypassado?
-□ É possível submeter o form múltiplas vezes sem limitação?
-□ Ausência de rate limiting nos endpoints?
+## O QUE VOCÊ DEVE FAZER
 
-A05 — Security Misconfiguration
-□ Headers HTTP de segurança presentes?
-  - Content-Security-Policy (CSP)
-  - X-Frame-Options
-  - X-Content-Type-Options
-  - Referrer-Policy
-  - Permissions-Policy
-□ Mensagens de erro expõem informações técnicas?
-□ Console.log() com dados sensíveis visível em produção?
+### ETAPA 1 — LEITURA E MAPEAMENTO
+Antes de sugerir qualquer melhoria:
 
-A06 — Vulnerable Components
-□ Bibliotecas JS/CSS desatualizadas ou com CVEs conhecidos?
-□ Scripts carregados de CDNs externos sem Subresource Integrity (SRI)?
-□ Versões de frameworks expostas nos meta tags ou headers?
+1. Leia toda a Landing Page
+2. Mapeie toda a estrutura da página seção por seção
+3. Identifique os componentes existentes
+4. Identifique os padrões visuais utilizados
+5. Cruze tudo com o Design System
+6. Liste inconsistências, lacunas, desvios e oportunidades
 
-A07 — Authentication Failures
-□ Ausência de proteção contra bots nos formulários?
-□ CAPTCHA ou honeypot implementado?
-□ Sem limite de tentativas de envio?
+### ETAPA 2 — AUDITORIA ESTRUTURAL
+Faça uma auditoria da Landing Page considerando:
 
-A08 — Software and Data Integrity
-□ Scripts externos verificados com hash SRI?
-□ Dependências de terceiros (Calendly, analytics) auditadas?
-□ Possibilidade de supply chain attack via CDN?
+- hierarquia visual
+- arquitetura da informação
+- fluxo de leitura
+- ordem das seções
+- lógica narrativa da página
+- clareza da headline
+- força da subheadline
+- distribuição dos CTAs
+- densidade informacional
+- ritmo da página
+- escaneabilidade
+- uso de prova social
+- tratamento de objeções
+- clareza da oferta
+- consistência entre promessa e conteúdo
+- legibilidade
+- uso de grids e espaçamentos
+- consistência de componentes
+- coerência entre desktop e possíveis comportamentos responsivos
+- pontos de fricção visual e cognitiva
 
-A09 — Logging and Monitoring
-□ Erros de formulário logados de forma segura?
-□ Tentativas de ataque registradas?
-□ Alertas configurados para comportamento anômalo?
+### ETAPA 3 — AUDITORIA COM BASE NO DESIGN SYSTEM
+Analise a página contra o Design System em profundidade.
 
-A10 — Server-Side Request Forgery (SSRF)
-□ Inputs do usuário usados para fazer requisições externas?
-□ URLs dinâmicas baseadas em parâmetros do usuário?
+Verifique e documente:
 
-═══════════════════════════════════════
-## FASE 3 — VULNERABILIDADES ESPECÍFICAS DE FORMULÁRIOS
-═══════════════════════════════════════
+#### Identidade visual
+- aderência à linguagem da marca
+- consistência estética
+- coerência com direção de arte
+- tom visual
 
-Analise especificamente:
+#### Tipografia
+- famílias tipográficas
+- hierarquia de títulos
+- pesos
+- tamanhos
+- line-height
+- contrastes
+- consistência entre blocos
+- uso correto para headlines, body, labels, captions e CTAs
 
-SPAM E BOTS
-□ Implementação de honeypot field?
-□ Rate limiting por IP?
-□ Validação server-side além do client-side?
-□ Token CSRF nos formulários?
+#### Cores
+- uso correto da paleta
+- contraste
+- semântica das cores
+- consistência dos estados
+- excesso ou ausência de cor
+- destaque de elementos prioritários
 
-DADOS PESSOAIS (LGPD)
-□ Campos coletados são necessários (minimização de dados)?
-□ Política de privacidade linkada antes do envio?
-□ Consentimento explícito do usuário registrado?
-□ Dados de WhatsApp/email protegidos?
+#### Espaçamento e layout
+- paddings
+- margins
+- respiros
+- alinhamentos
+- grid
+- ritmo vertical
+- consistência entre seções
 
-EXPOSIÇÃO DE DADOS
-□ Dados do formulário expostos na URL após submit?
-□ Informações sensíveis no histórico do browser?
-□ Autocomplete habilitado em campos sensíveis?
+#### Componentes
+- botões
+- cards
+- badges
+- seções
+- inputs
+- ícones
+- containers
+- elementos de prova social
+- accordions
+- comparativos
+- FAQs
+- modais
+- headers e footers
 
-═══════════════════════════════════════
-## FASE 4 — RELATÓRIO DE VULNERABILIDADES
-═══════════════════════════════════════
+Para cada componente, avalie:
+- aderência ao Design System
+- consistência visual
+- consistência funcional
+- necessidade de refatoração
+- oportunidade de padronização
 
-Apresente cada vulnerabilidade encontrada no formato:
+#### Estados e interação
+- hover
+- active
+- focus
+- disabled
+- feedback visual
+- affordance
+- clareza interativa
 
-🔴 CRÍTICO / 🟠 ALTO / 🟡 MÉDIO / 🟢 BAIXO / ℹ️ INFORMATIVO
+#### Imagens e elementos gráficos
+- coerência com a marca
+- qualidade visual
+- função narrativa
+- excesso ou ruído
+- contribuição para conversão
 
-[SEVERIDADE] Nome da Vulnerabilidade
-├── Arquivo: [onde foi encontrado]
-├── Linha: [número da linha]
-├── Descrição: [o que é o problema]
-├── Impacto: [o que um atacante pode fazer]
-├── Evidência: [trecho do código vulnerável]
-└── Correção: [como resolver com código]
+### ETAPA 4 — AUDITORIA DE CONVERSÃO
+Analise a Landing Page como uma página de performance e conversão.
 
-═══════════════════════════════════════
-## FASE 5 — PLANO DE HARDENING
-═══════════════════════════════════════
+Considere:
 
-Após o relatório, apresente um plano de correção priorizado:
+- clareza imediata acima da dobra
+- entendimento do produto em poucos segundos
+- força da proposta de valor
+- diferenciação competitiva
+- benefícios versus features
+- nível de confiança transmitido
+- credibilidade dos argumentos
+- presença e qualidade de prova social
+- tratamento de objeções
+- consistência dos CTAs
+- atrito na jornada
+- pontos de abandono
+- excesso de complexidade
+- clareza da oferta e do próximo passo
 
-PRIORIDADE 1 — Correção imediata (24h)
-Lista de vulnerabilidades críticas e altas com código de correção pronto
+### ETAPA 5 — DIAGNÓSTICO CRÍTICO
+Quero que você seja rigoroso e honesto.
+Aponte com clareza:
 
-PRIORIDADE 2 — Correção no próximo deploy (7 dias)
-Lista de vulnerabilidades médias com implementação sugerida
+- o que está bom
+- o que está fraco
+- o que está inconsistente
+- o que está prejudicando a conversão
+- o que está fora do Design System
+- o que transmite aparência amadora
+- o que reduz percepção de valor
+- o que gera dúvida
+- o que pode estar quebrando a confiança do usuário
 
-PRIORIDADE 3 — Melhorias de longo prazo (30 dias)
-Boas práticas e melhorias arquiteturais recomendadas
+Não suavize a análise.
+Não faça elogios genéricos.
+Quero visão crítica de especialista.
 
-CHECKLIST DE SEGURANÇA MÍNIMA:
-□ CSP Header configurado
-□ HTTPS forçado em todos os endpoints
-□ Inputs sanitizados e validados server-side
-□ CSRF token nos formulários
-□ Honeypot anti-bot implementado
-□ SRI em todos os scripts externos
-□ Dados LGPD mapeados e protegidos
-□ Rate limiting no backend
-□ Logs de segurança ativos
+### ETAPA 6 — PLANO DE MELHORIAS PRIORITIZADO
+Depois da auditoria, monte um plano de ação em camadas:
 
-═══════════════════════════════════════
-## RESTRIÇÕES IMPORTANTES
-═══════════════════════════════════════
-- ⛔ NÃO modifique nenhum arquivo durante a auditoria
-- ⛔ NÃO explore vulnerabilidades — apenas identifique e documente
-- ✅ Seja específico com números de linha e trechos de código
-- ✅ Aguarde aprovação antes de aplicar qualquer correção
-- ✅ Priorize proteção de dados dos usuários (LGPD)
+#### Prioridade 1 — impacto alto e esforço baixo
+Quick wins com maior impacto imediato.
 
-Comece pelo RECONHECIMENTO e apresente o relatório completo 
-antes de qualquer ação.
+#### Prioridade 2 — impacto alto e esforço médio
+Mudanças estruturais importantes.
+
+#### Prioridade 3 — impacto médio e esforço médio/alto
+Refinamentos relevantes.
+
+#### Prioridade 4 — evoluções futuras
+Itens que podem entrar em roadmap.
+
+Para cada item do plano, traga:
+- problema identificado
+- por que isso é um problema
+- impacto esperado
+- recomendação exata
+- seção/componente afetado
+- relação com o Design System
+- prioridade
+- nível de esforço
+- dependências
+
+### ETAPA 7 — ENTREGA EM FORMATO EXECUTIVO E TÉCNICO
+
+# 1. Resumo executivo
+# 2. Mapeamento da Landing Page
+# 3. Auditoria detalhada por seção
+# 4. Auditoria detalhada por componente
+# 5. Auditoria de conversão
+# 6. Lista consolidada de problemas
+# 7. Plano priorizado de melhorias
+# 8. Próxima versão ideal da Landing Page
+
+## CRITÉRIOS IMPORTANTES
+- Baseie tudo estritamente nos arquivos fornecidos
+- Não invente regras de Design System
+- Quando faltar informação, sinalize “lacuna no DS”
+- Diferencie:
+  - problema visual
+  - problema de UX
+  - problema de conversão
+  - problema de consistência com o DS
+- Seja específico, técnico e acionável
+- Evite sugestões genéricas
+
+## SAÍDA EXTRA
+
+Ao final, inclua:
+
+1. Top 10 problemas mais críticos  
+2. Top 10 melhorias com maior impacto  
+3. Riscos de manter a página como está  
+4. Recomendações para a próxima iteração de design e front-end  
+
+Inicie a auditoria agora com base nos arquivos fornecidos.
