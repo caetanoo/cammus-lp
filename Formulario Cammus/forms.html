@@ -2167,10 +2167,10 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
          * @returns {string} Valor sanitizado (sem HTML/scripts)
          *
          * @example
-         * sanitizeInput('<script>alert("XSS")</script>João')
+         * sanitizeInput('<script>alert("XSS")<\/script>João')
          * // Retorna: 'João'
          *
-         * sanitizeInput('Empresa <b>XYZ</b>')
+         * sanitizeInput('Empresa <b>XYZ<\/b>')
          * // Retorna: 'Empresa XYZ'
          */
         function sanitizeInput(input) {
