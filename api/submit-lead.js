@@ -10,6 +10,18 @@
  */
 export default async function handler(req, res) {
     // ═══════════════════════════════════════════════════════════
+    // 🔍 DIAGNÓSTICO INICIAL
+    // ═══════════════════════════════════════════════════════════
+    console.log('═══════════════════════════════════════════════════════════');
+    console.log('🔍 DIAGNÓSTICO - Função serverless chamada');
+    console.log('═══════════════════════════════════════════════════════════');
+    console.log('Método HTTP:', req.method);
+    console.log('URL:', req.url);
+    console.log('Origin:', req.headers.origin || 'não definido');
+    console.log('User-Agent:', req.headers['user-agent'] || 'não definido');
+    console.log('Content-Type:', req.headers['content-type'] || 'não definido');
+
+    // ═══════════════════════════════════════════════════════════
     // CORS HEADERS
     // ═══════════════════════════════════════════════════════════
     const allowedOrigins = process.env.FRONTEND_URL
@@ -26,8 +38,15 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
 
+    console.log('CORS configurado:', {
+        allowedOrigins,
+        origin,
+        header: res.getHeader('Access-Control-Allow-Origin')
+    });
+
     // Handle preflight OPTIONS request
     if (req.method === 'OPTIONS') {
+        console.log('✅ Preflight OPTIONS request - respondendo 200');
         return res.status(200).end();
     }
 
@@ -35,6 +54,7 @@ export default async function handler(req, res) {
     // VALIDAR MÉTODO HTTP
     // ═══════════════════════════════════════════════════════════
     if (req.method !== 'POST') {
+        console.error('❌ Método não permitido:', req.method);
         return res.status(405).json({
             error: 'Método não permitido. Use POST.'
         });
@@ -43,25 +63,36 @@ export default async function handler(req, res) {
     // ═══════════════════════════════════════════════════════════
     // VALIDAÇÃO DE CONFIGURAÇÃO
     // ═══════════════════════════════════════════════════════════
+    console.log('🔍 Verificando variáveis de ambiente...');
+    console.log('WEBHOOK_URL definido:', !!process.env.WEBHOOK_URL);
+    console.log('WEBHOOK_TOKEN definido:', !!process.env.WEBHOOK_TOKEN);
+    console.log('FRONTEND_URL:', process.env.FRONTEND_URL || 'não definido (usando *)');
+
     if (!process.env.WEBHOOK_TOKEN) {
         console.error('❌ ERRO: WEBHOOK_TOKEN não definido nas variáveis de ambiente');
         return res.status(500).json({
-            error: 'Configuração inválida do servidor'
+            error: 'Configuração inválida do servidor (WEBHOOK_TOKEN ausente)'
         });
     }
 
     if (!process.env.WEBHOOK_URL) {
         console.error('❌ ERRO: WEBHOOK_URL não definido nas variáveis de ambiente');
         return res.status(500).json({
-            error: 'Configuração inválida do servidor'
+            error: 'Configuração inválida do servidor (WEBHOOK_URL ausente)'
         });
     }
+
+    console.log('✅ Variáveis de ambiente OK');
 
     try {
         // ═══════════════════════════════════════════════════════════
         // 1. VALIDAR PAYLOAD
         // ═══════════════════════════════════════════════════════════
+        console.log('🔍 Validando payload...');
+        console.log('Body recebido:', JSON.stringify(req.body, null, 2));
+
         if (!req.body || Object.keys(req.body).length === 0) {
+            console.error('❌ Payload vazio');
             return res.status(400).json({
                 error: 'Payload vazio'
             });
@@ -70,10 +101,17 @@ export default async function handler(req, res) {
         const { lead, segmentacao, qualificacao } = req.body;
 
         if (!lead || !segmentacao || !qualificacao) {
+            console.error('❌ Campos obrigatórios ausentes:', {
+                lead: !!lead,
+                segmentacao: !!segmentacao,
+                qualificacao: !!qualificacao
+            });
             return res.status(400).json({
                 error: 'Campos obrigatórios ausentes (lead, segmentacao, qualificacao)'
             });
         }
+
+        console.log('✅ Payload válido - Email:', lead.email);
 
         // ═══════════════════════════════════════════════════════════
         // 2. ADICIONAR METADATA SERVER-SIDE
@@ -82,6 +120,8 @@ export default async function handler(req, res) {
                          req.headers['x-real-ip'] ||
                          req.socket?.remoteAddress ||
                          'unknown';
+
+        console.log('🔍 Metadata - IP:', clientIP);
 
         const enrichedPayload = {
             ...req.body,
@@ -96,6 +136,10 @@ export default async function handler(req, res) {
         // ═══════════════════════════════════════════════════════════
         // 3. FAZER REQUISIÇÃO AO WEBHOOK N8N
         // ═══════════════════════════════════════════════════════════
+        console.log('🔍 Enviando para webhook N8N...');
+        console.log('Webhook URL:', process.env.WEBHOOK_URL);
+        console.log('Webhook Token (primeiros 10 chars):', process.env.WEBHOOK_TOKEN?.substring(0, 10) + '...');
+
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
@@ -112,6 +156,9 @@ export default async function handler(req, res) {
 
         clearTimeout(timeout);
 
+        console.log('🔍 Resposta do webhook - Status:', webhookResponse.status);
+        console.log('🔍 Resposta do webhook - Headers:', Object.fromEntries(webhookResponse.headers.entries()));
+
         // ═══════════════════════════════════════════════════════════
         // 4. PROCESSAR RESPOSTA DO WEBHOOK
         // ═══════════════════════════════════════════════════════════
@@ -122,9 +169,10 @@ export default async function handler(req, res) {
             let errorMessage = `Erro no webhook: ${webhookResponse.status}`;
             try {
                 const errorData = await webhookResponse.json();
+                console.error('❌ Erro do webhook:', JSON.stringify(errorData, null, 2));
                 errorMessage = errorData.message || errorMessage;
-            } catch {
-                // Ignorar erro ao parsear JSON de erro
+            } catch (parseError) {
+                console.error('❌ Não foi possível parsear resposta de erro do webhook');
             }
 
             return res.status(webhookResponse.status).json({
@@ -138,6 +186,8 @@ export default async function handler(req, res) {
         const data = await webhookResponse.json();
 
         console.log(`✅ Lead enviado com sucesso - Email: ${lead.email}, IP: ${clientIP}`);
+        console.log('✅ Resposta do webhook:', JSON.stringify(data, null, 2));
+        console.log('═══════════════════════════════════════════════════════════');
 
         return res.status(200).json(data);
 
@@ -145,10 +195,16 @@ export default async function handler(req, res) {
         // ═══════════════════════════════════════════════════════════
         // TRATAMENTO DE ERROS
         // ═══════════════════════════════════════════════════════════
-        console.error('❌ Erro ao processar requisição:', error.message);
+        console.error('═══════════════════════════════════════════════════════════');
+        console.error('❌ ERRO AO PROCESSAR REQUISIÇÃO');
+        console.error('═══════════════════════════════════════════════════════════');
+        console.error('Tipo de erro:', error.name);
+        console.error('Mensagem:', error.message);
+        console.error('Stack:', error.stack);
 
         // Erro de timeout
         if (error.name === 'AbortError') {
+            console.error('❌ Timeout de 15s excedido ao chamar webhook');
             return res.status(504).json({
                 error: 'Timeout ao conectar com webhook'
             });
@@ -156,14 +212,17 @@ export default async function handler(req, res) {
 
         // Erro de rede
         if (error.message?.includes('fetch') || error.message?.includes('ECONNREFUSED')) {
+            console.error('❌ Erro de conexão com o webhook');
             return res.status(503).json({
                 error: 'Serviço temporariamente indisponível'
             });
         }
 
         // Erro genérico
+        console.error('❌ Erro não categorizado');
         return res.status(500).json({
-            error: 'Erro interno do servidor'
+            error: 'Erro interno do servidor',
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined
         });
     }
 }

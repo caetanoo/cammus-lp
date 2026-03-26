@@ -1,39 +1,35 @@
-Me ajude a configurar o deploy correto na Vercel para o 
-repositório cammus-lp.
+O formulário está dando "Erro ao enviar" na Vercel em produção.
 
-A estrutura atual é:
-- Repositório: caetanoo/cammus-lp
-- Frontend: Formulario Cammus/forms.html (página principal)
-- Backend: backend/server.js (proxy do webhook)
-- vercel.json já criado na raiz
+Preciso que você diagnostique e corrija o problema:
 
-O PROBLEMA é que o backend Node.js (backend/server.js) 
-não pode rodar na Vercel como está, pois a Vercel é 
-serverless e não suporta Express da forma tradicional.
+1. Verifique se o arquivo /api/submit-lead.js existe e está 
+   no formato correto de Vercel Serverless Function
 
-Preciso que você:
+2. Verifique o vercel.json se está roteando corretamente 
+   para a função serverless
 
-1. Converta o backend/server.js para uma Vercel Serverless Function:
-   - Criar pasta /api na raiz do projeto
-   - Criar arquivo /api/submit-lead.js no formato serverless
-   - Manter toda a lógica atual (rate limiting, validações, 
-     proxy do webhook, token de segurança)
+3. Verifique em forms.html qual URL está sendo chamada 
+   no fetch do submit — deve ser /api/submit-lead
 
-2. Configurar variáveis de ambiente:
-   - Listar quais variáveis do .env precisam ser configuradas 
-     no dashboard da Vercel (Settings → Environment Variables)
-   - WEBHOOK_URL e WEBHOOK_TOKEN não podem ficar no código
+4. Verifique se as variáveis de ambiente estão sendo 
+   lidas corretamente com process.env.WEBHOOK_URL 
+   e process.env.WEBHOOK_TOKEN
 
-3. Atualizar o vercel.json:
-   - Garantir que / aponta para Formulario Cammus/forms.html
-   - Garantir que /api/submit-lead aponta para a função serverless
-   - Manter os headers de segurança
+5. Adicione um log de diagnóstico na função serverless 
+   para identificar onde está falhando:
+   - A função está sendo chamada?
+   - As variáveis de ambiente estão definidas?
+   - O webhook externo está respondendo?
 
-4. Atualizar forms.html:
-   - Garantir que WEBHOOK_URL aponta para /api/submit-lead
-   - Funciona tanto em localhost quanto em produção
+6. Verifique o CORS — a função serverless precisa aceitar 
+   requisições do domínio da Vercel
 
-5. Fazer commit e push para o repositório cammus-lp
+Após o diagnóstico, me diga:
+- Qual é o erro exato que aparece nos logs da Vercel?
+- A função /api/submit-lead está sendo encontrada?
+- As variáveis WEBHOOK_URL e WEBHOOK_TOKEN estão 
+  cadastradas no dashboard da Vercel?
 
-Após isso, me diga exatamente quais variáveis de ambiente 
-preciso cadastrar no dashboard da Vercel antes de fazer deploy.
+Para ver os logs de erro reais:
+Vercel Dashboard → seu projeto → Deployments → 
+clique no deployment → Functions → submit-lead → Logs
