@@ -166,12 +166,126 @@ Optimizes standalone HTML files for performance while preserving functionality:
 
 Trigger: When user asks to "optimize", "minify", or "improve performance" of HTML
 
+## Backend & API Architecture
+
+### Dual Backend Strategy (Development vs Production)
+
+**Development (Local)**:
+```bash
+# Terminal 1: Backend Express
+cd backend && node server.js    # Port 3000
+
+# Terminal 2: Frontend
+python3 -m http.server 8000     # Port 8000
+```
+
+**Production (Vercel)**:
+- Frontend: Static files served by Vercel
+- Backend: Serverless function at `/api/submit-lead`
+- No Express server needed
+
+### API Endpoint: /api/submit-lead
+
+**Files**:
+- **Development**: `backend/server.js` (Express proxy)
+- **Production**: `api/submit-lead.js` (Vercel serverless function)
+
+**Format**: MUST use `module.exports` (CommonJS), NOT `export default` (ESM)
+
+```javascript
+// ✅ CORRECT (CommonJS - works on Vercel)
+module.exports = async function handler(req, res) { ... }
+
+// ❌ WRONG (ESM - causes compilation warnings)
+export default async function handler(req, res) { ... }
+```
+
+**Why**: Vercel compiles ESM to CommonJS, causing warnings and execution issues. CommonJS runs natively.
+
+### Environment Variables
+
+**Development**: `backend/.env` (gitignored)
+```env
+WEBHOOK_URL=https://webhook.dev.sakaguchifutai.shop/webhook/lead-analysis
+WEBHOOK_TOKEN=29dd43a31c2419183e0eb7d7b298335050807c5d83fb5c231cf02c3b740e0e1a
+FRONTEND_URL=*
+```
+
+**Production**: Vercel Dashboard → Settings → Environment Variables
+- `WEBHOOK_URL` (required)
+- `WEBHOOK_TOKEN` (required)
+- `FRONTEND_URL` (optional, defaults to `*`)
+
+**NEVER commit tokens/secrets to Git**. Use `.env.example` as template.
+
+### Deploy Configuration (vercel.json)
+
+```json
+{
+  "rewrites": [
+    { "source": "/agendamento", "destination": "/Formulario Cammus/agendamento.html" },
+    { "source": "/obrigado", "destination": "/Formulario Cammus/obrigado.html" }
+  ],
+  "functions": {
+    "api/submit-lead.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  }
+}
+```
+
+**Note**: `/` rewrite removed - Vercel serves `index.html` at root automatically.
+
+### URL Strategy
+
+Forms use **relative URL** (`/api/submit-lead`) that works in both environments:
+- **Localhost**: Resolves to `http://localhost:8000/api/submit-lead` → proxied to backend:3000
+- **Vercel**: Resolves to `https://domain.vercel.app/api/submit-lead` → serverless function
+
+### Debugging Production Issues
+
+**1. Console do Navegador** (F12):
+```javascript
+// Frontend errors appear here
+❌ Erro ao enviar formulário: 500
+```
+
+**2. Vercel Function Logs**:
+```
+Dashboard → Deployments → [deployment] → Functions → submit-lead → Logs
+```
+
+**3. Test Script** (`test-api.js`):
+```bash
+node test-api.js
+```
+Simulates form submission to diagnose API issues.
+
+### Scope Issues (JavaScript)
+
+**Common pitfall**: Variables declared in one script block not accessible in submit handler.
+
+**Solution**: Use `window` object to share data between scopes:
+```javascript
+// Script 1: Dropdown initialization
+window.nichos = nichos;  // ✅ Expose globally
+
+// Script 2: Submit handler
+const nichosData = window.nichos || {};  // ✅ Access safely
+```
+
+**Example**: Nicho dropdown data needed in form validation but declared in different scope.
+
 ## Common Pitfalls
 
 1. **No build tools**: Do not suggest webpack, vite, or npm scripts. This is intentional.
-2. **Config secrets**: Never commit `Formulario Cammus/config.js` — it's gitignored.
+2. **Config secrets**: Never commit `Formulario Cammus/config.js` or `backend/.env` — they're gitignored.
 3. **Token usage**: Always use CSS variables. Never hardcode `#1a1a1a` or `rgba(255, 255, 255, 0.9)`.
 4. **v1 vs v2**: CAMMUS uses v2 (monochrome). Do not add orange/violet colors unless explicitly requested for v1.
 5. **Single-file architecture**: Do not extract CSS/JS into separate files unless explicitly requested.
 6. **Font availability**: Coolvetica is not included. Fallback chain must include `system-ui`.
 7. **Forms embedding**: Use `forms-embed.html` for iframe, not `forms.html` (storage conflicts).
+8. **Vercel functions format**: Use `module.exports`, NOT `export default`. ESM causes compilation issues.
+9. **Environment variables**: Configure in Vercel Dashboard, not in code. Check after every redeploy.
+10. **Relative URLs**: Forms use `/api/submit-lead` (relative), works in dev and prod without changes.
