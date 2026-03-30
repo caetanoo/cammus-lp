@@ -70,11 +70,11 @@
 
 **Passos:**
 
-1. **Criar arquivo PHP proxy** (`api/submit-lead.php`)
+1. **Criar arquivo PHP proxy** (`api/submit-form.php`)
 
 2. **Atualizar forms.html para usar PHP**
    ```javascript
-   const WEBHOOK_URL = '/api/submit-lead.php';
+   const WEBHOOK_URL = '/api/submit-form.php';
    ```
 
 3. **Upload para Hostinger**

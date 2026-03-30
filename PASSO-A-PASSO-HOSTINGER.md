@@ -94,9 +94,9 @@ const API_CONFIG = {
 - ✅ Tudo em um lugar só
 - ✅ Funciona em plano básico
 
-### Passo 1: Configurar api/submit-lead.php
+### Passo 1: Configurar api/submit-form.php
 
-Edite o arquivo `/api/submit-lead.php`:
+Edite o arquivo `/api/submit-form.php`:
 
 ```php
 define('WEBHOOK_URL', 'https://webhook.dev.sakaguchifutai.shop/webhook/lead-analysis');
@@ -108,7 +108,7 @@ define('FRONTEND_URL', 'https://seudominio.com.br'); // ou '*'
 
 1. Crie `/config.php` (fora de public_html)
 2. Mova as credenciais para lá
-3. Em `submit-lead.php`, adicione no início:
+3. Em `submit-form.php`, adicione no início:
    ```php
    require_once(__DIR__ . '/../../config.php');
    ```
@@ -124,12 +124,12 @@ const API_CONFIG = {
 
 ### Passo 3: Upload para Hostinger
 
-Upload dos arquivos (incluindo `/api/submit-lead.php`):
+Upload dos arquivos (incluindo `/api/submit-form.php`):
 ```
 public_html/
 ├── index.html
 ├── api/
-│   └── submit-lead.php  ← Novo arquivo PHP
+│   └── submit-form.php  ← Novo arquivo PHP
 ├── assets/
 ├── Formulario Cammus/
 │   ├── forms.html
@@ -143,19 +143,19 @@ public_html/
 2. Abra console (F12) → Network
 3. Envie o formulário
 4. Verifique:
-   - ✅ POST `/api/submit-lead.php` retornou 200
+   - ✅ POST `/api/submit-form.php` retornou 200
    - ✅ Webhook N8N recebeu os dados
 
 ---
 
 ## 🆘 Solução de Problemas
 
-### Erro 404 em /api/submit-lead.php
+### Erro 404 em /api/submit-form.php
 
 **Causa:** Arquivo não foi enviado ou está no diretório errado
 
 **Solução:**
-1. Verifique que `/api/submit-lead.php` existe em `public_html/api/`
+1. Verifique que `/api/submit-form.php` existe em `public_html/api/`
 2. Permissões do arquivo: `644` (rw-r--r--)
 
 ### Erro 500 Internal Server Error
@@ -175,7 +175,7 @@ public_html/
 **Causa:** `FRONTEND_URL` não está configurado corretamente
 
 **Solução:**
-Edite `submit-lead.php`:
+Edite `submit-form.php`:
 ```php
 define('FRONTEND_URL', 'https://seudominio.com.br');
 // ou use '*' para permitir qualquer origem (menos seguro)
@@ -206,7 +206,7 @@ Antes de considerar o deploy completo:
 - [ ] Webhook N8N recebendo leads
 
 ### Opção 2 (PHP backend):
-- [ ] `api/submit-lead.php` configurado com token real
+- [ ] `api/submit-form.php` configurado com token real
 - [ ] Credenciais movidas para fora de `public_html` (segurança)
 - [ ] `config-api.js` com `ambiente: 'hostinger-php'`
 - [ ] Arquivos enviados para Hostinger

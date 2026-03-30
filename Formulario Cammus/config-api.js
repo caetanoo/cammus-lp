@@ -23,7 +23,7 @@ const API_CONFIG = {
         vercel: 'https://cammus-ai.vercel.app/api/submit-lead',
 
         // Hostinger com PHP proxy
-        'hostinger-php': '/api/submit-lead.php',
+        'hostinger-php': '/api/submit-form.php',
 
         // Hostinger com Node.js (se tiver VPS)
         'hostinger-nodejs': '/api/submit-lead',
