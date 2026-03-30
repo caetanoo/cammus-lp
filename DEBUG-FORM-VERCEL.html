@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Form Vercel</title>
+</head>
+<body>
+    <h1>🔍 Debug Script - Cole isso no Console do Navegador</h1>
+    <pre><code>
+// ═══════════════════════════════════════════════════════════
+// SCRIPT DE DEBUG - COLAR NO CONSOLE DA VERCEL
+// ═══════════════════════════════════════════════════════════
+
+console.log('🔍 ═══════ DEBUG DETALHADO ═══════');
+
+// 1. Verificar DOMPurify
+console.log('1. DOMPurify:', typeof DOMPurify !== 'undefined' ? '✅ Carregado' : '❌ NÃO carregado');
+if (typeof DOMPurify !== 'undefined') {
+    console.log('   - DOMPurify.sanitize:', typeof DOMPurify.sanitize);
+}
+
+// 2. Verificar window.nichos
+console.log('2. window.nichos:', window.nichos ? '✅ Definido' : '❌ UNDEFINED');
+if (window.nichos) {
+    console.log('   - Nichos disponíveis:', Object.keys(window.nichos).length);
+}
+
+// 3. Verificar form
+const form = document.getElementById('qualificationForm');
+console.log('3. Form:', form ? '✅ Encontrado' : '❌ NÃO encontrado');
+
+// 4. Verificar se submit handler está anexado
+if (form) {
+    const listeners = getEventListeners(form);
+    console.log('4. Submit listeners:', listeners.submit ? listeners.submit.length : 0);
+}
+
+// 5. Verificar campos obrigatórios
+const requiredFields = ['nome', 'email', 'whatsapp'];
+console.log('5. Campos obrigatórios:');
+requiredFields.forEach(fieldId => {
+    const field = document.getElementById(fieldId);
+    const value = field?.value || '';
+    console.log(`   - ${fieldId}: ${value ? '✅ Preenchido' : '❌ Vazio'}`);
+});
+
+// 6. Verificar dropdowns
+const nichoValue = document.getElementById('nicho-value')?.value;
+const subnichoValue = document.getElementById('subnicho-value')?.value;
+console.log('6. Dropdowns:');
+console.log('   - Nicho:', nichoValue || '❌ Vazio');
+console.log('   - Subnicho:', subnichoValue || '❌ Vazio');
+
+// 7. Verificar rádios
+const radioGroups = ['temEcommerce', 'conheceMarca', 'interesseServico'];
+console.log('7. Radio groups:');
+radioGroups.forEach(name => {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    console.log(`   - ${name}: ${checked ? '✅ Selecionado' : '❌ Não selecionado'}`);
+});
+
+// 8. Tentar trigger manual do submit
+console.log('8. Tentando trigger manual...');
+if (form) {
+    // Simular preenchimento
+    document.getElementById('nome').value = 'Teste Debug';
+    document.getElementById('email').value = 'teste@debug.com';
+    document.getElementById('whatsapp').value = '+5511999999999';
+
+    // Marcar rádios
+    document.querySelector('input[name="temEcommerce"][value="sim"]')?.click();
+    document.querySelector('input[name="conheceMarca"][value="não"]')?.click();
+    document.querySelector('input[name="interesseServico"][value="médio"]')?.click();
+
+    console.log('   ✅ Campos preenchidos automaticamente');
+    console.log('   ⚠️ Preencha os dropdowns manualmente e clique em Enviar');
+}
+
+console.log('═════════════════════════════════════');
+    </code></pre>
+
+    <h2>📋 Instruções:</h2>
+    <ol>
+        <li>Abra: https://cammus-ai.vercel.app/Formulario Cammus/forms.html</li>
+        <li>Aperte F12 (Console)</li>
+        <li>Cole o script acima</li>
+        <li>Aperte Enter</li>
+        <li>Me envie o resultado!</li>
+    </ol>
+
+    <hr>
+
+    <h2>🎯 Checklist Rápido:</h2>
+    <ol>
+        <li><strong>DOMPurify carregou?</strong>
+            <br>Se não → problema no arquivo ou CDN
+        </li>
+        <li><strong>window.nichos existe?</strong>
+            <br>Se não → problema no script de nichos
+        </li>
+        <li><strong>Form existe?</strong>
+            <br>Se não → problema no HTML
+        </li>
+        <li><strong>Submit handler anexado?</strong>
+            <br>Se 0 listeners → JavaScript não executou
+        </li>
+    </ol>
+
+    <hr>
+
+    <h2>🚨 Ação Imediata:</h2>
+    <p><strong>Antes de debugar, FAÇA ISSO:</strong></p>
+    <ol>
+        <li>Acesse: https://vercel.com/dashboard</li>
+        <li>Projeto: cammus-ai</li>
+        <li>Deployments → 3 pontos (⋮) → <strong>Redeploy</strong></li>
+        <li>Aguarde 1-2 minutos</li>
+        <li>Teste novamente</li>
+    </ol>
+
+    <p style="color: red; font-weight: bold;">
+        ⚠️ IMPORTANTE: O último commit (cfa9d16) com DOMPurify correto
+        precisa ser deployado na Vercel. Sem redeploy, o arquivo antigo
+        (errado) ainda está sendo servido!
+    </p>
+</body>
+</html>
