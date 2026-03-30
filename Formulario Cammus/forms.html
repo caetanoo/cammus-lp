@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cammus</title>
 
-    <!-- Fonts -->
+    
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Meta description -->
+    
     <meta name="description" content="Cammus">
 
-    <!-- Favicon -->
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
 
-    <!-- Tailwind CSS CDN com Fallback -->
-    <!-- ⚠️ Mantido em CDN por ser ferramenta de desenvolvimento (não usar em produção final) -->
-    <!-- ✅ CORREÇÃO ALTO-06: Fallback automático se CDN principal falhar -->
+    
+    
+    
     <script
         id="tailwind-cdn"
         src="https://cdn.tailwindcss.com"
@@ -53,8 +53,8 @@
         }
     </script>
 
-    <!-- ✅ CORREÇÃO CRÍTICO-02 + ALTO-05: DOMPurify hospedado localmente -->
-    <!-- Proteção contra supply chain attacks via hash SRI -->
+    
+    
     <script
         src="/assets/dompurify.min.js"
         integrity="sha384-cwS6YdhLI7XS60eoDiC+egV0qHp8zI+Cms46R0nbn8JrmoAzV9uFL60etMZhAnSu"
@@ -75,7 +75,7 @@
         })();
     </script>
 
-    <!-- ✅ CONFIGURAÇÃO DE API - Permite alternar entre Vercel/Hostinger facilmente -->
+    
     <script src="config-api.js"></script>
 
     <style>
@@ -1021,13 +1021,13 @@
     </style>
 </head>
 <body>
-    <!-- Background Shapes -->
+    
     <div class="bg-shapes" aria-hidden="true">
         <div class="bg-shape bg-shape-circle"></div>
         <div class="bg-shape bg-shape-square"></div>
     </div>
 
-    <!-- Theme Toggle -->
+    
     <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" type="button">
         <span class="theme-icon theme-icon-sun">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1049,9 +1049,9 @@
         </span>
     </button>
 
-    <!-- START FORMS PAGE -->
+    
 
-    <!-- Logo Header -->
+    
     <header style="padding: 0.25rem 0 0; position: relative; z-index: 1; text-align: center;">
         <div class="container">
             <div style="display: flex; justify-content: center; align-items: center;">
@@ -1142,8 +1142,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         </div>
     </header>
 
-    <!-- ✅ CORREÇÃO ALTO-03: Geração de Token CSRF -->
-    <!-- Proteção contra Cross-Site Request Forgery (CSRF) -->
+    
+    
     <script>
     (function() {
         'use strict';
@@ -1182,7 +1182,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     })();
     </script>
 
-    <!-- Hero Section -->
+    
     <section style="padding: 0.75rem 0 1.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto; text-align: center;">
@@ -1196,22 +1196,22 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         </div>
     </section>
 
-    <!-- Form Section -->
+    
     <section style="padding: 1.5rem 0 2.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto;">
                 <div class="card">
                     <form id="qualificationForm" novalidate>
 
-                        <!-- ✅ CORREÇÃO ALTO-03: Campo hidden com token CSRF -->
-                        <!-- Token validado no submit para prevenir ataques CSRF -->
+                        
+                        
                         <input type="hidden" id="csrf-token" name="csrf_token" value="">
                         <script>
                             // Preencher campo hidden com token do sessionStorage
                             document.getElementById('csrf-token').value = sessionStorage.getItem('csrfToken') || '';
                         </script>
 
-                        <!-- BLOCO 1: Dados de Contato -->
+                        
                         <div style="margin-bottom: 2rem;">
                             <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Dados de contato
@@ -1295,7 +1295,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                                 <span class="input-helper">Opcional</span>
                             </div>
 
-                            <!-- START NICHO DROPDOWN -->
+                            
                             <div class="input-group">
                                 <label for="nicho-input" class="input-label">Nicho *</label>
                                 <div class="custom-dropdown" id="nicho-dropdown">
@@ -1339,9 +1339,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                                 </div>
                                 <span class="input-error" id="nicho-error">Por favor, selecione um nicho</span>
                             </div>
-                            <!-- END NICHO DROPDOWN -->
+                            
 
-                            <!-- START SUBNICHO DROPDOWN -->
+                            
                             <div class="input-group">
                                 <label for="subnicho-input" class="input-label">Subnicho *</label>
                                 <div class="custom-dropdown disabled" id="subnicho-dropdown">
@@ -1387,10 +1387,10 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                                 </div>
                                 <span class="input-error" id="subnicho-error">Por favor, selecione um subnicho</span>
                             </div>
-                            <!-- END SUBNICHO DROPDOWN -->
+                            
                         </div>
 
-                        <!-- BLOCO 2: Qualificação de Ticket -->
+                        
                         <div style="margin-bottom: 2rem;">
                             <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Investimento em mídia
@@ -1424,7 +1424,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                             <span class="input-error" id="ticket-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
                         </div>
 
-                        <!-- BLOCO 3: Maturidade de Marketing -->
+                        
                         <div style="margin-bottom: 2rem;">
                             <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Situação atual
@@ -1454,7 +1454,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                             <span class="input-error" id="maturity-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
                         </div>
 
-                        <!-- BLOCO 4: Urgência -->
+                        
                         <div style="margin-bottom: 2rem;">
                             <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Urgência
@@ -1480,7 +1480,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                             <span class="input-error" id="urgency-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
                         </div>
 
-                        <!-- BLOCO 5: Campo Aberto -->
+                        
                         <div style="margin-bottom: 2rem;">
                             <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
                                 Informações adicionais
@@ -1500,12 +1500,12 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                             </div>
                         </div>
 
-                        <!-- Submit Button -->
+                        
                         <button type="submit" class="btn btn-primary" id="submitBtn">
                             <span id="btnText">Agendar minha call</span>
                         </button>
 
-                        <!-- Success Message -->
+                        
                         <div class="success-message" id="successMessage">
                             <p>✓ Sua call foi solicitada com sucesso!</p>
                             <small>Você será redirecionado em instantes...</small>
@@ -1516,9 +1516,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         </div>
     </section>
 
-    <!-- END FORMS PAGE -->
+    
 
-    <!-- START CURSOR SPOTLIGHT JS -->
+    
     <script>
     (function() {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1552,9 +1552,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         }
     })();
     </script>
-    <!-- END CURSOR SPOTLIGHT JS -->
+    
 
-    <!-- START NICHO DROPDOWN JS -->
+    
     <script>
     (function() {
         'use strict';
@@ -2108,9 +2108,9 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
         window.subnichoDropdown = subnichoDropdown;
     })();
     </script>
-    <!-- END NICHO DROPDOWN JS -->
+    
 
-    <!-- Form Validation & Submission JS -->
+    
     <script>
     (function() {
         const form = document.getElementById('qualificationForm');
@@ -2732,7 +2732,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     })();
     </script>
 
-    <!-- Theme Toggle JS -->
+    
     <script>
     (function() {
         const toggle = document.getElementById('themeToggle');
@@ -2760,7 +2760,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     })();
     </script>
 
-    <!-- 🔍 Script de Diagnóstico Automático -->
+    
     <script>
     console.log('═══════════════════════════════════════');
     console.log('🔍 DIAGNÓSTICO AUTOMÁTICO');
