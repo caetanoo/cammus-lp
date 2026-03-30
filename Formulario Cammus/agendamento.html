@@ -531,7 +531,7 @@
                         <p style="color: var(--text-muted); font-size: var(--font-size-sm); line-height: var(--line-height-normal); margin-bottom: 1rem;">
                             Prefere agendar depois?
                         </p>
-                        <a href="obrigado.html" class="btn btn-secondary">
+                        <a href="/obrigado" class="btn btn-secondary">
                             Pular agendamento
                         </a>
                     </div>
@@ -603,7 +603,7 @@
         if (!userName) {
             if (window.location.hostname === 'localhost') { console.warn('⚠️ Nome do usuário não encontrado. Redirecionando para formulário...'); }
             // ✅ CORREÇÃO: Bloquear acesso direto sem passar pelo formulário
-            window.location.href = 'forms.html';
+            window.location.href = '/Formulario Cammus/forms.html';
         }
 
         // Detectar interação com o iframe (agendamento)
@@ -653,7 +653,7 @@
         if (e.origin.includes('calendly.com') &&
             e.data.event &&
             e.data.event === 'calendly.event_scheduled') {
-            window.location.href = 'obrigado.html';
+            window.location.href = '/obrigado';
         }
     });
     </script>
