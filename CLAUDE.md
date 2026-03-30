@@ -13,6 +13,7 @@ All files are self-contained HTML with embedded CSS and minimal vanilla JS. **No
 
 ## Development
 
+### Frontend (No Build Required)
 ```bash
 # Preferred: local server (needed for iframe embedding tests)
 python3 -m http.server 8000
@@ -22,12 +23,38 @@ python3 -m http.server 8000
 open index.html
 ```
 
-**Critical:** No npm, no package.json, no build step. `npm run dev` will fail.
+**Critical:** Frontend has no npm, no package.json, no build step. Do not suggest build tools.
+
+### Backend (Local Development Only)
+```bash
+# Install backend dependencies (one-time setup)
+cd backend
+npm install
+
+# Start backend server
+npm start
+# or
+node server.js
+# Runs on http://localhost:3000
+
+# In separate terminal, start frontend
+cd ..
+python3 -m http.server 8000
+```
+
+**Environment Setup:**
+```bash
+# Create backend environment file
+cd backend
+cp .env.example .env
+# Edit .env with webhook credentials
+```
 
 ## Repository Structure
 
 ### Production Files
-- `index.html` — **⭐ Main CAMMUS landing page** (uses v2 design system)
+- `index.html` — **⭐ Main CAMMUS landing page** (root, uses v2 design system)
+- `landing/index.html` — Alternative landing page version
 - `design-system/design-system.html` — **⭐ Design system source of truth** (all tokens, typography, components)
 - `design-system/flux-aurora-v2-source.html` — v2 CSS reference extracted from design system
 - `Formulario Cammus/forms.html` — Standalone lead capture form (v2 tokens, dark mode)
@@ -36,13 +63,18 @@ open index.html
 - `Formulario Cammus/obrigado.html` — Post-submission thank-you page
 
 ### Configuration
-- `Formulario Cammus/config.js` — **Webhook credentials** (gitignored, never commit)
-- `Formulario Cammus/config.example.js` — Template for new developers to create `config.js`
+- `Formulario Cammus/config.js` — **Webhook credentials** (gitignored, never commit, legacy)
+- `Formulario Cammus/config.example.js` — Template for config.js (legacy)
+- `backend/.env` — **Backend environment variables** (gitignored, never commit)
+- `backend/.env.example` — Template for backend .env
 
-To set up webhook config:
+**Note:** Forms now use the backend proxy (`/api/submit-lead`), not direct webhook calls. The `config.js` is legacy and not actively used in production.
+
+To set up backend:
 ```bash
-cp "Formulario Cammus/config.example.js" "Formulario Cammus/config.js"
-# Edit config.js with real webhook token and URLs
+cd backend
+cp .env.example .env
+# Edit .env with WEBHOOK_URL and WEBHOOK_TOKEN
 ```
 
 ### Design System Reference
@@ -54,6 +86,9 @@ cp "Formulario Cammus/config.example.js" "Formulario Cammus/config.js"
 - `docs/GUIA-DE-APLICACAO-v2.md` — v1→v2 migration guide and usage rules
 - `docs/copy-landing-page.md` — Strategic copywriting and content guidelines
 - `docs/AGENTS.md` — Repository guidelines and structure (older, partially redundant with this file)
+- `GUIA-DEPLOY-VERCEL.md` — Vercel deployment guide
+- `SESSION_NOTES.md` — Session history and decisions
+- `PROMPTS.md` — Instructions for session end procedures
 
 ### Archive
 - `_archive/` — Deprecated landing page versions (cammus-final, cammus-v2, etc.) kept for reference
@@ -130,8 +165,9 @@ Use `Formulario Cammus/forms-embed.html` inside an `<iframe>`. This version has:
 - Semantic HTML: use `<nav>`, `<section>`, `<button>`, not `<div>` for interactive elements
 - Focus states: 2px outline + 2px offset on all focusable elements
 
-## Testing Checklist
+## Testing & Verification
 
+### Frontend Testing Checklist
 Before finishing any change:
 - [ ] Test at mobile (≤640px), tablet (641-1024px), desktop (≥1025px) breakpoints
 - [ ] Verify all hover states and transitions work smoothly
@@ -139,6 +175,29 @@ Before finishing any change:
 - [ ] Keyboard navigate with Tab, Enter, Space
 - [ ] Verify focus rings are visible on all interactive elements
 - [ ] Check contrast with WebAIM Contrast Checker or browser DevTools
+
+### Backend Testing
+```bash
+# Test local backend
+cd backend && npm start
+# In another terminal: node test-api.js
+
+# Test production endpoint
+node test-api.js
+# (script auto-detects environment)
+
+# Check backend health
+curl http://localhost:3000/health
+```
+
+### Form Submission Testing
+1. Open `Formulario Cammus/forms.html` or `forms-embed.html`
+2. Fill out form with test data
+3. Submit and verify:
+   - Success message displays
+   - Redirect to `/obrigado` works
+   - Check browser console for errors
+   - Verify webhook receives data (check Vercel logs or backend console)
 
 ## Custom Skills
 
@@ -180,9 +239,10 @@ python3 -m http.server 8000     # Port 8000
 ```
 
 **Production (Vercel)**:
-- Frontend: Static files served by Vercel
+- Frontend: Static files served by Vercel (auto-serves `index.html` at root)
 - Backend: Serverless function at `/api/submit-lead`
 - No Express server needed
+- Security headers configured in `vercel.json` (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection)
 
 ### API Endpoint: /api/submit-lead
 
@@ -231,11 +291,23 @@ FRONTEND_URL=*
       "maxDuration": 30,
       "memory": 1024
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
+  ]
 }
 ```
 
-**Note**: `/` rewrite removed - Vercel serves `index.html` at root automatically.
+**Note**:
+- `/` rewrite removed - Vercel serves `index.html` at root automatically
+- Security headers applied to all routes for defense-in-depth
 
 ### URL Strategy
 
@@ -260,7 +332,7 @@ Dashboard → Deployments → [deployment] → Functions → submit-lead → Log
 ```bash
 node test-api.js
 ```
-Simulates form submission to diagnose API issues.
+Simulates form submission to diagnose API issues. Tests both local backend (port 3000) and production Vercel endpoint.
 
 ### Scope Issues (JavaScript)
 
@@ -279,7 +351,7 @@ const nichosData = window.nichos || {};  // ✅ Access safely
 
 ## Common Pitfalls
 
-1. **No build tools**: Do not suggest webpack, vite, or npm scripts. This is intentional.
+1. **No build tools (frontend)**: Frontend has no webpack, vite, or npm. Do not suggest build tools. Backend has npm for Express server only.
 2. **Config secrets**: Never commit `Formulario Cammus/config.js` or `backend/.env` — they're gitignored.
 3. **Token usage**: Always use CSS variables. Never hardcode `#1a1a1a` or `rgba(255, 255, 255, 0.9)`.
 4. **v1 vs v2**: CAMMUS uses v2 (monochrome). Do not add orange/violet colors unless explicitly requested for v1.
@@ -289,3 +361,5 @@ const nichosData = window.nichos || {};  // ✅ Access safely
 8. **Vercel functions format**: Use `module.exports`, NOT `export default`. ESM causes compilation issues.
 9. **Environment variables**: Configure in Vercel Dashboard, not in code. Check after every redeploy.
 10. **Relative URLs**: Forms use `/api/submit-lead` (relative), works in dev and prod without changes.
+11. **Rate limiting**: Backend (development) has rate limiting via express-rate-limit (5 req/hour). Vercel (production) relies on frontend rate limiting (3 req/hour) - see notes in `api/submit-lead.js` for Upstash Redis option.
+12. **Backend dependencies**: Must run `npm install` in `backend/` directory before starting local development server.

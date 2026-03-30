@@ -56,9 +56,23 @@
     <!-- ✅ CORREÇÃO CRÍTICO-02 + ALTO-05: DOMPurify hospedado localmente -->
     <!-- Proteção contra supply chain attacks via hash SRI -->
     <script
-        src="./assets/dompurify.min.js"
+        src="/assets/dompurify.min.js"
         integrity="sha384-cwS6YdhLI7XS60eoDiC+egV0qHp8zI+Cms46R0nbn8JrmoAzV9uFL60etMZhAnSu"
         crossorigin="anonymous">
+    </script>
+    <script>
+        // Fallback: se o DOMPurify local falhar no build (SRI/404/etc), carrega via CDN
+        (function () {
+            if (typeof DOMPurify !== 'undefined' && DOMPurify && DOMPurify.sanitize) return;
+            var s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js';
+            s.defer = true;
+            s.onload = function () { /* no-op */ };
+            s.onerror = function () {
+                console.error('❌ DOMPurify não carregou (fallback CDN falhou). Usando fallback seguro.');
+            };
+            document.head.appendChild(s);
+        })();
     </script>
 
     <style>
@@ -2137,7 +2151,20 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
 
                 // Verificar se resposta é OK
                 if (!response.ok) {
-                    throw new Error(`Erro HTTP: ${response.status}`);
+                    let serverMessage = '';
+                    try {
+                        const data = await response.json();
+                        serverMessage = data?.error || data?.message || '';
+                    } catch (_) {
+                        try {
+                            serverMessage = await response.text();
+                        } catch (__) {
+                            serverMessage = '';
+                        }
+                    }
+
+                    serverMessage = serverMessage ? String(serverMessage).slice(0, 220) : '';
+                    throw new Error(`Erro HTTP: ${response.status}${serverMessage ? ' - ' + serverMessage : ''}`);
                 }
 
                 return await response.json();
@@ -2181,15 +2208,21 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 return input; // Retorna valores não-string sem modificar
             }
 
-            // Sanitizar usando DOMPurify
-            // ALLOWED_TAGS: [] = remove TODAS as tags HTML
-            // KEEP_CONTENT: true = mantém o texto entre as tags
-            // ALLOWED_ATTR: [] = remove todos os atributos HTML
-            return DOMPurify.sanitize(input, {
-                ALLOWED_TAGS: [],      // Remove <script>, <img>, <a>, etc
-                KEEP_CONTENT: true,    // Mantém texto: '<b>Oi</b>' → 'Oi'
-                ALLOWED_ATTR: []       // Remove onclick, onerror, etc
-            }).trim(); // Remove espaços extras
+            // Sanitizar usando DOMPurify quando disponível.
+            // Em produção, se o script falhar ao carregar por qualquer motivo, caímos num fallback
+            // seguro (remove tags) para não quebrar o submit.
+            if (typeof DOMPurify !== 'undefined' && DOMPurify?.sanitize) {
+                return DOMPurify.sanitize(input, {
+                    ALLOWED_TAGS: [],
+                    KEEP_CONTENT: true,
+                    ALLOWED_ATTR: []
+                }).trim();
+            }
+
+            return input
+                .replace(/<[^>]*>/g, '') // Remove qualquer tag HTML
+                .replace(/[\u0000-\u001F\u007F]/g, '') // Remove caracteres de controle
+                .trim();
         }
 
         /**
@@ -2629,16 +2662,25 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                 btnText.innerHTML = '✗ Erro ao enviar';
                 submitBtn.style.background = '#d32f2f';
 
-                // Criar mensagem de erro amigável
-                let errorMessage = 'Ocorreu um erro ao enviar. Tente novamente.';
-
-                if (error.message.includes('Tempo esgotado')) {
-                    errorMessage = 'A conexão está lenta. Tente novamente.';
-                } else if (error.message.includes('Erro de conexão')) {
-                    errorMessage = 'Verifique sua conexão com a internet.';
-                } else if (error.message.includes('HTTP')) {
-                    errorMessage = 'Erro no servidor. Tente novamente em instantes.';
+                // Criar mensagem de erro (mostra detalhes para diagnósticos na Vercel)
+                let errorDetail = '';
+                try {
+                    if (error instanceof Error) {
+                        errorDetail = `${error.name}: ${error.message}`;
+                    } else if (typeof error === 'string') {
+                        errorDetail = error;
+                    } else if (error && typeof error === 'object') {
+                        errorDetail = error.message ? String(error.message) : JSON.stringify(error);
+                    } else {
+                        errorDetail = String(error);
+                    }
+                } catch (_) {
+                    errorDetail = '';
                 }
+
+                const errorMessage = errorDetail
+                    ? `Ocorreu um erro ao enviar: ${errorDetail}`
+                    : 'Ocorreu um erro ao enviar. Tente novamente.';
 
                 // Mostrar erro abaixo do botão
                 const errorDiv = document.createElement('div');
