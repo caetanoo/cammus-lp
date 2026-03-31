@@ -170,7 +170,7 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 0.75rem;
         }
 
         /* ═══════════════════════════════════════════════ */
@@ -181,8 +181,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
+            gap: 0.375rem;
+            padding: 0.625rem 0.875rem;
             font-size: 1rem;
             font-weight: 600;
             border-radius: 0.5rem;
@@ -221,13 +221,13 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.375rem;
+            margin-bottom: 0.75rem;
         }
 
         /* Mais espaçamento para input-groups com dropdown */
         .input-group:has(.custom-dropdown) {
-            margin-bottom: 2rem;
+            margin-bottom: 0.75rem;
         }
 
         .input-label {
@@ -238,7 +238,7 @@
 
         .input-field,
         .textarea-field {
-            padding: 0.625rem 0.875rem;
+            padding: 0.375rem 0.625rem;
             border: 1px solid var(--border-default);
             border-radius: 0.375rem;
             font-size: 1rem;
@@ -317,7 +317,7 @@
         .custom-dropdown .dropdown-input {
             cursor: pointer;
             user-select: none;
-            padding-right: 2.5rem;
+            padding-right: 1.0rem;
             position: relative;
             z-index: 1;
             transition: all var(--duration-fast) var(--ease-out);
@@ -380,7 +380,7 @@
 
         /* Quando tem valor selecionado, ajustar padding do input */
         .custom-dropdown.has-value .dropdown-input {
-            padding-right: 4.5rem;
+            padding-right: 1.5rem;
             font-weight: 500;
         }
 
@@ -414,7 +414,7 @@
         }
 
         .dropdown-search-wrapper {
-            padding: 0.75rem;
+            padding: 0.5rem;
             border-bottom: 1px solid var(--border-subtle);
             background: var(--bg-section);
             pointer-events: auto;
@@ -423,7 +423,7 @@
 
         .dropdown-search {
             width: 100%;
-            padding: 0.5rem 0.75rem;
+            padding: 0.375rem 0.5rem;
             border: 1px solid var(--border-default);
             border-radius: 0.25rem;
             font-size: 0.875rem;
@@ -479,7 +479,7 @@
         }
 
         .dropdown-item {
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 0.5rem;
             cursor: pointer !important;
             border-radius: 0.375rem;
             font-size: 0.9375rem;
@@ -512,7 +512,7 @@
             background: var(--bg-section);
             color: var(--text-primary);
             font-weight: 600;
-            padding-left: 2rem;
+            padding-left: 0.75rem;
         }
 
         .dropdown-item.selected::before {
@@ -538,7 +538,7 @@
         }
 
         .dropdown-empty {
-            padding: 2rem 1.5rem;
+            padding: 0.75rem 0.75rem;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.875rem;
@@ -582,14 +582,14 @@
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            gap: 0.375rem;
+            margin-top: 0.375rem;
         }
 
         .radio-option {
             display: flex;
             align-items: center;
-            padding: 0.75rem;
+            padding: 0.5rem;
             border: 1px solid var(--border-default);
             border-radius: 0.5rem;
             cursor: pointer;
@@ -603,7 +603,7 @@
         }
 
         .radio-option input[type="radio"] {
-            margin-right: 0.5rem;
+            margin-right: 0.375rem;
             width: 1.25rem;
             height: 1.25rem;
             cursor: pointer;
@@ -638,7 +638,7 @@
             background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
             border-radius: 1rem;
-            padding: 2.5rem;
+            padding: 1.0rem;
             box-shadow: var(--shadow-sm);
         }
 
@@ -648,12 +648,12 @@
 
         .success-message {
             display: none;
-            padding: 1rem;
+            padding: 0.5rem;
             background: var(--semantic-success-bg);
             border: 1px solid var(--border-default);
             border-radius: 0.75rem;
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
 
         .success-message.show {
@@ -695,7 +695,7 @@
 
         @media (max-width: 768px) {
             .card {
-                padding: 1rem;
+                padding: 0.5rem;
             }
 
             .btn {
@@ -869,10 +869,10 @@
     
 
     
-    <section style="padding: 4rem 0 2rem; position: relative; z-index: 1;">
+    <section style="padding: 1.375rem 0 0.75rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto; text-align: center;">
-                <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.625rem; letter-spacing: -0.02em;">
+                <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.375rem; letter-spacing: -0.02em;">
                     Fale com a gente
                 </h1>
                 <p style="font-size: 1.125rem; color: var(--text-secondary); max-width: 540px; margin: 0 auto;">
@@ -883,15 +883,15 @@
     </section>
 
     
-    <section style="padding: 2rem 0 4rem; position: relative; z-index: 1;">
+    <section style="padding: 0.75rem 0 1.375rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto;">
                 <div class="card">
                     <form id="qualificationForm" novalidate>
 
                         
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem;">
+                        <div style="margin-bottom: 1.0rem;">
+                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem;">
                                 Dados de contato
                             </h2>
 
@@ -1069,11 +1069,11 @@
                         </div>
 
                         
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 1.0rem;">
+                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.375rem;">
                                 Investimento em mídia
                             </h2>
-                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
                                 Quanto você gasta por mês em anúncios pagos? *
                             </p>
 
@@ -1099,15 +1099,15 @@
                                     <label for="ticket5">Acima de R$ 2M</label>
                                 </div>
                             </div>
-                            <span class="input-error" id="ticket-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
+                            <span class="input-error" id="ticket-error" style="margin-top: 0.375rem;">Por favor, selecione uma opção</span>
                         </div>
 
                         
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 1.0rem;">
+                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.375rem;">
                                 Situação atual
                             </h2>
-                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
                                 Como está sua situação de marketing digital hoje? *
                             </p>
 
@@ -1129,15 +1129,15 @@
                                     <label for="maturity4">Faço eu mesmo, mas não tenho tempo</label>
                                 </div>
                             </div>
-                            <span class="input-error" id="maturity-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
+                            <span class="input-error" id="maturity-error" style="margin-top: 0.375rem;">Por favor, selecione uma opção</span>
                         </div>
 
                         
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 1.0rem;">
+                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.375rem;">
                                 Urgência
                             </h2>
-                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
                                 O que te fez buscar uma solução agora? *
                             </p>
 
@@ -1155,15 +1155,15 @@
                                     <label for="urgency3">Urgente — preciso escalar agora</label>
                                 </div>
                             </div>
-                            <span class="input-error" id="urgency-error" style="margin-top: 0.5rem;">Por favor, selecione uma opção</span>
+                            <span class="input-error" id="urgency-error" style="margin-top: 0.375rem;">Por favor, selecione uma opção</span>
                         </div>
 
                         
-                        <div style="margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">
+                        <div style="margin-bottom: 1.0rem;">
+                            <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.375rem;">
                                 Informações adicionais
                             </h2>
-                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
                                 Algo mais que devemos saber?
                             </p>
 
@@ -2143,7 +2143,7 @@
 
                 // Mostrar erro abaixo do botão
                 const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = 'margin-top: 0.75rem; padding: 0.75rem; background: var(--semantic-error-bg); color: var(--semantic-error-text); border-radius: 0.5rem; text-align: center; font-size: 0.875rem;';
+                errorDiv.style.cssText = 'margin-top: 0.5rem; padding: 0.5rem; background: var(--semantic-error-bg); color: var(--semantic-error-text); border-radius: 0.5rem; text-align: center; font-size: 0.875rem;';
                 errorDiv.textContent = errorMessage;
 
                 // Remover erro anterior se existir
