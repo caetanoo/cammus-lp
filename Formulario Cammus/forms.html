@@ -346,7 +346,7 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 1rem;
         }
 
         /* ═══════════════════════════════════════════════ */
@@ -358,7 +358,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 1rem 1.75rem; /* ANTES: 0.875rem → DEPOIS: 1rem — alinhamento ao grid 4pt (16px) */
+            padding: 0.75rem 1.5rem;
             font-size: var(--font-size-md);
             font-weight: var(--font-weight-regular);
             border-radius: 0.5rem;
@@ -397,13 +397,13 @@
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem; /* ANTES: 0.375rem (6px) → DEPOIS: 0.5rem (8px) — alinhamento ao grid 4pt */
-            margin-bottom: 1.25rem; /* 20px — field gap (8pt grid) */
+            gap: 0.375rem;
+            margin-bottom: 0.75rem; /* 20px — field gap (8pt grid) */
         }
 
         /* Mais espaçamento para input-groups com dropdown */
         .input-group:has(.custom-dropdown) {
-            margin-bottom: 1.5rem; /* ANTES: 2rem → DEPOIS: 1.5rem — aproxima dropdown do próximo campo (24px) */
+            margin-bottom: 1rem; /* ANTES: 2rem → DEPOIS: 1.5rem — aproxima dropdown do próximo campo (24px) */
         }
 
         .input-label {
@@ -414,7 +414,7 @@
 
         .input-field,
         .textarea-field {
-            padding: 0.75rem 1rem;
+            padding: 0.625rem 0.875rem;
             border: 1px solid var(--border-default);
             border-radius: 0.375rem;
             font-size: var(--font-size-md);
@@ -721,7 +721,7 @@
         }
 
         .dropdown-empty {
-            padding: 1.5rem; /* ANTES: 2rem 1.5rem → DEPOIS: 1.5rem — reduz vertical excessivo (24px) */
+            padding: 1rem; /* ANTES: 2rem 1.5rem → DEPOIS: 1.5rem — reduz vertical excessivo (24px) */
             text-align: center;
             color: var(--text-muted);
             font-size: var(--font-size-sm);
@@ -732,7 +732,7 @@
             content: '🔍';
             display: block;
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.375rem;
             opacity: 0.5;
         }
 
@@ -765,14 +765,14 @@
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 0.75rem;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         .radio-option {
             display: flex;
             align-items: center;
-            padding: 1rem;
+            padding: 0.75rem;
             border: 1px solid var(--border-default);
             border-radius: 0.5rem;
             cursor: pointer;
@@ -786,7 +786,7 @@
         }
 
         .radio-option input[type="radio"] {
-            margin-right: 0.75rem;
+            margin-right: 0.5rem;
             width: 1.25rem;
             height: 1.25rem;
             cursor: pointer;
@@ -821,7 +821,7 @@
             background: var(--bg-elevated);
             border: 1px solid var(--border-subtle);
             border-radius: 1rem;
-            padding: 1.5rem; /* ANTES: 2.5rem (40px) → DEPOIS: 1.5rem (24px) — máximo 24px para padding interno de cards */
+            padding: 1rem; /* ANTES: 2.5rem (40px) → DEPOIS: 1.5rem (24px) — máximo 24px para padding interno de cards */
             box-shadow: var(--shadow-sm);
         }
 
@@ -831,12 +831,12 @@
 
         .success-message {
             display: none;
-            padding: 1.5rem;
+            padding: 1rem;
             background: var(--semantic-success-bg);
             border: 1px solid var(--border-default);
             border-radius: 0.75rem;
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         .success-message.show {
@@ -846,7 +846,7 @@
         .success-message p {
             color: var(--semantic-success-text);
             font-weight: 400;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.375rem;
         }
 
         .success-message small {
@@ -878,7 +878,7 @@
 
         @media (max-width: 768px) {
             .card {
-                padding: 1.5rem;
+                padding: 1rem;
             }
 
             .btn {
@@ -1052,7 +1052,7 @@
     
 
     
-    <header style="padding: 0.25rem 0 0; position: relative; z-index: 1; text-align: center;">
+    <header style="padding: 0.125rem 0 0; position: relative; z-index: 1; text-align: center;">
         <div class="container">
             <div style="display: flex; justify-content: center; align-items: center;">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
@@ -1183,10 +1183,10 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     </script>
 
     
-    <section style="padding: 0.75rem 0 1.5rem; position: relative; z-index: 1;">
+    <section style="padding: 0.5rem 0 1rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto; text-align: center;">
-                <h1 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: var(--letter-spacing-tight); margin-bottom: 1rem; color: var(--text-primary);">
+                <h1 style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); line-height: var(--line-height-tight); letter-spacing: var(--letter-spacing-tight); margin-bottom: 0.625rem; color: var(--text-primary);">
                     Fale com a gente
                 </h1>
                 <p style="font-size: var(--font-size-md); color: var(--text-secondary); max-width: 540px; margin: 0 auto; line-height: var(--line-height-relaxed);">
@@ -1197,7 +1197,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
     </section>
 
     
-    <section style="padding: 1.5rem 0 2.5rem; position: relative; z-index: 1;">
+    <section style="padding: 1rem 0 1.5rem; position: relative; z-index: 1;">
         <div class="container">
             <div style="max-width: 720px; margin: 0 auto;">
                 <div class="card">
@@ -1212,8 +1212,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </script>
 
                         
-                        <div style="margin-bottom: 2rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.625rem;">
                                 Dados de contato
                             </h2>
 
@@ -1391,8 +1391,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         
-                        <div style="margin-bottom: 2rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.625rem;">
                                 Investimento em mídia
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1425,8 +1425,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         
-                        <div style="margin-bottom: 2rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.625rem;">
                                 Situação atual
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1455,8 +1455,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         
-                        <div style="margin-bottom: 2rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.625rem;">
                                 Urgência
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -1481,8 +1481,8 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
                         </div>
 
                         
-                        <div style="margin-bottom: 2rem;">
-                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 1rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <h2 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); line-height: var(--line-height-tight); margin-bottom: 0.625rem;">
                                 Informações adicionais
                             </h2>
                             <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -2687,7 +2687,7 @@ c203 -3 211 -1 247 70 12 24 59 155 106 292 111 331 188 525 294 736 139 277
 
                 // Mostrar erro abaixo do botão
                 const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = 'margin-top: 1rem; padding: 1rem; background: var(--semantic-error-bg); color: var(--semantic-error-text); border-radius: 0.5rem; text-align: center; font-size: 0.875rem;';
+                errorDiv.style.cssText = 'margin-top: 0.75rem; padding: 0.75rem; background: var(--semantic-error-bg); color: var(--semantic-error-text); border-radius: 0.5rem; text-align: center; font-size: 0.875rem;';
                 errorDiv.textContent = errorMessage;
 
                 // Remover erro anterior se existir
