@@ -143,12 +143,29 @@ module.exports = async function handler(req, res) {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
+        // ═══════════════════════════════════════════════════════════
+        // CORREÇÃO: N8N mudou para Basic Authentication
+        // Header: www-authenticate: Basic realm="Webhook"
+        // ═══════════════════════════════════════════════════════════
+
+        // Construir Authorization header com Basic Auth
+        // Formato: "Basic base64(username:password)"
+        // Username pode ser vazio ou "webhook" dependendo da config do N8N
+        const username = process.env.WEBHOOK_USERNAME || ''; // vazio por padrão
+        const password = process.env.WEBHOOK_TOKEN;
+        const basicAuth = Buffer.from(`${username}:${password}`).toString('base64');
+
+        console.log('🔍 Autenticação configurada:');
+        console.log('  Username:', username || '(vazio)');
+        console.log('  Password (primeiros 10):', password.substring(0, 10) + '...');
+        console.log('  Basic Auth:', 'Basic ' + basicAuth.substring(0, 20) + '...');
+
         const webhookResponse = await fetch(process.env.WEBHOOK_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'X-Webhook-Token': process.env.WEBHOOK_TOKEN // ← Token protegido (server-side)
+                'Authorization': 'Basic ' + basicAuth // ← Basic Auth (server-side)
             },
             body: JSON.stringify(enrichedPayload),
             signal: controller.signal
